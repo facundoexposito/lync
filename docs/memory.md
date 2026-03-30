@@ -4,67 +4,54 @@
 - Client: Rebecca Nolan — LYNC Events (lyncevents.com)
 - Scope: Rebuild WordPress + Elementor site as Next.js 15
 - Phase 1: Frontend + Quiz (no backend integrations)
-- Colleague Alejandro handles: Pipedrive, Acuity, Shopify integrations (future phases)
+- Colleague Alejandro handles: Pipedrive, Acuity, Shopify integrations (future)
 - Built under Boss's accounts: facundoexposito GitHub, personal Vercel
 
 ## Key People
-- **Rebecca Nolan** (21, LA) — co-founder, handles content/social, main client contact
+- **Rebecca Nolan** (21, LA) — co-founder, content/social, main client contact
 - **Cordelia** (21, London) — co-founder, creative
-- **Alejandro** — Boss's colleague, handles backend integrations
+- **Alejandro** — Boss's colleague, backend integrations
 - **Facundo (Boss)** — frontend, design, architecture
-
-## Key Dates
-- March 29, 2026: Industry research PDF delivered (9 sections, 19 pages)
-- March 30, 2026: Site audit (screenshots + content extraction + branding analysis)
-- March 30, 2026: Project scaffolded, pushed to GitHub, deployed to Vercel
-- March 30, 2026: Design overhaul v1 (brand system, quiz polish, homepage redesign)
 
 ## Current State
 - **Repo:** github.com/facundoexposito/lync (main branch)
 - **Live:** lync-orcin.vercel.app
-- **Stack:** Next.js 15 (16.2.1) + Tailwind CSS 4 + TypeScript
-- **Pages:** Home, Quiz (7-step), Events, About, Study Abroad, Blog (shell)
-- **Design status:** Functional but needs visual polish — Boss taking over locally
+- **Stack:** Next.js 16.2.1 + Tailwind CSS 4 + TypeScript + motion (for animations)
+- **Design system:** Blue (#007AFF) + white + black (#0a0a0a) + surface gray (#fafafa)
+- **Fonts:** Playfair Display (display, placeholder for Mogena) + Inter (body, placeholder for Avenir)
+
+## Page Status
+| Page | Design Status | Notes |
+|------|--------------|-------|
+| Home | ✅ v2 done | BlurText hero, SpotlightCard features, CountUp stats, ShinyText CTA |
+| Quiz | ✅ v2 done | Full-width progress bar, card answers, auto-advance, lead form |
+| Events | ❌ needs redesign | Has event cards but styling is old v1 |
+| About | ❌ needs redesign | Still v1 generic layout |
+| Study Abroad | ❌ needs redesign | Still v1 accordion style |
+| Blog | ❌ needs redesign | Still v1 coming soon shell |
+
+## ReactBits Components (custom-built, in src/components/ui/)
+- `blur-text.tsx` — word-by-word blur reveal, uses motion/react IntersectionObserver
+- `count-up.tsx` — spring-animated number counter, scroll-triggered
+- `spotlight-card.tsx` — mouse-follow radial gradient glow
+- `shiny-text.tsx` — text shimmer sweep animation
+- `faq.tsx` — plus/minus accordion
 
 ## Content Sources
-- **Current site audit:** Screenshots in `Projects/LYNC/site-audit/` (7 pages captured)
-- **Rebecca's Drive folder:** https://drive.google.com/drive/folders/1LSM7YGJdhG4wnRCjJUB8cRmK3Pmb4xdc
-  - EVENT PICTURES, EVENT VIDEOS, MARKETING PICTURES, PHOTOS FOR SOCIALS
-  - MASTER CONTENT CALENDAR, SOCIAL MEDIA CREATION SOP
-  - intro page video, SPONSOR PHOTOS, story samples
-  - NOT downloaded yet — waiting for Boss to curate which photos to use
-- **Brand assets downloaded:** Logo (white + blue variants), favicon → `Projects/LYNC/brand-assets/`
+- Current site audit: `Projects/LYNC/site-audit/` (7 page screenshots)
+- Rebecca's Drive: https://drive.google.com/drive/folders/1LSM7YGJdhG4wnRCjJUB8cRmK3Pmb4xdc
+- Brand assets: `Projects/LYNC/brand-assets/` (logo variants, favicon)
+- Research PDF: `docs/LYNC-Industry-Research.pdf` (19 pages)
 
-## Branding
-- Primary Blue: #007AFF
-- Navy: #1a1a2e
-- Cream: #F5F0E8
-- Gold: #D4A853
-- Display font: Mogena (using Playfair Display as placeholder)
-- Body font: Avenir (using Inter as placeholder)
-- Full brand guide: `docs/branding.md`
+## Architecture
+- Tailwind v4: CSS-based config via @theme in globals.css (NO tailwind.config.ts)
+- No Supabase in Phase 1
+- Quiz data: client-side state only
+- Future webhooks folder: src/app/api/webhooks/.gitkeep
+- Data files in src/data/ (events, testimonials, FAQ, quiz questions)
 
-## Architecture Decisions
-- No Supabase in Phase 1 (frontend only)
-- Keep Acuity + Shopify for now, webhook into Supabase later
-- Quiz data client-side only until Phase 2
-- Tailwind v4 CSS-based config (@theme in globals.css, no tailwind.config.ts)
-- Clean folder structure for future integrations (api/webhooks/ ready)
-
-## What Needs Work
-- Design quality — Boss taking over for visual polish
-- Real photos from Rebecca's Drive folder
-- Swap placeholder fonts for Mogena + Avenir
-- Mobile responsiveness pass
-- About page + Study Abroad page need same design treatment as homepage
-- SEO metadata for all pages
-- Original site copy preservation (FAQ done, About page needs real copy from WP)
-
-## External Tools (Current Site)
-- Acuity Scheduling — event booking (siloed)
-- Shopify — guides store (lync-events.myshopify.com)
-- Pipedrive — CRM (form signups only)
-- HubSpot — possibly active email/CRM
-- WhatsApp — community chat, phone: 13107411846
-- GoDaddy — hosting
-- Credentials needed from Rebecca: Acuity, Shopify, GoDaddy logins
+## Key Lessons
+- Don't delegate creative/design work to subagents — do it yourself
+- Use ReactBits-style components for visual interest, not just Tailwind classes
+- Keep color palette tight: one brand color + white + black + one gray
+- Boss has high design taste — generic templates won't cut it

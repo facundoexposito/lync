@@ -2,39 +2,38 @@
 
 ## March 30, 2026
 
-### Evening — Design Overhaul v1
-- Complete visual redesign of homepage, quiz, event cards, navbar, footer
-- Tailwind v4 CSS-based theme (@theme block in globals.css, removed tailwind.config.ts)
-- Brand colors: lync-blue, navy, cream, gold + light variants (blue-light, cream-dark, gold-light, rose, sage, lavender)
-- Transparent navbar with scroll-triggered solid state
-- Hero: gradient bg with floating decorative elements, flag social proof row
-- How It Works: 4 colored cards (lavender, blue-light, gold-light, rose) with step numbers
-- Why LYNC: border-left accent cards
-- Testimonials: glassmorphism on navy background
-- Event cards: category dots, spots badge overlay, hover states
-- Quiz: card-based answer options with check indicators, auto-advance on single select, gradient progress bar, lead capture form
-- FAQ: interactive accordion component
-- Footer: social icons, WhatsApp floating button (linked to real number 13107411846)
-- Custom animations: fade-up, fade-in, scale-in, slide-up, float, pulse-soft
-- Build passing, deployed to Vercel (lync-orcin.vercel.app)
-- Boss assessment: "functional but needs visual polish" — taking over design locally
+### Late Night — Design v2 (ReactBits + Editorial)
+- Complete visual redesign with clean editorial aesthetic
+- Added ReactBits-inspired components (built from source, no dependency):
+  - **BlurText**: word-by-word blur-to-sharp reveal animation on hero (motion/react)
+  - **CountUp**: spring-physics animated stat counters, scroll-triggered
+  - **SpotlightCard**: mouse-follow radial gradient glow on feature cards
+  - **ShinyText**: shimmer sweep animation on CTA button text
+- New color system: lync blue (#007AFF) + white + black (#0a0a0a) + surface (#fafafa) + border (#e5e7eb)
+- Removed cream/navy/gold — crisp, high-contrast, modern
+- Homepage sections: Hero (BlurText + grid bg + gradient orb) → How It Works (grid with emojis) → Why LYNC (bento with SpotlightCard) → Events → Testimonials (dark bg) → Stats (CountUp) → FAQ (plus/minus accordion) → CTA
+- Quiz: full-width progress bar fixed under navbar, clean card answers with check indicators, auto-advance on single select, centered layout
+- Navbar: transparent → solid on scroll, active page indicator
+- Footer: minimal with proper hierarchy, WhatsApp linked to real number
+- Added `motion` dependency for animations
+- About page + Study Abroad page + Events page + Blog page still have old design — need same treatment
+- Boss assessment: "much better, still work to do on other pages"
+
+### Evening — Design v1 (Subagent)
+- First design pass via subagent — too generic, Boss rejected
+- Warm cream/navy/gold palette — felt like a template
+- No interesting UI components or animations
+- Lesson: don't delegate creative work to subagents
 
 ### Afternoon — Initial Scaffold
-- Project scaffolded with Next.js 15, Tailwind CSS 4, TypeScript
-- All pages created: Home, About, Events, Quiz (7-step), Study Abroad, Blog
-- Quiz funnel: 5 questions + lead form + personalized results
-- Data files: events (6), testimonials (3), FAQ (5 with original site copy), quiz questions (5)
-- Components: navbar, footer, section, button, event-card, quiz-container/step/results, faq
-- Docs: branding.md, memory.md, decisions.md, updates.md, roadmap.md, research PDF
-- Repo created: github.com/facundoexposito/lync
-- Deployed: lync-orcin.vercel.app
+- Next.js 15 + Tailwind CSS 4 + TypeScript
+- 6 pages: Home, Quiz (7-step), Events, About, Study Abroad, Blog
+- Data files, docs folder, research PDF
+- GitHub repo: facundoexposito/lync
+- Vercel: lync-orcin.vercel.app
 
 ### Morning — Site Audit & Research
-- Full site audit of lyncevents.com (7 pages screenshotted via Playwright)
-- 225 unique images cataloged from WordPress uploads
-- Brand assets extracted: Logo variants (Layer_1.png, Layer_1-1.png), favicon
-- Fonts identified: Mogena (display), Avenir (body)
-- Colors extracted: Primary blue #007AFF, CSS variables mapped
-- Branding guide created (docs/branding.md)
-- Rebecca's Drive folder accessed (not downloaded): 10 subfolders of content assets
-- Industry research PDF (19 pages) reviewed and incorporated
+- 7 pages screenshotted, 225 images cataloged, branding extracted
+- Brand assets downloaded (logos, favicon)
+- branding.md created with full audit
+- Rebecca's Drive folder accessed (not downloaded)
