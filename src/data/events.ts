@@ -1,0 +1,58 @@
+import { Event } from '@/lib/types'
+
+export const events: Event[] = [
+  {
+    id: '1',
+    title: 'Sunset Yoga & Wine',
+    date: new Date('2026-04-05T18:00:00'),
+    location: 'Retiro Park',
+    category: 'Wellness',
+    spotsLeft: 8,
+    description: 'Join us for an evening of yoga followed by wine and conversation as the sun sets over Madrid.',
+  },
+  {
+    id: '2',
+    title: 'Coffee & Conversation',
+    date: new Date('2026-04-08T11:00:00'),
+    location: 'Malasaña',
+    category: 'Social',
+    spotsLeft: 12,
+    description: 'Casual morning coffee meetup to connect with new friends in a cozy café setting.',
+  },
+  {
+    id: '3',
+    title: 'Hiking Sierra de Guadarrama',
+    date: new Date('2026-04-12T09:00:00'),
+    location: 'Sierra de Guadarrama',
+    category: 'Adventure',
+    spotsLeft: 15,
+    description: 'Escape the city for a day of hiking and breathtaking mountain views.',
+  },
+  {
+    id: '4',
+    title: 'Pottery Workshop',
+    date: new Date('2026-04-15T16:00:00'),
+    location: 'Lavapiés',
+    category: 'Creative',
+    spotsLeft: 6,
+    description: 'Get your hands dirty and create something beautiful in this beginner-friendly pottery class.',
+  },
+  {
+    id: '5',
+    title: 'Tapas & Dance Night',
+    date: new Date('2026-04-18T20:00:00'),
+    location: 'La Latina',
+    category: 'Social',
+    spotsLeft: 20,
+    description: 'Experience Madrid nightlife with tapas hopping followed by dancing at a local club.',
+  },
+  {
+    id: '6',
+    title: 'Photography Walk',
+    date: new Date('2026-04-22T10:00:00'),
+    location: 'Barrio de las Letras',
+    category: 'Creative',
+    spotsLeft: 10,
+    description: 'Capture the beauty of Madrid literary quarter through your lens with guidance from a local photographer.',
+  },
+]
