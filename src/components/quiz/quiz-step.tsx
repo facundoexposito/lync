@@ -12,59 +12,51 @@ interface QuizQuestion {
   type: string
 }
 
-interface QuizStepProps {
-  currentStep: number
+interface Props {
   question: QuizQuestion | null
   isLeadStep: boolean
   answers: Record<string, string | string[]>
-  onAnswer: (questionId: string, answer: string | string[]) => void
+  onAnswer: (id: string, answer: string | string[]) => void
   onNext: () => void
   onLeadSubmit: (info: { name: string; email: string; phone?: string; nationality: string }) => void
 }
 
-export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLeadSubmit }: QuizStepProps) {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', nationality: '' })
+export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLeadSubmit }: Props) {
+  const [form, setForm] = useState({ name: '', email: '', phone: '', nationality: '' })
 
   if (isLeadStep) {
     return (
-      <div className="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100">
-        <div className="text-center mb-8">
-          <span className="text-4xl mb-4 block">🎉</span>
-          <h2 className="font-display text-3xl font-bold mb-2">Almost there!</h2>
-          <p className="text-gray-500">Tell us where to send your personalized recommendations.</p>
-        </div>
+      <div>
+        <span className="text-4xl block mb-6">✉️</span>
+        <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Almost there!</h2>
+        <p className="text-muted mb-10">Where should we send your personalized recommendations?</p>
 
-        <form
-          onSubmit={(e) => { e.preventDefault(); onLeadSubmit(formData) }}
-          className="space-y-5"
-        >
+        <form onSubmit={(e) => { e.preventDefault(); onLeadSubmit(form) }} className="space-y-4">
           {[
             { key: 'name', label: 'First Name', type: 'text', placeholder: 'Rebecca', required: true },
             { key: 'email', label: 'Email', type: 'email', placeholder: 'you@example.com', required: true },
-            { key: 'phone', label: 'Phone (Optional)', type: 'tel', placeholder: '+34 612 345 678', required: false },
-            { key: 'nationality', label: 'Nationality', type: 'text', placeholder: 'American, British, French...', required: true },
-          ].map((field) => (
-            <div key={field.key}>
-              <label className="block text-sm font-semibold text-lync-navy mb-2">
-                {field.label} {field.required && <span className="text-lync-blue">*</span>}
+            { key: 'phone', label: 'Phone (optional)', type: 'tel', placeholder: '+34 612 345 678', required: false },
+            { key: 'nationality', label: 'Nationality', type: 'text', placeholder: 'American, British...', required: true },
+          ].map((f) => (
+            <div key={f.key}>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-muted mb-2">
+                {f.label} {f.required && <span className="text-lync">*</span>}
               </label>
               <input
-                type={field.type}
-                required={field.required}
-                value={formData[field.key as keyof typeof formData]}
-                onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-lync-blue focus:outline-none transition-colors text-lync-navy placeholder:text-gray-300"
-                placeholder={field.placeholder}
+                type={f.type}
+                required={f.required}
+                value={form[f.key as keyof typeof form]}
+                onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+                className="w-full px-4 py-3.5 rounded-xl border border-border focus:border-lync focus:ring-2 focus:ring-lync/10 outline-none transition-all text-dark placeholder:text-muted/40"
+                placeholder={f.placeholder}
               />
             </div>
           ))}
-
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-lync-gold text-lync-navy font-bold py-4 rounded-full text-lg hover:bg-lync-gold-light transition-all duration-200 mt-8"
+            className="w-full flex items-center justify-center gap-2 bg-lync text-white font-semibold py-4 rounded-full text-base hover:bg-lync-dark transition-colors mt-6"
           >
-            See My Recommendations
-            <ArrowRight size={20} />
+            See My Results <ArrowRight size={18} />
           </button>
         </form>
       </div>
@@ -74,57 +66,46 @@ export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLe
   if (!question) return null
 
   const currentAnswer = answers[question.id]
-  const selectedValues: string[] = Array.isArray(currentAnswer) ? currentAnswer : currentAnswer ? [currentAnswer] : []
+  const selected: string[] = Array.isArray(currentAnswer) ? currentAnswer : currentAnswer ? [currentAnswer] : []
 
   const handleClick = (value: string) => {
     if (question.type === 'multi') {
-      const newValues = selectedValues.includes(value)
-        ? selectedValues.filter(v => v !== value)
-        : [...selectedValues, value]
-      onAnswer(question.id, newValues)
+      const next = selected.includes(value) ? selected.filter(v => v !== value) : [...selected, value]
+      onAnswer(question.id, next)
     } else {
       onAnswer(question.id, value)
-      // Auto-advance on single select after a brief delay
-      setTimeout(onNext, 300)
+      setTimeout(onNext, 250)
     }
   }
 
-  const canContinue = question.type === 'multi' ? selectedValues.length > 0 : selectedValues.length > 0
-
   return (
-    <div className="bg-white rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100">
-      <h2 className="font-display text-2xl md:text-3xl font-bold mb-2">{question.question}</h2>
-      {question.subtitle && (
-        <p className="text-gray-400 mb-6 text-sm">{question.subtitle}</p>
-      )}
-      {!question.subtitle && <div className="mb-6" />}
+    <div>
+      <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">{question.question}</h2>
+      {question.subtitle && <p className="text-muted text-sm mb-8">{question.subtitle}</p>}
+      {!question.subtitle && <div className="mb-8" />}
 
-      <div className="grid grid-cols-1 gap-3">
-        {question.options.map((option) => {
-          const isSelected = selectedValues.includes(option.value)
+      <div className="space-y-2.5">
+        {question.options.map((opt) => {
+          const isSelected = selected.includes(opt.value)
           return (
             <button
-              key={option.value}
-              onClick={() => handleClick(option.value)}
-              className={`relative flex items-center gap-4 p-5 rounded-2xl border-2 transition-all duration-200 text-left group ${
+              key={opt.value}
+              onClick={() => handleClick(opt.value)}
+              className={`w-full flex items-center gap-4 p-4 md:p-5 rounded-xl border-2 transition-all duration-150 text-left ${
                 isSelected
-                  ? 'border-lync-blue bg-lync-blue-light shadow-sm'
-                  : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50'
+                  ? 'border-lync bg-lync-light'
+                  : 'border-border hover:border-muted/30'
               }`}
             >
-              <span className="text-3xl flex-shrink-0">{option.icon}</span>
-              <div className="flex-1 min-w-0">
-                <span className="font-semibold text-lync-navy block">{option.label}</span>
-                {option.subtitle && (
-                  <span className="text-gray-400 text-sm">{option.subtitle}</span>
-                )}
+              <span className="text-2xl flex-shrink-0">{opt.icon}</span>
+              <div className="flex-1">
+                <span className="font-semibold text-dark text-sm md:text-base">{opt.label}</span>
+                {opt.subtitle && <span className="block text-muted text-xs mt-0.5">{opt.subtitle}</span>}
               </div>
-              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
-                isSelected
-                  ? 'bg-lync-blue border-lync-blue'
-                  : 'border-gray-200 group-hover:border-gray-300'
+              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                isSelected ? 'bg-lync border-lync' : 'border-border'
               }`}>
-                {isSelected && <Check size={14} className="text-white" />}
+                {isSelected && <Check size={12} className="text-white" />}
               </div>
             </button>
           )
@@ -134,15 +115,14 @@ export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLe
       {question.type === 'multi' && (
         <button
           onClick={onNext}
-          disabled={!canContinue}
-          className={`w-full flex items-center justify-center gap-2 font-bold py-4 rounded-full text-lg mt-6 transition-all duration-200 ${
-            canContinue
-              ? 'bg-lync-navy text-white hover:bg-lync-blue'
-              : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+          disabled={selected.length === 0}
+          className={`w-full flex items-center justify-center gap-2 font-semibold py-4 rounded-full mt-8 transition-all ${
+            selected.length > 0
+              ? 'bg-dark text-white hover:bg-lync'
+              : 'bg-surface text-muted cursor-not-allowed'
           }`}
         >
-          Continue
-          <ArrowRight size={20} />
+          Continue <ArrowRight size={18} />
         </button>
       )}
     </div>

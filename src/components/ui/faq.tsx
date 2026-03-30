@@ -1,33 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { Plus, Minus } from 'lucide-react'
 
-interface FAQProps {
-  question: string
-  answer: string
-}
+interface FAQProps { question: string; answer: string }
 
 export function FAQ({ question, answer }: FAQProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
-    <button
-      onClick={() => setIsOpen(!isOpen)}
-      className="w-full text-left bg-lync-cream/60 hover:bg-lync-cream rounded-2xl p-6 transition-all duration-200"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="font-display text-lg font-bold pr-4">{question}</h3>
-        <ChevronDown
-          size={20}
-          className={`text-lync-blue flex-shrink-0 mt-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-        />
+    <button onClick={() => setOpen(!open)} className="w-full text-left border border-border rounded-xl p-5 hover:border-lync/20 transition-colors bg-white">
+      <div className="flex items-center justify-between gap-4">
+        <h3 className="font-semibold text-sm md:text-base pr-4">{question}</h3>
+        <div className="flex-shrink-0 w-7 h-7 rounded-full bg-surface flex items-center justify-center">
+          {open ? <Minus size={14} className="text-lync" /> : <Plus size={14} className="text-muted" />}
+        </div>
       </div>
-      <div
-        className={`grid transition-all duration-200 ${isOpen ? 'grid-rows-[1fr] mt-4' : 'grid-rows-[0fr]'}`}
-      >
+      <div className={`grid transition-all duration-200 ${open ? 'grid-rows-[1fr] mt-3' : 'grid-rows-[0fr]'}`}>
         <div className="overflow-hidden">
-          <p className="text-gray-600 leading-relaxed">{answer}</p>
+          <p className="text-muted text-sm leading-relaxed">{answer}</p>
         </div>
       </div>
     </button>
