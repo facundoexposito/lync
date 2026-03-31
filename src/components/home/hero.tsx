@@ -32,7 +32,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black/30" />
 
         <div
-          className={`relative z-10 grid min-h-dvh place-content-center gap-10 pb-24 pt-24 text-center sm:pt-28 md:gap-12 md:text-left lg:grid-cols-2 lg:gap-16 lg:pb-28 ${PAGE_SHELL}`}
+          className={`relative z-10 grid min-h-dvh place-content-center gap-10 pb-24 pt-24 text-center sm:pt-28 md:gap-12 md:text-left lg:grid-cols-2 lg:items-center lg:gap-16 lg:pb-28 ${PAGE_SHELL}`}
         >
           <div className="flex flex-col items-center md:items-start">
             {/* Social proof badge — desktop only */}
@@ -49,7 +49,7 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-white min-[400px]:text-[2.4rem] sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl">
+            <h1 className="font-display text-[1.65rem] font-bold leading-[1.12] tracking-tight text-white min-[400px]:text-[1.85rem] sm:text-3xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
               <motion.span className="block" {...fadeUp(0.1)}>
                 Make Friends
               </motion.span>
