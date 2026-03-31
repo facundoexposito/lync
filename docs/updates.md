@@ -1,5 +1,13 @@
 # LYNC — Updates
 
+## March 31, 2026
+
+### Session — Homepage polish & typography system
+- **Home structure:** Hero (full-bleed image + overlay) → **TrustBento** (“Our Community” bubble stats) → **ThisMonth** (rotating icon, scroll-driven fan of event placeholder cards, **View all events** → `/events`) → **WhyLync** (SpotlightCard pillars; fanned layout on large screens, stack on small).
+- **Typography (ADR-005):** Mona Sans for nav and all marketing titles / default `h1–h6`; **Playfair Display only on the hero headline** (explicitly **not** uppercase/semibold on that line—normal title case, bold, tight tracking). Other titles: uppercase, semibold, **`tracking-normal`** (dropped `tracking-wide` after feedback).
+- **CTAs:** Removed trailing arrow from **View all events**; **Upcoming Events** and **View all events** use **`text-dark`** on white pills (not blue body text).
+- **Mobile:** Extra space between ThisMonth card fan and **View all events** (`mt-8` below `sm`, negative overlap preserved from `sm` up).
+
 ## March 30, 2026
 
 ### Late Night — Design v2 (ReactBits + Editorial)

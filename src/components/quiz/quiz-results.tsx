@@ -21,7 +21,7 @@ export function QuizResults({ answers, leadInfo }: Props) {
         {/* Welcome */}
         <div className="text-center mb-16 animate-fade-up">
           <span className="text-6xl block mb-6">🎉</span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="mb-4 font-nav text-4xl font-semibold uppercase tracking-normal md:text-5xl">
             Welcome, <span className="text-lync">{leadInfo?.name}</span>!
           </h1>
           <p className="text-muted text-lg max-w-md mx-auto">
@@ -40,7 +40,7 @@ export function QuizResults({ answers, leadInfo }: Props) {
 
         {/* Next steps */}
         <div className="bg-dark text-white rounded-2xl p-8 md:p-10 animate-fade-up delay-400">
-          <h2 className="font-display text-2xl font-bold mb-8">What happens next</h2>
+          <h2 className="mb-8 font-nav text-2xl font-semibold uppercase tracking-normal">What happens next</h2>
           <div className="space-y-5 mb-10">
             {[
               { text: `Recommendations sent to ${leadInfo?.email}` },

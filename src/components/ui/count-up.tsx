@@ -18,7 +18,7 @@ export default function CountUp({ to, from = 0, duration = 2, className = '', su
     damping: 20 + 40 * (1 / duration),
     stiffness: 100 * (1 / duration),
   })
-  const isInView = useInView(ref, { once: true, margin: '0px' })
+  const isInView = useInView(ref, { once: true, margin: '-50px 0px' })
 
   useEffect(() => {
     if (ref.current) ref.current.textContent = String(from) + suffix

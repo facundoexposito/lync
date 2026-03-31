@@ -22,3 +22,10 @@
 - **Date:** March 30, 2026
 - **Decision:** Use Playfair Display (display) and Inter (body) as placeholders for Mogena and Avenir
 - **Rationale:** Mogena is a premium/custom font. Playfair Display captures similar editorial/serif energy. Boss can swap in Mogena when font files are available.
+- **Update (March 31, 2026):** Playfair is no longer the global display font. See ADR-005.
+
+## ADR-005: Mona Sans for titles; Playfair only on hero headline
+- **Date:** March 31, 2026
+- **Decision:** Use Mona Sans (`font-nav`, Google Fonts) for navigation, all marketing section titles, and default semantic headings (`h1–h6` base styles in `globals.css`). Reserve Playfair Display (`font-display`) for the **homepage hero `<h1>` only**. Non-hero titles use **uppercase**, **`font-semibold`**, and **`tracking-normal`** (wider tracking was tried with `tracking-wide` and reverted).
+- **Rationale:** Keeps nav and titles in one sans voice; a single serif hero line preserves editorial emphasis without mixing display fonts across the page. Tighter letter-spacing reads better for long uppercase lines.
+- **Consequences:** Inner pages and section headers render in Mona Sans. Hero remains visually distinct. Quiz question copy stays sentence case (semibold only, no forced uppercase).

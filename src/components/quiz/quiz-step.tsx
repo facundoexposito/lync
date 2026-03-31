@@ -28,7 +28,7 @@ export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLe
     return (
       <div>
         <span className="text-4xl block mb-6">✉️</span>
-        <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Almost there!</h2>
+        <h2 className="mb-2 font-nav text-3xl font-semibold uppercase tracking-normal md:text-4xl">Almost there!</h2>
         <p className="text-muted mb-10">Where should we send your personalized recommendations?</p>
 
         <form onSubmit={(e) => { e.preventDefault(); onLeadSubmit(form) }} className="space-y-4">
@@ -39,7 +39,7 @@ export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLe
             { key: 'nationality', label: 'Nationality', type: 'text', placeholder: 'American, British...', required: true },
           ].map((f) => (
             <div key={f.key}>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-muted mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-normal text-muted mb-2">
                 {f.label} {f.required && <span className="text-lync">*</span>}
               </label>
               <input
@@ -80,7 +80,7 @@ export function QuizStep({ question, isLeadStep, answers, onAnswer, onNext, onLe
 
   return (
     <div>
-      <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">{question.question}</h2>
+      <h2 className="mb-2 font-nav text-3xl font-semibold md:text-4xl">{question.question}</h2>
       {question.subtitle && <p className="text-muted text-sm mb-8">{question.subtitle}</p>}
       {!question.subtitle && <div className="mb-8" />}
 

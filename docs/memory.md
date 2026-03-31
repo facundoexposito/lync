@@ -17,18 +17,18 @@
 - **Repo:** github.com/facundoexposito/lync (main branch)
 - **Live:** lync-orcin.vercel.app
 - **Stack:** Next.js 16.2.1 + Tailwind CSS 4 + TypeScript + motion (for animations)
-- **Design system:** Blue (#007AFF) + white + black (#0a0a0a) + surface gray (#fafafa)
-- **Fonts:** Playfair Display (display, placeholder for Mogena) + Inter (body, placeholder for Avenir)
+- **Design system (code):** `--color-lync` #3679F1, `--color-cream` #F3EFE7, `--color-dark` #0a0a0a, lync-light, borders/surface tokens in `src/app/globals.css`; layout padding helper `PAGE_SHELL` in `src/lib/page-shell.ts`
+- **Fonts:** Mona Sans (`font-nav`) for nav, section/page titles, and default headings; Playfair Display (`font-display`) **homepage hero H1 only**; Inter (`font-body`) for body (placeholders until Mogena/Avenir files land)
 
 ## Page Status
 | Page | Design Status | Notes |
 |------|--------------|-------|
-| Home | ✅ v2 done | BlurText hero, SpotlightCard features, CountUp stats, ShinyText CTA |
+| Home | ✅ v3 (Timeleft-inspired) | Full-bleed hero (`hero-bg.webp`), TrustBento community stats, ThisMonth scroll-fan cards + events CTA, WhyLync fanned pillars (desktop) / stacked (mobile) |
 | Quiz | ✅ v2 done | Full-width progress bar, card answers, auto-advance, lead form |
-| Events | ❌ needs redesign | Has event cards but styling is old v1 |
-| About | ❌ needs redesign | Still v1 generic layout |
-| Study Abroad | ❌ needs redesign | Still v1 accordion style |
-| Blog | ❌ needs redesign | Still v1 coming soon shell |
+| Events | ⚠️ partial | Event cards; rest of page still v1 shell |
+| About | ⚠️ partial | Content OK; typography/spacing aligned with new title system |
+| Study Abroad | ⚠️ partial | Accordion layout; typography aligned |
+| Blog | ⚠️ partial | Coming-soon style shell |
 
 ## ReactBits Components (custom-built, in src/components/ui/)
 - `blur-text.tsx` — word-by-word blur reveal, uses motion/react IntersectionObserver

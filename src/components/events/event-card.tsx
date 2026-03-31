@@ -23,7 +23,7 @@ export function EventCard({ event }: EventCardProps) {
       </div>
 
       <div className="p-6">
-        <h3 className="font-display text-lg font-bold mb-3 group-hover:text-lync transition-colors">
+        <h3 className="mb-3 font-nav text-lg font-semibold uppercase tracking-normal transition-colors group-hover:text-lync">
           {event.title}
         </h3>
         <div className="flex flex-col gap-1.5 text-sm text-muted mb-4">

@@ -4,25 +4,20 @@ import { cn } from '@/lib/utils'
 interface SectionProps {
   children: ReactNode
   className?: string
-  background?: 'white' | 'cream' | 'navy'
+  background?: 'white' | 'cream' | 'dark' | 'blue'
+}
+
+const bgClasses: Record<NonNullable<SectionProps['background']>, string> = {
+  white: 'bg-white',
+  cream: 'bg-cream',
+  dark: 'bg-dark text-white',
+  blue: 'bg-lync text-white',
 }
 
 export function Section({ children, className, background = 'white' }: SectionProps) {
-  const bgClasses = {
-    white: 'bg-white',
-    cream: 'bg-lync-cream',
-    navy: 'bg-lync-navy text-white',
-  }
-  
   return (
-    <section
-      className={cn(
-        'py-16 md:py-24',
-        bgClasses[background],
-        className
-      )}
-    >
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+    <section className={cn('py-16 md:py-24', bgClasses[background], className)}>
+      <div className="mx-auto max-w-6xl px-5">
         {children}
       </div>
     </section>

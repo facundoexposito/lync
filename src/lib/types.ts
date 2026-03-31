@@ -30,6 +30,7 @@ export type Testimonial = {
   name: string
   quote: string
   stars: number
+  role?: string
 }
 
 export type FAQ = {

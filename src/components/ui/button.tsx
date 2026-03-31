@@ -7,6 +7,18 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
+const variantClasses = {
+  primary: 'bg-lync text-white hover:bg-lync-dark active:scale-95',
+  secondary: 'bg-cream text-dark hover:bg-cream/80 active:scale-95',
+  outline: 'border-2 border-lync text-lync hover:bg-lync hover:text-white',
+}
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg',
+}
+
 export function Button({
   variant = 'primary',
   size = 'md',
@@ -14,18 +26,6 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const variantClasses = {
-    primary: 'bg-lync-blue text-white hover:bg-blue-600 active:scale-95',
-    secondary: 'bg-lync-cream text-lync-navy hover:bg-lync-gold/20',
-    outline: 'border-2 border-lync-blue text-lync-blue hover:bg-lync-blue hover:text-white',
-  }
-  
-  const sizeClasses = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
-  }
-  
   return (
     <button
       className={cn(

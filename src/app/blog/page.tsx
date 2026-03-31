@@ -1,6 +1,4 @@
-import { Section } from '@/components/layout/section'
-import { Button } from '@/components/ui/button'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,36 +8,39 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <>
-      <Section background="cream" className="min-h-[60vh] flex items-center justify-center text-center">
-        <div className="max-w-2xl">
-          <div className="w-20 h-20 bg-lync-blue/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <BookOpen size={40} className="text-lync-blue" />
+    <section className="py-16 md:py-24 bg-cream min-h-[60vh] flex items-center justify-center text-center">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="max-w-2xl mx-auto">
+          <div className="w-20 h-20 bg-lync/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <BookOpen size={40} className="text-lync" />
           </div>
-          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="mb-6 font-nav text-5xl font-semibold uppercase tracking-normal md:text-6xl">
             Coming Soon
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Tips, stories, and inspiration for your Madrid adventure. We're currently building this section — check back soon!
+          <p className="text-xl text-muted mb-8">
+            Tips, stories, and inspiration for your Madrid adventure. We&apos;re currently building this section — check back soon!
           </p>
           <div className="bg-white rounded-2xl p-8 max-w-md mx-auto">
-            <h3 className="font-display text-2xl font-bold mb-4">Stay in the Loop</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="mb-4 font-nav text-2xl font-semibold uppercase tracking-normal">Stay in the Loop</h3>
+            <p className="text-muted mb-6">
               Want to be the first to know when we launch the blog? Drop your email below.
             </p>
             <form className="space-y-4">
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-lync-blue focus:outline-none transition-colors"
+                className="w-full px-4 py-3 rounded-xl border-2 border-border focus:border-lync focus:outline-none transition-colors"
               />
-              <Button size="lg" className="w-full">
-                Notify Me
-              </Button>
+              <button
+                type="submit"
+                className="w-full inline-flex items-center justify-center gap-2 bg-lync text-white font-semibold px-8 py-4 rounded-full text-lg hover:bg-lync-dark transition-colors"
+              >
+                Notify Me <ArrowRight size={18} />
+              </button>
             </form>
           </div>
         </div>
-      </Section>
-    </>
+      </div>
+    </section>
   )
 }

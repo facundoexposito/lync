@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 
@@ -19,7 +20,15 @@ export function Footer() {
         <div className="mx-auto max-w-6xl px-5 py-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-              <h3 className="font-display text-2xl font-bold mb-4">LYNC</h3>
+              <Link href="/" className="relative mb-6 block h-9 w-32 md:h-10 md:w-36" aria-label="LYNC — Home">
+                <Image
+                  src="/brand/LOGO_WHITETEXT_NOBG.png"
+                  alt=""
+                  fill
+                  className="object-contain object-left"
+                  sizes="(max-width: 768px) 128px, 144px"
+                />
+              </Link>
               <p className="text-white/40 text-sm leading-relaxed max-w-xs">
                 Making meaningful friendships in Madrid, one event at a time.
               </p>
