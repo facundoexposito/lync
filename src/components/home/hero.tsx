@@ -49,7 +49,7 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[1.65rem] font-bold leading-[1.12] tracking-tight text-white min-[400px]:text-[1.85rem] sm:text-3xl md:text-5xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+            <h1 className="font-display text-[1.75rem] font-bold leading-[1.12] tracking-tight text-white min-[400px]:text-[2rem] sm:text-4xl md:text-5xl lg:text-[2.5rem] xl:text-[3.35rem] 2xl:text-6xl">
               <motion.span className="block" {...fadeUp(0.1)}>
                 Make Friends
               </motion.span>
