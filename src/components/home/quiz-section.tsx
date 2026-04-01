@@ -75,9 +75,9 @@ export function QuizSection() {
         </div>
 
         <header className="mb-6 text-center">
-          <p className="font-nav text-xs font-semibold uppercase tracking-normal text-dark sm:text-sm">
+          <h2 className="font-display text-xl font-semibold uppercase tracking-normal text-dark sm:text-2xl md:text-[1.65rem]">
             Find your <span className="text-lync">experience</span>
-          </p>
+          </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
             <span className="block">
               A few quick questions, then we&apos;ll match you

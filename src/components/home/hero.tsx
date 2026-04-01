@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, CalendarDays } from 'lucide-react'
 import { motion } from 'motion/react'
@@ -19,15 +18,16 @@ const fadeUp = (delay: number) => ({
 export function HeroSection() {
   return (
     <section className="relative min-h-dvh overflow-hidden">
-        <Image
-          src="/brand/HERO-BG/hero-bg.webp"
-          alt="Women laughing together at a dinner in Madrid"
-          fill
-          className="object-cover"
-          priority
-          quality={90}
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/brand/HERO-BG/hero-bg.webp"
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/brand/HERO-BG/hero-bg.mp4" type="video/mp4" />
+        </video>
 
         <div className="absolute inset-0 bg-black/30" />
 
@@ -49,7 +49,7 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[1.75rem] font-bold leading-[1.12] tracking-tight text-white min-[400px]:text-[2rem] sm:text-4xl md:text-5xl lg:text-[2.5rem] xl:text-[3.35rem] 2xl:text-6xl">
+            <h1 className="font-display text-[2.25rem] font-bold leading-[1.12] tracking-tight text-white min-[400px]:text-[2.5rem] sm:text-4xl md:text-5xl lg:text-[2.5rem] xl:text-[3.35rem] 2xl:text-6xl">
               <motion.span className="block" {...fadeUp(0.1)}>
                 Make Friends
               </motion.span>
@@ -61,13 +61,16 @@ export function HeroSection() {
             {/* Video — mobile: below heading */}
             <motion.div className="mt-6 w-full lg:hidden" {...fadeUp(0.3)}>
               <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20 shadow-2xl">
-                <iframe
-                  src="https://www.youtube.com/embed/oWRzdhntElU"
-                  title="How to Make Female Friends in Madrid"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full"
-                />
+                <video
+                  autoPlay
+                  muted
+                  controls
+                  playsInline
+                  poster="/brand/HERO-BG/lync-intro-poster.webp"
+                  className="h-full w-full object-cover"
+                >
+                  <source src="/brand/HERO-BG/lync-intro.mp4" type="video/mp4" />
+                </video>
               </div>
             </motion.div>
 
@@ -108,13 +111,16 @@ export function HeroSection() {
           {/* Video — desktop: shown on the right */}
           <motion.div className="hidden w-full lg:block" {...fadeUp(0.5)}>
             <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20 shadow-2xl">
-              <iframe
-                src="https://www.youtube.com/embed/oWRzdhntElU"
-                title="How to Make Female Friends in Madrid"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 h-full w-full"
-              />
+              <video
+                autoPlay
+                muted
+                controls
+                playsInline
+                poster="/brand/HERO-BG/lync-intro-poster.webp"
+                className="h-full w-full object-cover"
+              >
+                <source src="/brand/HERO-BG/lync-intro.mp4" type="video/mp4" />
+              </video>
             </div>
           </motion.div>
         </div>

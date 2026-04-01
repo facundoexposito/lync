@@ -23,19 +23,22 @@
 ## Page Status
 | Page | Design Status | Notes |
 |------|--------------|-------|
-| Home | ✅ v3 (Timeleft-inspired) | Full-bleed hero (`hero-bg.webp`), TrustBento community stats, ThisMonth scroll-fan cards + events CTA, WhyLync fanned pillars (desktop) / stacked (mobile) |
+| Home | ✅ v3 polished | Full-bleed hero, TrustBento (auto-cycling on mobile), ThisMonth (infinite swipe carousel on mobile / scroll-fan on desktop), WhyLync, Testimonials (mobile carousel), CTA (responsive aspect ratios) |
 | Quiz | ✅ v2 done | Full-width progress bar, card answers, auto-advance, lead form |
-| Events | ⚠️ partial | Event cards; rest of page still v1 shell |
-| About | ⚠️ partial | Content OK; typography/spacing aligned with new title system |
-| Study Abroad | ⚠️ partial | Accordion layout; typography aligned |
-| Blog | ⚠️ partial | Coming-soon style shell |
+| Events | ✅ done | Acuity scheduler embed (live events), sticky sidebar, hero + CTA |
+| Retreats | ✅ done | Placeholder cards (no real retreats on Acuity yet), sticky sidebar |
+| About | ✅ done | Founders photo + story, responsive grid |
+| Accommodations | ✅ done | Hero, features grid, room types, communal spaces, lifestyle banner |
+| Study Abroad | ✅ done | Tabs (Services/Resources/Consultation), fan cards on desktop |
+| Blog | ✅ done | Blog list + individual articles, 3-column grid |
+| Guides | ✅ done | Alternating image/content layout |
 
 ## ReactBits Components (custom-built, in src/components/ui/)
-- `blur-text.tsx` — word-by-word blur reveal, uses motion/react IntersectionObserver
 - `count-up.tsx` — spring-animated number counter, scroll-triggered
 - `spotlight-card.tsx` — mouse-follow radial gradient glow
 - `shiny-text.tsx` — text shimmer sweep animation
 - `faq.tsx` — plus/minus accordion
+- `acuity-embed.tsx` — Acuity Scheduling iframe + auto-resize script
 
 ## Content Sources
 - Current site audit: `Projects/LYNC/site-audit/` (7 page screenshots)

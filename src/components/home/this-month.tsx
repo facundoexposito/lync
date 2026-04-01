@@ -5,26 +5,17 @@ import {
   useScroll,
   useTransform,
   useMotionValueEvent,
+  useMotionValue,
+  animate,
   AnimatePresence,
 } from 'motion/react'
 import { useRef, useState, useEffect, useCallback } from 'react'
-import {
-  Wine,
-  Dumbbell,
-  UtensilsCrossed,
-  Music,
-  Palette,
-  Camera,
-  Bike,
-  BookOpen,
-} from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CtaHoverWrap } from '@/components/ui/cta-hover'
 import { PAGE_SHELL } from '@/lib/page-shell'
 
-const icons: LucideIcon[] = [Wine, Dumbbell, UtensilsCrossed, Music, Palette, Camera, Bike, BookOpen]
+const emojis = ['🍷', '💪', '🍽️', '🎵', '🎨', '📸', '🚴', '📖']
 
 const cardData = [
   { alt: 'Tapas night',        img: '/brand/COMMUNITY/sushi-chef-plating.webp' },
@@ -40,7 +31,6 @@ const CARD_COUNT = cardData.length
 const MID = Math.floor(CARD_COUNT / 2)
 
 const DESKTOP = { rotationStep: 5, xSpread: 120, yDrop: 40 }
-const MOBILE  = { rotationStep: 3, xSpread: 50,  yDrop: 20 }
 
 function useIsMobile() {
   const [mobile, setMobile] = useState(false)
@@ -60,26 +50,24 @@ function RotatingIcon() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % icons.length)
+      setIndex((prev) => (prev + 1) % emojis.length)
     }, 2000)
     return () => clearInterval(interval)
   }, [])
 
-  const Icon = icons[index]
-
   return (
     <div className="mx-auto mb-4 flex h-10 w-10 items-center justify-center">
       <AnimatePresence mode="wait">
-        <motion.div
+        <motion.span
           key={index}
           initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           exit={{ opacity: 0, scale: 0.6, rotate: 20 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="text-muted"
+          className="text-3xl"
         >
-          <Icon size={32} strokeWidth={1.5} />
-        </motion.div>
+          {emojis[index]}
+        </motion.span>
       </AnimatePresence>
     </div>
   )
@@ -88,25 +76,22 @@ function RotatingIcon() {
 function FanCard({
   card,
   index,
-  isMobile,
   progress,
   hoveredId,
   setHoveredId,
 }: {
   card: (typeof cardData)[number]
   index: number
-  isMobile: boolean
   progress: ReturnType<typeof useTransform<number, number>>
   hoveredId: number | null
   setHoveredId: (id: number | null) => void
 }) {
   const distFromCenter = index - MID
   const absFromCenter = Math.abs(distFromCenter)
-  const cfg = isMobile ? MOBILE : DESKTOP
 
-  const targetRotation = distFromCenter * cfg.rotationStep
-  const targetX = distFromCenter * cfg.xSpread
-  const targetY = absFromCenter * cfg.yDrop
+  const targetRotation = distFromCenter * DESKTOP.rotationStep
+  const targetX = distFromCenter * DESKTOP.xSpread
+  const targetY = absFromCenter * DESKTOP.yDrop
   const zBase = CARD_COUNT - absFromCenter
 
   const rotation = useTransform(progress, [0, 1], [0, targetRotation])
@@ -122,7 +107,7 @@ function FanCard({
 
   return (
     <motion.div
-      className="absolute w-[130px] cursor-pointer overflow-hidden rounded-xl shadow-xl min-[400px]:w-[150px] sm:w-[180px] md:w-[230px] lg:w-[260px]"
+      className="absolute w-[230px] cursor-pointer overflow-hidden rounded-xl shadow-xl lg:w-[260px]"
       style={{
         aspectRatio: '9 / 16',
         transformOrigin: 'bottom center',
@@ -142,16 +127,131 @@ function FanCard({
         alt={card.alt}
         fill
         className="object-cover"
-        sizes="(max-width: 400px) 130px, (max-width: 640px) 150px, (max-width: 768px) 180px, (max-width: 1024px) 230px, 260px"
+        sizes="(max-width: 1024px) 230px, 260px"
       />
-      <div className="absolute inset-0 flex flex-col items-center justify-end p-2 sm:p-3">
-        <span className="rounded-full bg-white/90 px-2 py-1 text-[9px] font-semibold text-dark backdrop-blur-sm min-[400px]:px-3 min-[400px]:py-1.5 min-[400px]:text-[10px] sm:text-xs md:text-sm">
+      <div className="absolute inset-0 flex flex-col items-center justify-end p-3">
+        <span className="rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-dark backdrop-blur-sm">
           {card.alt}
         </span>
       </div>
     </motion.div>
   )
 }
+
+/* ── Mobile Carousel ─────────────────────────────────────────── */
+
+const CARD_W = 200
+const GAP = 16
+const STEP = CARD_W + GAP
+const SET_W = CARD_COUNT * STEP
+const AUTO_SPEED = 0.4 // px per frame
+
+function MobileCarousel() {
+  const x = useMotionValue(-SET_W)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isDragging = useRef(false)
+  const isPaused = useRef(false)
+  const pauseTimer = useRef<ReturnType<typeof setTimeout>>(null)
+
+  // Normalize x into the middle set after every animation so the loop is seamless
+  const normalize = () => {
+    const cur = x.get()
+    const mod = ((cur % SET_W) + SET_W) % SET_W // always positive
+    x.set(-SET_W + mod)
+  }
+
+  // Auto-slide via rAF — pauses during drag and briefly after release
+  useEffect(() => {
+    let raf: number
+    const tick = () => {
+      if (!isDragging.current && !isPaused.current) {
+        const next = x.get() - AUTO_SPEED
+        if (next <= -SET_W * 2) {
+          x.set(next + SET_W)
+        } else {
+          x.set(next)
+        }
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [x])
+
+  const handleDragStart = () => {
+    isDragging.current = true
+    if (pauseTimer.current) clearTimeout(pauseTimer.current)
+  }
+
+  const handleDragEnd = (
+    _: unknown,
+    info: { velocity: { x: number }; offset: { x: number } },
+  ) => {
+    isDragging.current = false
+    isPaused.current = true
+
+    const cur = x.get()
+    const projected = cur + info.velocity.x * 0.2
+    const snapped = Math.round(projected / STEP) * STEP
+    animate(x, snapped, {
+      type: 'spring',
+      stiffness: 400,
+      damping: 40,
+      onComplete: () => {
+        normalize()
+        pauseTimer.current = setTimeout(() => {
+          isPaused.current = false
+        }, 2000)
+      },
+    })
+  }
+
+  // 3 copies for infinite illusion
+  const tripled = [...cardData, ...cardData, ...cardData]
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative mx-auto mt-4 h-[320px] overflow-hidden"
+      style={{ touchAction: 'pan-y' }}
+    >
+      <motion.div
+        className="flex cursor-grab items-start active:cursor-grabbing"
+        style={{ x, gap: GAP }}
+        drag="x"
+        dragElastic={0.05}
+        dragMomentum={false}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        {tripled.map((card, i) => (
+          <div
+            key={`${card.alt}-${i}`}
+            className="relative shrink-0 overflow-hidden rounded-2xl shadow-lg"
+            style={{ width: CARD_W, aspectRatio: '3 / 4' }}
+          >
+            <Image
+              src={card.img}
+              alt={card.alt}
+              fill
+              className="pointer-events-none object-cover"
+              draggable={false}
+              sizes="200px"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center p-3">
+              <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-dark backdrop-blur-sm">
+                {card.alt}
+              </span>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  )
+}
+
+/* ── Section ─────────────────────────────────────────────────── */
 
 export function ThisMonth() {
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -188,31 +288,50 @@ export function ThisMonth() {
         This Month at <span className="text-lync">LYNC</span>
       </motion.h2>
 
-      <div className="relative mx-auto mt-4 flex h-[340px] items-start justify-center overflow-hidden pt-4 min-[400px]:h-[380px] sm:h-[480px] sm:overflow-visible sm:pt-6 md:h-[600px] md:pt-8 lg:h-[680px]">
-        {cardData.map((card, i) => (
-          <FanCard
-            key={card.alt}
-            card={card}
-            index={i}
-            isMobile={isMobile}
-            progress={progress}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-          />
-        ))}
+      {!isMobile && (
+        <div className="relative mx-auto mt-4 flex h-[600px] items-start justify-center overflow-visible pt-8 lg:h-[680px]">
+          {cardData.map((card, i) => (
+            <FanCard
+              key={card.alt}
+              card={card}
+              index={i}
+              progress={progress}
+              hoveredId={hoveredId}
+              setHoveredId={setHoveredId}
+            />
+          ))}
+        </div>
+      )}
+
+      {!isMobile && (
+        <div className="relative z-20 -mt-12 flex justify-center lg:-mt-14">
+          <CtaHoverWrap>
+            <Link
+              href="/events"
+              className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-base font-semibold text-dark transition-colors hover:bg-white/90 md:px-8 md:text-lg"
+            >
+              View all events
+            </Link>
+          </CtaHoverWrap>
+        </div>
+      )}
       </div>
 
-      <div className="relative z-20 mt-8 flex justify-center sm:mt-0 sm:-mt-10 md:-mt-12 lg:-mt-14">
-        <CtaHoverWrap>
-          <Link
-            href="/events"
-            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-base font-semibold text-dark transition-colors hover:bg-white/90 md:px-8 md:text-lg"
-          >
-            View all events
-          </Link>
-        </CtaHoverWrap>
-      </div>
-      </div>
+      {isMobile && (
+        <>
+          <MobileCarousel />
+          <div className="-mt-6 flex justify-center">
+            <CtaHoverWrap>
+              <Link
+                href="/events"
+                className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-base font-semibold text-dark transition-colors hover:bg-white/90"
+              >
+                View all events
+              </Link>
+            </CtaHoverWrap>
+          </div>
+        </>
+      )}
     </section>
   )
 }

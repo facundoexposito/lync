@@ -42,19 +42,23 @@ export function WhyLync() {
         </p>
       </motion.header>
 
-      {/* Mobile / tablet: stacked cards */}
+      {/* Mobile / tablet: stacked cards with alternating tilt */}
       <div className="mx-auto flex max-w-lg flex-col gap-6 lg:hidden">
         {WHY_LYNC_PILLARS.map((pillar, i) => {
-          const Icon = pillar.Icon
+          const tilt = i % 2 === 0 ? -1.5 : 1.5
           return (
             <ScrollReveal key={pillar.title} delay={reduceMotion ? 0 : i * 0.06}>
+              <motion.div
+                style={{ rotate: tilt }}
+                whileInView={reduceMotion ? undefined : { rotate: tilt }}
+              >
               <SpotlightCard
                 className="rounded-2xl border border-border bg-white p-5 shadow-lg"
                 spotlightColor="rgba(54,121,241,0.06)"
               >
                 <div className="flex items-start gap-3">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-lync text-white shadow-sm">
-                    <Icon size={22} strokeWidth={1.75} />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-lync/10 text-xl">
+                    {pillar.emoji}
                   </span>
                   <div>
                     <h3 className="font-display text-lg font-semibold uppercase tracking-normal text-dark">{pillar.title}</h3>
@@ -75,6 +79,7 @@ export function WhyLync() {
                   />
                 </div>
               </SpotlightCard>
+              </motion.div>
             </ScrollReveal>
           )
         })}

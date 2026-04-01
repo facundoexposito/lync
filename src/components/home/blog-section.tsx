@@ -8,30 +8,7 @@ import { ArrowRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { HighlightStroke } from '@/components/ui/highlight-stroke'
 import { PAGE_SHELL } from '@/lib/page-shell'
-
-const TEASERS = [
-  {
-    title: 'Your first month in Madrid without the awkward phase',
-    excerpt:
-      'Small habits and hangouts that help friendships stick when everything is new.',
-    href: '/blog',
-    img: '/brand/COMMUNITY/watch-party-four-girls-autumn.webp',
-  },
-  {
-    title: 'Why curated beats chaotic for meeting people',
-    excerpt:
-      'Fewer events, better energy. How we think about real connection.',
-    href: '/blog',
-    img: '/brand/COMMUNITY/sushi-chef-plating.webp',
-  },
-  {
-    title: 'Study abroad & solo moves: you are not the only one',
-    excerpt:
-      'Stories from girls who landed alone and found their crew anyway.',
-    href: '/blog',
-    img: '/brand/COMMUNITY/social-four-girls-venue-pose.webp',
-  },
-] as const
+import { blogPosts } from '@/data/blog-posts'
 
 export function BlogSection() {
   return (
@@ -58,15 +35,15 @@ export function BlogSection() {
 
       {/* Card grid */}
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {TEASERS.map((post, i) => (
-          <ScrollReveal key={post.title} delay={i * 0.08}>
+        {blogPosts.map((post, i) => (
+          <ScrollReveal key={post.slug} delay={i * 0.08}>
             <Link
-              href={post.href}
+              href={`/blog/${post.slug}`}
               className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow hover:shadow-lg"
             >
               <div className="relative h-36 sm:h-40">
                 <Image
-                  src={post.img}
+                  src={post.image}
                   alt={post.title}
                   fill
                   className="object-cover"

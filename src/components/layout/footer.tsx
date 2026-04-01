@@ -3,14 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { CtaMotionA } from '@/components/ui/cta-hover'
-import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 export function Footer() {
-  const pathname = usePathname()
-  const isHome = pathname === '/'
-
   return (
     <>
       <CtaMotionA
@@ -23,94 +18,79 @@ export function Footer() {
         <MessageCircle size={22} />
       </CtaMotionA>
 
-      <footer
-        className={cn(
-          'text-white',
-          isHome ? 'bg-lync' : 'bg-dark',
-        )}
-      >
-        <div className="mx-auto max-w-6xl px-5 py-14 md:py-16">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-            <div className="flex flex-col items-start">
-              <Link
-                href="/"
-                className="relative mb-6 inline-block h-9 shrink-0 md:h-10"
-                aria-label="LYNC — Home"
-              >
+      <footer className="bg-lync text-white">
+        <div className="mx-auto max-w-6xl px-5 py-10 md:py-12">
+          <div className="flex flex-col items-center gap-8 md:flex-row md:items-start md:justify-between">
+            {/* Logo + tagline */}
+            <div className="text-center md:text-left">
+              <Link href="/" className="relative mb-3 inline-block h-8 md:h-9" aria-label="LYNC — Home">
                 <Image
                   src="/brand/LOGO_WHITETEXT_NOBG.png"
                   alt=""
                   width={640}
                   height={200}
-                  className="block h-9 w-auto max-w-[min(100%,10.5rem)] object-contain object-left md:h-10 md:max-w-[min(100%,12rem)]"
-                  sizes="(max-width: 768px) 168px, 192px"
+                  className="block h-8 w-auto max-w-[9rem] object-contain md:h-9 md:max-w-[10rem]"
+                  sizes="160px"
                 />
               </Link>
-              <p className="max-w-xs font-nav text-sm leading-relaxed text-white/55">
-                Making meaningful friendships in Madrid,
-                <br />
-                one event at a time.
+              <p className="max-w-xs text-sm leading-relaxed text-white/55">
+                Making meaningful friendships in Madrid, one event at a time.
               </p>
             </div>
 
-            <div>
-              <h4 className="mb-4 font-nav text-xs font-semibold uppercase tracking-widest text-white/45">
-                Navigate
-              </h4>
-              <ul className="space-y-2.5">
-                {[
-                  { href: '/', label: 'Home' },
-                  { href: '/events', label: 'Events' },
-                  { href: '/blog', label: 'Blog' },
-                  { href: '/about', label: 'About' },
-                  { href: '/quiz', label: 'Take the Quiz' },
-                  { href: '/study-abroad', label: 'Study Abroad' },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="mb-4 font-nav text-xs font-semibold uppercase tracking-widest text-white/45">
-                Social
-              </h4>
-              <ul className="space-y-2.5">
-                {['Instagram', 'TikTok', 'YouTube'].map((name) => (
-                  <li key={name}>
-                    <a
-                      href="#"
-                      className="text-sm text-white/60 transition-colors hover:text-white"
-                    >
-                      {name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* Links */}
+            <nav className="flex gap-10 text-center md:gap-14 md:text-left">
+              <div>
+                <h4 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/45">
+                  Explore
+                </h4>
+                <ul className="space-y-2">
+                  {[
+                    { href: '/events', label: 'Events' },
+                    { href: '/retreats', label: 'Retreats' },
+                    { href: '/blog', label: 'Blog' },
+                    { href: '/about', label: 'About' },
+                  ].map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-white">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="mb-3 text-xs font-semibold uppercase tracking-widest text-white/45">
+                  Connect
+                </h4>
+                <ul className="space-y-2">
+                  {[
+                    { href: '/quiz', label: 'Take the Quiz' },
+                    { href: 'https://instagram.com', label: 'Instagram', external: true },
+                    { href: 'https://tiktok.com', label: 'TikTok', external: true },
+                  ].map((link) => (
+                    <li key={link.label}>
+                      {'external' in link ? (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 transition-colors hover:text-white">
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-white">
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </nav>
           </div>
 
-          <div
-            className={cn(
-              'mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 md:mt-14 md:flex-row',
-              isHome ? 'border-white/15' : 'border-white/10',
-            )}
-          >
-            <p className="text-xs text-white/35">© 2026 LYNC Events. All rights reserved.</p>
-            <div className="flex gap-6 text-xs text-white/35">
-              <a href="#" className="transition-colors hover:text-white/55">
-                Privacy
-              </a>
-              <a href="#" className="transition-colors hover:text-white/55">
-                Cookies
-              </a>
+          <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/15 pt-6 text-xs text-white/35 md:flex-row">
+            <p>&copy; 2026 LYNC Events. All rights reserved.</p>
+            <div className="flex gap-5">
+              <a href="#" className="transition-colors hover:text-white/55">Privacy</a>
+              <a href="#" className="transition-colors hover:text-white/55">Cookies</a>
             </div>
           </div>
         </div>

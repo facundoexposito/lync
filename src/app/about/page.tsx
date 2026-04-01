@@ -30,7 +30,7 @@ export default function AboutPage() {
             <div>
               <ScrollReveal delay={0.15}>
                 <h1 className="mb-6 font-display text-3xl font-semibold uppercase tracking-normal md:text-4xl">
-                  Hey! We&apos;re<br />Rebecca and Cordelia
+                  👋 Hey! We&apos;re<br />Rebecca and Cordelia
                 </h1>
               </ScrollReveal>
               <div className="space-y-4 text-muted">

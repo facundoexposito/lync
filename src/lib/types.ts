@@ -22,8 +22,10 @@ export type Event = {
   location: string
   category: 'Wellness' | 'Social' | 'Adventure' | 'Creative' | 'Nightlife'
   spotsLeft: number
-  image?: string
+  image: string
+  price: string
   description: string
+  highlights?: string[]
 }
 
 export type Testimonial = {
@@ -31,6 +33,7 @@ export type Testimonial = {
   quote: string
   stars: number
   role?: string
+  img?: string
 }
 
 export type FAQ = {

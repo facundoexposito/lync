@@ -8,7 +8,7 @@ import { Menu, X, ArrowRight } from 'lucide-react'
 
 import { PAGE_SHELL } from '@/lib/page-shell'
 
-const ROW_H = 'min-h-[2.75rem] md:min-h-[3rem]'
+const ROW_H = 'min-h-[2.25rem] md:min-h-[2.5rem]'
 
 /** Keep 1px border always so scroll state doesn’t reflow layout */
 const navShellTransition =
@@ -16,7 +16,7 @@ const navShellTransition =
 
 /** Desktop nav links: same tap/hit padding in hero + scrolled so nothing "shrinks" on scroll */
 const DESKTOP_LINK_PAD =
-  'rounded-full px-2.5 py-1.5 transition-[color,text-decoration-color] duration-150'
+  'rounded-full px-2 py-1 transition-[color,text-decoration-color] duration-150'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,11 +28,18 @@ export function Navbar() {
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [pathname])
 
-  const isHome = pathname === '/'
+  /** Full-bleed hero behind nav — white logo/links until scroll */
+  const isHeroNav =
+    pathname === '/' ||
+    pathname === '/accommodations' ||
+    pathname === '/events' ||
+    pathname === '/retreats'
   /** Use dark (black text, blue logo) on inner pages or when scrolled */
-  const dark = scrolled || !isHome
+  const dark = scrolled || !isHeroNav
+  /** Show white container only after scrolling — all pages start transparent */
+  const showContainer = scrolled
 
   const links = [
     { href: '/about', label: 'About' },
@@ -49,16 +56,16 @@ export function Navbar() {
       <nav style={{ fontFamily: 'var(--font-nav)' }} className="pointer-events-auto pt-3">
         <div className={PAGE_SHELL}>
           <div
-            className={`w-full rounded-full px-3 py-2 md:px-5 md:py-2.5 ${navShellTransition} ${
-              scrolled
-                ? 'border border-black/[0.08] bg-white/95 shadow-xl backdrop-blur-md'
+            className={`w-full rounded-full px-3 py-1.5 md:px-4 md:py-1.5 ${navShellTransition} ${
+              showContainer
+                ? 'border border-white/40 bg-white/60 shadow-xl backdrop-blur-xl backdrop-saturate-150'
                 : 'border border-transparent bg-transparent shadow-none [backdrop-filter:none]'
             }`}
           >
             <div className={`hidden md:grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-0 ${ROW_H}`}>
               <Link
                 href="/"
-                className="relative h-8 w-32 shrink-0 justify-self-start"
+                className="relative h-6 w-24 shrink-0 justify-self-start"
                 aria-label="LYNC — Home"
               >
                 <Image
@@ -89,7 +96,7 @@ export function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`inline-flex items-center justify-center text-sm font-semibold leading-none lg:text-base ${DESKTOP_LINK_PAD} ${linkClass} ${heroHover}`}
+                      className={`inline-flex items-center justify-center text-[13px] font-semibold leading-none lg:text-sm ${DESKTOP_LINK_PAD} ${linkClass} ${heroHover}`}
                     >
                       {link.label}
                     </Link>
@@ -100,9 +107,9 @@ export function Navbar() {
               <div className="flex justify-self-end">
                 <Link
                   href="/quiz"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark px-4 py-2 text-sm font-semibold text-white shadow-sm transition-shadow duration-150 hover:shadow-md lg:px-5 lg:text-base"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark px-3.5 py-1.5 text-[13px] font-semibold text-white shadow-sm transition-shadow duration-150 hover:shadow-md lg:px-4 lg:text-sm"
                 >
-                  Get Started <ArrowRight size={16} strokeWidth={2.25} />
+                  Get Started <ArrowRight size={14} strokeWidth={2.25} />
                 </Link>
               </div>
             </div>

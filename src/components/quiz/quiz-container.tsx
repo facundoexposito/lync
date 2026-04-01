@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { motion } from 'motion/react'
 import { QuizStep } from './quiz-step'
 import { QuizResults } from './quiz-results'
 import { quizQuestions } from '@/data/quiz-questions'
@@ -30,35 +31,68 @@ export function QuizContainer() {
 
   return (
     <div className="flex min-h-screen flex-col bg-cream pt-20">
-      {/* Progress bar — full width at top */}
-      <div className="fixed top-16 left-0 right-0 z-40 h-1 bg-border md:top-20">
-        <div className="h-full bg-lync transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
-      </div>
-
       <div className="flex flex-1 items-center justify-center px-4 py-8 sm:px-5 sm:py-10">
-        <div className="w-full max-w-md">
-          {/* Step info */}
-          <div className="mb-5 flex items-center justify-between sm:mb-6">
-            {step > 0 ? (
-              <button onClick={() => setStep(s => s - 1)} className="flex items-center gap-1.5 text-muted hover:text-dark text-sm transition-colors">
-                <ArrowLeft size={16} /> Back
-              </button>
-            ) : <div />}
-            <span className="text-xs font-mono text-muted">{step + 1} / {total}</span>
-          </div>
+        <motion.div
+          className="w-full max-w-xl"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          {/* Card */}
+          <div className="rounded-[1.75rem] border border-border bg-white p-5 shadow-lg sm:rounded-[2rem] sm:p-7 md:p-8">
+            {/* Header — only on first step */}
+            {step === 0 && (
+              <div className="mb-6 text-center sm:mb-7">
+                <h1 className="font-display text-2xl font-semibold uppercase tracking-normal text-dark sm:text-3xl md:text-4xl">
+                  Find your <span className="text-lync">experience</span>
+                </h1>
+                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                  A few quick questions, then we&apos;ll match you with events you&apos;ll actually want to go to.
+                </p>
+              </div>
+            )}
 
-          {/* Content */}
-          <div key={step} className="animate-fade-up">
-            <QuizStep
-              question={question}
-              isLeadStep={isLead}
-              answers={answers}
-              onAnswer={handleAnswer}
-              onNext={() => setStep(s => s + 1)}
-              onLeadSubmit={(info) => { setLeadInfo(info); setDone(true) }}
-            />
+            {/* Step info + progress bar */}
+            <div className="mb-5 sm:mb-6">
+              <div className="mb-1.5 flex items-center justify-between">
+                {step > 0 ? (
+                  <button
+                    onClick={() => setStep(s => s - 1)}
+                    className="flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-dark"
+                  >
+                    <ArrowLeft size={16} /> Back
+                  </button>
+                ) : <div />}
+                <span className="text-xs font-medium tabular-nums text-muted">
+                  Step <span className="font-semibold text-dark">{step + 1}</span> of <span className="font-semibold text-dark">{total}</span>
+                </span>
+              </div>
+              <div className="h-2 overflow-hidden rounded-full bg-lync-light">
+                <div
+                  className="h-full rounded-full bg-lync transition-[width] duration-500 ease-out"
+                  style={{ width: `${progress}%` }}
+                  role="progressbar"
+                  aria-valuenow={step + 1}
+                  aria-valuemin={1}
+                  aria-valuemax={total}
+                  aria-label={`Step ${step + 1} of ${total}`}
+                />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div key={step} className="animate-fade-up">
+              <QuizStep
+                question={question}
+                isLeadStep={isLead}
+                answers={answers}
+                onAnswer={handleAnswer}
+                onNext={() => setStep(s => s + 1)}
+                onLeadSubmit={(info) => { setLeadInfo(info); setDone(true) }}
+              />
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

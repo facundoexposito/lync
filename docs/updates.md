@@ -1,5 +1,27 @@
 # LYNC — Updates
 
+## April 1, 2026
+
+### Session — Acuity embed + mobile responsive polish
+
+**Events page — Acuity scheduler embed:**
+- Replaced hardcoded event cards with live Acuity Scheduling iframe (auto-syncs with client's real events)
+- Created reusable `AcuityEmbed` client component (`src/components/ui/acuity-embed.tsx`) — uses `next/script` for auto-resize
+- Page converted from `'use client'` to server component with `metadata` export for SEO
+- Hero, sticky sidebar, and bottom CTA unchanged
+
+**Mobile responsive fixes:**
+- **TrustBento ("Our Community"):** Removed `min-h-[44svh]` that created excessive top spacing on mobile; desktop `min-h-[38svh]` preserved
+- **ThisMonth ("This Month at LYNC"):** Replaced clipped fan-card stack on mobile with infinite swipeable carousel (touch drag, auto-scroll, seamless loop via 3x card duplication + modular normalization). Desktop fan animation unchanged.
+- **Testimonials:** Fixed mobile card cutting off author info — removed `flex-1` from quote, added `mt-auto` on author to pin to bottom; image aspect changed from `4/3` → `3/2` for better proportions; stars enlarged to `h-10`
+- **CTA Section:** Changed mobile aspect ratio from `1.35/1` (landscape) to `4/5` (portrait) so stacked buttons fit inside the rounded card; heading bumped from `text-lg` → `text-xl`
+
+**Repo hygiene:**
+- Deleted 4 orphaned UI components with zero imports: `blur-text.tsx`, `button.tsx`, `image-marquee.tsx`, `text-marquee.tsx`
+- Updated all docs (updates.md, roadmap.md, memory.md)
+
+---
+
 ## March 31, 2026
 
 ### Session — Homepage polish & typography system

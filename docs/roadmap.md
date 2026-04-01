@@ -10,11 +10,14 @@
 - [x] Blog shell
 - [x] Build passing (npm run build)
 - [x] Git repo created and pushed to GitHub
-- [ ] Real photos from Rebecca's Drive folder (Boss task)
+- [x] Real photos from Rebecca's Drive folder
+- [x] Events page: Acuity scheduler embed (replaces hardcoded cards)
+- [x] Mobile polish pass (first round — TrustBento, ThisMonth carousel, testimonials, CTA)
+- [x] Deploy to Vercel
 - [ ] Swap placeholder fonts for Mogena + Avenir (Boss task)
-- [ ] Mobile polish pass
 - [ ] SEO metadata for all pages
-- [ ] Deploy to Vercel
+- [ ] Mobile polish pass (remaining pages — accommodations hero, retreats sidebar order)
+- [ ] Accessibility audit (touch targets, focus states, reduced motion)
 
 ## Phase 2: Supabase + Data
 - [ ] Supabase project setup

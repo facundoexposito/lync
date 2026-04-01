@@ -1,99 +1,143 @@
-import { CtaMotionLink } from '@/components/ui/cta-hover'
-import { MapPin, UtensilsCrossed, Bus, Music, Mountain, Lightbulb, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import { ArrowRight, ShoppingBag } from 'lucide-react'
+import { ScrollReveal } from '@/components/ui/scroll-reveal'
+import { CtaMotionLink, CtaMotionA } from '@/components/ui/cta-hover'
+import { HighlightStroke } from '@/components/ui/highlight-stroke'
+import { guides } from '@/data/guides'
 
 export const metadata: Metadata = {
-  title: 'City Guides | LYNC',
-  description: 'Insider tips and local knowledge to help you navigate Madrid like a local, from neighborhoods to nightlife.',
+  title: 'Guides — Insider Madrid Ebooks | LYNC',
+  description:
+    'Practical, community-curated ebooks to help you move to, live in, and thrive in Madrid. From relocation checklists to restaurant guides.',
+  openGraph: {
+    title: 'Guides — Insider Madrid Ebooks | LYNC',
+    description:
+      'Practical, community-curated ebooks to help you move to, live in, and thrive in Madrid.',
+    type: 'website',
+  },
 }
-
-const guides = [
-  {
-    icon: MapPin,
-    title: 'Neighborhoods',
-    description: 'Discover the personality of each barrio, from trendy Malasaña to elegant Salamanca.',
-  },
-  {
-    icon: UtensilsCrossed,
-    title: 'Food & Drink',
-    description: 'The best tapas bars, brunch spots, rooftop terraces, and hidden gems locals love.',
-  },
-  {
-    icon: Bus,
-    title: 'Getting Around',
-    description: 'Metro tips, bike routes, and everything you need to navigate the city with ease.',
-  },
-  {
-    icon: Music,
-    title: 'Nightlife',
-    description: 'Where to go out, what to expect, and how to enjoy Madrid\'s legendary nightlife safely.',
-  },
-  {
-    icon: Mountain,
-    title: 'Day Trips',
-    description: 'Escape the city for a day. Toledo, Segovia, Sierra de Guadarrama, and more.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Practical Tips',
-    description: 'Banking, healthcare, phone plans, and the admin stuff nobody tells you about.',
-  },
-]
 
 export default function GuidesPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="py-16 md:py-24 bg-cream text-center">
-        <div className="mx-auto max-w-6xl px-5">
-          <h1 className="mb-6 font-display text-5xl font-semibold uppercase tracking-normal md:text-6xl">
-            City Guides
-          </h1>
-          <p className="text-xl text-muted max-w-2xl mx-auto">
-            Insider tips and local knowledge to help you navigate Madrid like a pro.
-          </p>
+      {/* ── Hero ──────────────────────────────────────── */}
+      <section className="bg-cream pb-10 pt-28 md:pb-14 md:pt-32">
+        <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
+          <ScrollReveal>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-lync">
+              Ebooks &amp; Guides
+            </p>
+            <h1 className="mb-5 font-display text-5xl font-semibold uppercase tracking-normal md:text-6xl">
+              Your Madrid{' '}
+              <span className="relative inline-block">
+                Playbook
+                <HighlightStroke
+                  className="absolute -bottom-1 left-0 w-full"
+                  strokeWidth={5}
+                />
+              </span>
+            </h1>
+            <p className="mx-auto max-w-2xl text-lg text-muted md:text-xl">
+              Practical, community-curated ebooks packed with insider
+              knowledge to help you move to, live in, and thrive in Madrid.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Guide Cards */}
+      {/* ── Guide Cards ───────────────────────────────── */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {guides.map((guide, i) => (
-              <div
-                key={i}
-                className="relative bg-white border-2 border-cream p-6 rounded-2xl animate-fade-up"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <span className="absolute top-4 right-4 bg-cream text-dark/60 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-                  Coming Soon
-                </span>
-                <div className="w-12 h-12 bg-lync/10 rounded-full flex items-center justify-center mb-4">
-                  <guide.icon size={24} className="text-lync" />
-                </div>
-                <h3 className="mb-3 font-display text-xl font-semibold uppercase tracking-normal">{guide.title}</h3>
-                <p className="text-muted">{guide.description}</p>
-              </div>
-            ))}
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="flex flex-col gap-16 md:gap-20">
+            {guides.map((guide, i) => {
+              const reversed = i % 2 !== 0
+              return (
+                <ScrollReveal key={guide.title} delay={0.05}>
+                  <div
+                    className={`flex flex-col items-center gap-8 md:gap-12 lg:gap-16 ${
+                      reversed ? 'md:flex-row-reverse' : 'md:flex-row'
+                    }`}
+                  >
+                    {/* Image */}
+                    <div className="w-full md:w-1/2">
+                      <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface shadow-sm">
+                        <Image
+                          src={guide.image}
+                          alt={guide.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="w-full md:w-1/2">
+                      <h2 className="mb-3 font-display text-3xl font-semibold uppercase tracking-normal md:text-4xl">
+                        {guide.title}
+                      </h2>
+                      <p className="mb-5 leading-relaxed text-muted">
+                        {guide.description}
+                      </p>
+
+                      <ul className="mb-6 space-y-2.5">
+                        {guide.highlights.map((h) => (
+                          <li
+                            key={h}
+                            className="flex items-center gap-2.5 text-sm text-dark"
+                          >
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lync" />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Pricing */}
+                      <div className="mb-6 flex items-baseline gap-3">
+                        <span className="text-2xl font-bold text-dark">
+                          {guide.price}
+                        </span>
+                        <span className="text-base text-muted line-through">
+                          {guide.compareAt}
+                        </span>
+                      </div>
+
+                      <CtaMotionA
+                        href={guide.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-shadow hover:shadow-md"
+                      >
+                        <ShoppingBag size={18} />
+                        Get the Guide
+                      </CtaMotionA>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )
+            })}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 md:py-24 bg-lync text-white text-center">
-        <div className="mx-auto max-w-6xl px-5">
-          <h2 className="mb-6 font-display text-4xl font-semibold uppercase tracking-normal md:text-5xl">
-            Have a Suggestion?
-          </h2>
-          <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-            Know a hidden gem we should cover? We&apos;d love to hear from you.
-          </p>
-          <CtaMotionLink
-            href="/about"
-            className="inline-flex items-center gap-2 bg-white text-dark font-semibold px-8 py-4 rounded-full text-lg hover:bg-cream transition-colors"
-          >
-            Get in Touch <ArrowRight size={20} />
-          </CtaMotionLink>
+      {/* ── CTA ───────────────────────────────────────── */}
+      <section className="bg-dark py-16 text-center text-white md:py-24">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <ScrollReveal>
+            <h2 className="mb-6 font-display text-4xl font-semibold uppercase tracking-normal md:text-5xl">
+              Want More Than a Guide?
+            </h2>
+            <p className="mx-auto mb-8 max-w-2xl text-xl text-white/70">
+              From curated events to retreat getaways, we&apos;ll match you
+              with the perfect Madrid experience.
+            </p>
+            <CtaMotionLink
+              href="/quiz"
+              className="inline-flex items-center gap-2 rounded-full bg-lync px-8 py-4 text-lg font-semibold text-white transition-colors hover:bg-lync-dark"
+            >
+              Find Your Experience <ArrowRight size={20} />
+            </CtaMotionLink>
+          </ScrollReveal>
         </div>
       </section>
     </>
