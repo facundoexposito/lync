@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
+import { CtaMotionLink } from '@/components/ui/cta-hover'
 import { GraduationCap, Building2, ChevronDown, ArrowRight } from 'lucide-react'
 
 const studentServices = [
@@ -45,7 +45,7 @@ export default function StudyAbroadPage() {
     <>
       <section className="py-16 md:py-24 bg-cream text-center">
         <div className="mx-auto max-w-6xl px-5">
-          <h1 className="mb-6 font-nav text-5xl font-semibold uppercase tracking-normal md:text-6xl">
+          <h1 className="mb-6 font-display text-5xl font-semibold uppercase tracking-normal md:text-6xl">
             Study Abroad in Madrid
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export default function StudyAbroadPage() {
               <div className="w-12 h-12 bg-lync rounded-full flex items-center justify-center">
                 <GraduationCap className="text-white" size={24} />
               </div>
-              <h2 className="font-nav text-3xl font-semibold uppercase tracking-normal text-dark">For Students</h2>
+              <h2 className="font-display text-3xl font-semibold uppercase tracking-normal text-dark">For Students</h2>
             </div>
             <ChevronDown
               size={24}
@@ -82,7 +82,7 @@ export default function StudyAbroadPage() {
                   className="bg-white border-2 border-cream p-6 rounded-2xl"
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  <h3 className="mb-3 font-nav text-xl font-semibold uppercase tracking-normal">{service.title}</h3>
+                  <h3 className="mb-3 font-display text-xl font-semibold uppercase tracking-normal">{service.title}</h3>
                   <p className="text-muted">{service.desc}</p>
                 </div>
               ))}
@@ -101,7 +101,7 @@ export default function StudyAbroadPage() {
               <div className="w-12 h-12 bg-dark rounded-full flex items-center justify-center">
                 <Building2 className="text-white" size={24} />
               </div>
-              <h2 className="font-nav text-3xl font-semibold uppercase tracking-normal text-dark">For Schools</h2>
+              <h2 className="font-display text-3xl font-semibold uppercase tracking-normal text-dark">For Schools</h2>
             </div>
             <ChevronDown
               size={24}
@@ -119,7 +119,7 @@ export default function StudyAbroadPage() {
                   className="bg-white border-2 border-cream p-6 rounded-2xl"
                   style={{ animationDelay: `${i * 100}ms` }}
                 >
-                  <h3 className="mb-3 font-nav text-xl font-semibold uppercase tracking-normal">{service.title}</h3>
+                  <h3 className="mb-3 font-display text-xl font-semibold uppercase tracking-normal">{service.title}</h3>
                   <p className="text-muted">{service.desc}</p>
                 </div>
               ))}
@@ -130,18 +130,18 @@ export default function StudyAbroadPage() {
 
       <section className="py-16 md:py-24 bg-lync text-white text-center">
         <div className="mx-auto max-w-6xl px-5">
-          <h2 className="mb-6 font-nav text-4xl font-semibold uppercase tracking-normal md:text-5xl">
+          <h2 className="mb-6 font-display text-4xl font-semibold uppercase tracking-normal md:text-5xl">
             Ready to Start Your Journey?
           </h2>
           <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
             Get in touch to learn more about how LYNC can support your study abroad experience.
           </p>
-          <Link
+          <CtaMotionLink
             href="/about"
             className="inline-flex items-center gap-2 bg-white text-dark font-semibold px-8 py-4 rounded-full text-lg hover:bg-cream transition-colors"
           >
             Contact Us <ArrowRight size={20} />
-          </Link>
+          </CtaMotionLink>
         </div>
       </section>
     </>

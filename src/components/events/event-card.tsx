@@ -1,3 +1,4 @@
+import { CtaMotionButton } from '@/components/ui/cta-hover'
 import { Event } from '@/lib/types'
 import { formatDate } from '@/lib/utils'
 import { MapPin, Calendar } from 'lucide-react'
@@ -23,7 +24,7 @@ export function EventCard({ event }: EventCardProps) {
       </div>
 
       <div className="p-6">
-        <h3 className="mb-3 font-nav text-lg font-semibold uppercase tracking-normal transition-colors group-hover:text-lync">
+        <h3 className="mb-3 font-display text-lg font-semibold uppercase tracking-normal transition-colors group-hover:text-lync">
           {event.title}
         </h3>
         <div className="flex flex-col gap-1.5 text-sm text-muted mb-4">
@@ -37,9 +38,12 @@ export function EventCard({ event }: EventCardProps) {
           </div>
         </div>
         <p className="text-muted text-sm leading-relaxed mb-5 line-clamp-2">{event.description}</p>
-        <button className="w-full bg-dark text-white font-semibold py-3 rounded-full text-sm hover:bg-lync transition-colors duration-200">
+        <CtaMotionButton
+          type="button"
+          className="w-full bg-dark text-white font-semibold py-3 rounded-full text-sm hover:bg-lync transition-colors duration-200"
+        >
           Reserve Your Spot
-        </button>
+        </CtaMotionButton>
       </div>
     </div>
   )

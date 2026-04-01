@@ -1,4 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mona+Sans:wght@500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* Feature Deck — self-hosted display font */
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-Light-Trial.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-LightItalic-Trial.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-Regular-Trial.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-RegularItalic-Trial.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-Medium-Trial.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-MediumItalic-Trial.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-Bold-Trial.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-BoldItalic-Trial.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-Extrabold-Trial.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Feature Deck';
+  src: url('/fonts/FeatureDeck-ExtraboldItalic-Trial.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
 
 @import 'tailwindcss';
 
@@ -12,9 +84,9 @@
   --color-border: #e5e7eb;
   --color-surface: #fafafa;
 
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  --font-nav: 'Mona Sans', sans-serif;
+  --font-display: 'Feature Deck', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-nav: 'Plus Jakarta Sans', sans-serif;
 }
 
 @layer base {
@@ -28,7 +100,7 @@
     background: #fff;
   }
 
-  h1, h2, h3, h4, h5, h6 { font-family: var(--font-nav); }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); }
   ::selection { background-color: var(--color-lync); color: white; }
 }
 
@@ -41,18 +113,39 @@
     from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
   }
-  @keyframes marquee-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes marquee-right {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.08); }
   }
   .animate-fade-up { animation: fade-up 0.6s ease-out both; }
   .animate-scale-in { animation: scale-in 0.4s ease-out both; }
+  .animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
   .delay-400 { animation-delay: 400ms; }
+}
+
+/* Marquee: outside @layer so `animation: marquee-left` resolves (Tailwind v4 layers can block this). */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee-track {
+    animation: none !important;
+  }
 }

@@ -1,7 +1,14 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    localPatterns: [
+      {
+        pathname: '/brand/**',
+        // no `search` → optional ?v= cache-bust on any brand asset
+      },
+    ],
+  },
 }
 
 export default nextConfig

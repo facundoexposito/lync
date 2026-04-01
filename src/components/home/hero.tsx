@@ -75,7 +75,7 @@ export function HeroSection() {
               className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-white sm:text-xl md:mt-6"
               {...fadeUp(0.45)}
             >
-              Join the fastest-growing community of international women building real friendships through curated events. No awkward apps — just real connection.
+              Join the fastest-growing community of international women building real friendships through curated events. No awkward apps, just real connection.
             </motion.p>
 
             <motion.div
@@ -84,7 +84,7 @@ export function HeroSection() {
             >
               <Link
                 href="/quiz"
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-lync px-8 py-4 text-lg font-semibold text-white transition-all duration-200 hover:bg-lync-dark hover:shadow-lg hover:shadow-lync/30"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark px-8 py-4 text-lg font-semibold text-white shadow-sm transition-all duration-200 hover:shadow-lg hover:shadow-lync/30"
               >
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
                 <ShinyText text="Find Your Experience" color="#ffffff" shineColor="#a8d4ff" speed={4} />

@@ -14,9 +14,9 @@ const ROW_H = 'min-h-[2.75rem] md:min-h-[3rem]'
 const navShellTransition =
   'transition-[background-color,backdrop-filter,box-shadow,border-color] duration-200 ease-out'
 
-/** Desktop nav links: same tap/hit padding in hero + scrolled so nothing “shrinks” on scroll */
+/** Desktop nav links: same tap/hit padding in hero + scrolled so nothing "shrinks" on scroll */
 const DESKTOP_LINK_PAD =
-  'rounded-full px-3.5 py-1.5 transition-[color,text-decoration-color] duration-150'
+  'rounded-full px-2.5 py-1.5 transition-[color,text-decoration-color] duration-150'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,11 +30,18 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const isHome = pathname === '/'
+  /** Use dark (black text, blue logo) on inner pages or when scrolled */
+  const dark = scrolled || !isHome
+
   const links = [
-    { href: '/events', label: 'Events' },
     { href: '/about', label: 'About' },
-    { href: '/study-abroad', label: 'Study Abroad' },
+    { href: '/events', label: 'Events' },
+    { href: '/retreats', label: 'Retreats' },
     { href: '/blog', label: 'Blog' },
+    { href: '/study-abroad', label: 'Study Abroad' },
+    { href: '/guides', label: 'Guides' },
+    { href: '/accommodations', label: 'Accommodations' },
   ]
 
   return (
@@ -55,7 +62,7 @@ export function Navbar() {
                 aria-label="LYNC — Home"
               >
                 <Image
-                  src={scrolled ? '/brand/LOGO_BLUETEXT_NOBG.png' : '/brand/LOGO_WHITETEXT_NOBG.png'}
+                  src={dark ? '/brand/LOGO_BLUETEXT_NOBG.png' : '/brand/LOGO_WHITETEXT_NOBG.png'}
                   alt=""
                   fill
                   className="object-contain object-left"
@@ -64,25 +71,25 @@ export function Navbar() {
                 />
               </Link>
 
-              <div className="flex items-center justify-center gap-1 lg:gap-2">
+              <div className="flex items-center justify-center gap-0.5 lg:gap-1">
                 {links.map((link) => {
                   const isActive = pathname === link.href
                   let linkClass: string
-                  if (scrolled) {
+                  let heroHover: string
+                  if (dark) {
                     linkClass = isActive
-                      ? 'text-black font-bold underline decoration-lync decoration-2 underline-offset-[6px]'
-                      : 'text-black hover:text-black underline-offset-[6px] decoration-lync decoration-2 hover:underline'
+                      ? 'text-black font-bold border border-black/15'
+                      : 'text-black border border-transparent hover:border-black/15'
+                    heroHover = 'bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lync focus-visible:ring-offset-2'
                   } else {
                     linkClass = isActive ? 'text-white font-bold' : 'text-white'
+                    heroHover = 'border border-transparent bg-transparent hover:border-border hover:bg-white hover:text-black hover:shadow-sm focus-visible:border-border focus-visible:bg-white focus-visible:text-black focus-visible:outline-none'
                   }
-                  const heroHover = scrolled
-                    ? 'border border-transparent bg-transparent hover:bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lync focus-visible:ring-offset-2'
-                    : 'border border-transparent bg-transparent hover:border-border hover:bg-white hover:text-black hover:shadow-sm focus-visible:border-border focus-visible:bg-white focus-visible:text-black focus-visible:outline-none'
                   return (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`inline-flex items-center justify-center text-base font-semibold leading-none lg:text-lg ${DESKTOP_LINK_PAD} ${linkClass} ${heroHover}`}
+                      className={`inline-flex items-center justify-center text-sm font-semibold leading-none lg:text-base ${DESKTOP_LINK_PAD} ${linkClass} ${heroHover}`}
                     >
                       {link.label}
                     </Link>
@@ -93,9 +100,9 @@ export function Navbar() {
               <div className="flex justify-self-end">
                 <Link
                   href="/quiz"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-lync px-5 py-2 text-base font-semibold text-white transition-colors duration-150 hover:bg-lync-dark lg:px-6 lg:text-lg"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark px-4 py-2 text-sm font-semibold text-white shadow-sm transition-shadow duration-150 hover:shadow-md lg:px-5 lg:text-base"
                 >
-                  Take the Quiz <ArrowRight size={16} strokeWidth={2.25} />
+                  Get Started <ArrowRight size={16} strokeWidth={2.25} />
                 </Link>
               </div>
             </div>
@@ -103,7 +110,7 @@ export function Navbar() {
             <div className={`flex items-center md:hidden ${ROW_H} pl-0 pr-0`}>
               <Link href="/" className="relative h-8 w-28 shrink-0" aria-label="LYNC — Home">
                 <Image
-                  src={scrolled ? '/brand/LOGO_BLUETEXT_NOBG.png' : '/brand/LOGO_WHITETEXT_NOBG.png'}
+                  src={dark ? '/brand/LOGO_BLUETEXT_NOBG.png' : '/brand/LOGO_WHITETEXT_NOBG.png'}
                   alt=""
                   fill
                   className="object-contain object-left"
@@ -113,7 +120,7 @@ export function Navbar() {
               </Link>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`ml-auto p-1.5 transition-colors duration-150 ${scrolled ? 'text-black' : 'text-white'}`}
+                className={`ml-auto p-1.5 transition-colors duration-150 ${dark ? 'text-black' : 'text-white'}`}
                 aria-label="Menu"
               >
                 {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -139,10 +146,10 @@ export function Navbar() {
               ))}
               <Link
                 href="/quiz"
-                className="mt-3 flex items-center justify-center gap-2 rounded-full bg-lync py-3 text-base font-semibold text-white"
+                className="mt-3 flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark py-3 text-base font-semibold text-white shadow-sm"
                 onClick={() => setIsOpen(false)}
               >
-                Take the Quiz <ArrowRight size={16} />
+                Get Started <ArrowRight size={16} />
               </Link>
             </div>
           </div>

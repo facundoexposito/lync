@@ -18,7 +18,7 @@ export default function EventsPage() {
     <>
       <section className="py-16 md:py-24 bg-cream text-center">
         <div className="mx-auto max-w-6xl px-5">
-          <h1 className="mb-6 font-nav text-5xl font-semibold uppercase tracking-normal md:text-6xl">
+          <h1 className="mb-6 font-display text-5xl font-semibold uppercase tracking-normal md:text-6xl">
             Upcoming Events
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto">

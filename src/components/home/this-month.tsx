@@ -19,19 +19,21 @@ import {
   BookOpen,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
+import { CtaHoverWrap } from '@/components/ui/cta-hover'
 import { PAGE_SHELL } from '@/lib/page-shell'
 
 const icons: LucideIcon[] = [Wine, Dumbbell, UtensilsCrossed, Music, Palette, Camera, Bike, BookOpen]
 
 const cardData = [
-  { alt: 'Tapas night',        bg: 'bg-rose-400' },
-  { alt: 'Rooftop drinks',     bg: 'bg-lync' },
-  { alt: 'Yoga in the park',   bg: 'bg-pink-400' },
-  { alt: 'Wine tasting',       bg: 'bg-amber-400' },
-  { alt: 'Brunch club',        bg: 'bg-emerald-500' },
-  { alt: 'Art & paint night',  bg: 'bg-violet-500' },
-  { alt: 'Picnic at Retiro',   bg: 'bg-sky-400' },
+  { alt: 'Tapas night',        img: '/brand/COMMUNITY/sushi-chef-plating.webp' },
+  { alt: 'Rooftop drinks',     img: '/brand/COMMUNITY/social-bar-lounge-large-group.webp' },
+  { alt: 'Yoga in the park',   img: '/brand/COMMUNITY/yoga-class-tree-pose.webp' },
+  { alt: 'Wine tasting',       img: '/brand/COMMUNITY/craft-night-cards-wine-closeup.webp' },
+  { alt: 'Brunch club',        img: '/brand/COMMUNITY/social-five-girls-restaurant-booth.webp' },
+  { alt: 'Art & paint night',  img: '/brand/COMMUNITY/vision-board-three-girls-showing.webp' },
+  { alt: 'Picnic at Retiro',   img: '/brand/COMMUNITY/run-club-viewpoint-arms-raised.webp' },
 ]
 
 const CARD_COUNT = cardData.length
@@ -120,7 +122,7 @@ function FanCard({
 
   return (
     <motion.div
-      className={`absolute w-[130px] cursor-pointer rounded-xl shadow-xl min-[400px]:w-[150px] sm:w-[180px] md:w-[230px] lg:w-[260px] ${card.bg}`}
+      className="absolute w-[130px] cursor-pointer overflow-hidden rounded-xl shadow-xl min-[400px]:w-[150px] sm:w-[180px] md:w-[230px] lg:w-[260px]"
       style={{
         aspectRatio: '9 / 16',
         transformOrigin: 'bottom center',
@@ -135,7 +137,14 @@ function FanCard({
       onMouseEnter={() => setHoveredId(index)}
       onMouseLeave={() => setHoveredId(null)}
     >
-      <div className="flex h-full flex-col items-center justify-end rounded-xl p-2 sm:rounded-2xl sm:p-3">
+      <Image
+        src={card.img}
+        alt={card.alt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 400px) 130px, (max-width: 640px) 150px, (max-width: 768px) 180px, (max-width: 1024px) 230px, 260px"
+      />
+      <div className="absolute inset-0 flex flex-col items-center justify-end p-2 sm:p-3">
         <span className="rounded-full bg-white/90 px-2 py-1 text-[9px] font-semibold text-dark backdrop-blur-sm min-[400px]:px-3 min-[400px]:py-1.5 min-[400px]:text-[10px] sm:text-xs md:text-sm">
           {card.alt}
         </span>
@@ -164,12 +173,13 @@ export function ThisMonth() {
   return (
     <section
       ref={sectionRef}
-      className={`bg-cream pb-16 pt-14 md:pb-20 md:pt-24 ${PAGE_SHELL}`}
+      className="bg-cream pb-16 pt-14 md:pb-20 md:pt-24"
     >
+      <div className={PAGE_SHELL}>
       <RotatingIcon />
 
       <motion.h2
-        className="mb-5 text-center font-nav text-2xl font-semibold uppercase tracking-normal text-dark sm:text-3xl md:mb-6 md:text-4xl"
+        className="mb-5 text-center font-display text-2xl font-semibold uppercase tracking-normal text-dark sm:text-3xl md:mb-6 md:text-4xl"
         initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         viewport={{ once: true, margin: '-40px 0px' }}
@@ -192,13 +202,16 @@ export function ThisMonth() {
         ))}
       </div>
 
-      <div className="mt-8 flex justify-center sm:mt-0 sm:-mt-10 md:-mt-12 lg:-mt-14">
-        <Link
-          href="/events"
-          className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-base font-semibold text-dark transition-colors hover:bg-white/90 md:px-8 md:text-lg"
-        >
-          View all events
-        </Link>
+      <div className="relative z-20 mt-8 flex justify-center sm:mt-0 sm:-mt-10 md:-mt-12 lg:-mt-14">
+        <CtaHoverWrap>
+          <Link
+            href="/events"
+            className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3 text-base font-semibold text-dark transition-colors hover:bg-white/90 md:px-8 md:text-lg"
+          >
+            View all events
+          </Link>
+        </CtaHoverWrap>
+      </div>
       </div>
     </section>
   )
