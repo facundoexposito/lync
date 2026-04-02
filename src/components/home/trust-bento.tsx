@@ -126,9 +126,13 @@ export function TrustBento() {
                       y: 0,
                       rotate: stat.rotation,
                       scale: isActive ? 1.08 : 1,
-                      backgroundColor: isActive ? stat.activeBg : 'rgb(255,255,255)',
-                      borderColor: isActive ? stat.activeBg : 'rgba(26,26,26,0.2)',
-                      color: isActive ? 'rgb(255,255,255)' : 'rgb(26,26,26)',
+                      ...(isMobile
+                        ? {
+                            backgroundColor: isActive ? stat.activeBg : 'rgb(255,255,255)',
+                            borderColor: isActive ? stat.activeBg : 'rgba(26,26,26,0.2)',
+                            color: isActive ? 'rgb(255,255,255)' : 'rgb(26,26,26)',
+                          }
+                        : {}),
                     }
                   : { opacity: 0, y: 30, rotate: 0 }
               }
