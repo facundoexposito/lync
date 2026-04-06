@@ -136,5 +136,5 @@ export const exclusiveOffer: ExclusiveOffer = {
   promoCode: 'CMC-LYN-200',
   discount: '€200 off',
   cta: 'Book Now',
-  href: 'https://www.collegiatestudentliving.com/madrid/',
+  href: 'https://www.collegiate-ac.es/en/student-accommodation/madrid/collegiate-madrid-chamartin/collegiate-madrid-chamartin-ppc/?utm_source=google&utm_medium=cpc&utm_campaign=spain_search_location_english&gad_source=1&gad_campaignid=22530599916&gbraid=0AAAAA-xnyuZMQN6korT2nBELMskM_CzIO&gclid=Cj0KCQjws83OBhD4ARIsACblj19AvkEvL2E-OXjxxHtLT38XhzSytCTc7UlwRkI6JplRtB5nd_pkhHcaAq3REALw_wcB',
 }
