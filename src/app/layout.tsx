@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   },
   description: 'Join hundreds of international women building meaningful friendships in Madrid through curated events and community.',
   keywords: 'madrid, friends, international, women, community, events, expats, students',
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
     siteName: 'LYNC',
     locale: 'en_US',
@@ -43,6 +46,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body>
         <script
           type="application/ld+json"

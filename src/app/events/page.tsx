@@ -10,7 +10,7 @@ import { ACUITY_BOOKING_URL } from '@/data/events'
 export const metadata: Metadata = {
   title: 'Upcoming Events',
   description:
-    'Browse and book upcoming LYNC events in Madrid — from yoga sessions to rooftop cocktails.',
+    'Browse and book upcoming LYNC events in Madrid — from yoga sessions to rooftop cocktails. Meet amazing women and build real friendships.',
   openGraph: {
     images: [{ url: '/brand/COMMUNITY/social-bar-chic-wide-shot.webp', width: 1200, height: 630, alt: 'LYNC community event in Madrid' }],
   },
