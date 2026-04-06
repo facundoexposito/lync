@@ -5,8 +5,11 @@ import { ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us | LYNC',
+  title: 'About Us',
   description: 'Meet the founders of LYNC and learn about our mission to help international women build meaningful friendships in Madrid.',
+  openGraph: {
+    images: [{ url: '/brand/about-founders.webp', width: 1200, height: 630, alt: 'LYNC founders Rebecca and Cordelia' }],
+  },
 }
 
 export default function AboutPage() {

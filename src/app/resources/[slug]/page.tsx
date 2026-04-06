@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { resources, getResource } from '@/data/study-abroad'
 import { ResourceArticle } from '@/components/study-abroad/resource-article'
+import { SITE_URL } from '@/lib/constants'
 import type { Metadata } from 'next'
 
 interface Props {
@@ -14,10 +15,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const resource = getResource(slug)
-  if (!resource) return { title: 'Resource Not Found | LYNC' }
+  if (!resource) return { title: 'Resource Not Found' }
 
   return {
-    title: `${resource.title} | LYNC Resources`,
+    title: resource.title,
     description: resource.description,
     openGraph: {
       title: resource.title,
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: resource.title,
       description: resource.description,
+      images: [{ url: resource.image, alt: resource.title }],
     },
   }
 }
@@ -41,5 +43,32 @@ export default async function ResourcePage({ params }: Props) {
 
   const otherResources = resources.filter((r) => r.slug !== slug)
 
-  return <ResourceArticle resource={resource} otherResources={otherResources} />
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: resource.title,
+    description: resource.description,
+    image: `${SITE_URL}${resource.image}`,
+    datePublished: resource.date,
+    author: {
+      '@type': 'Organization',
+      name: 'LYNC',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'LYNC',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/brand/ICON_BLUE.png` },
+    },
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ResourceArticle resource={resource} otherResources={otherResources} />
+    </>
+  )
 }

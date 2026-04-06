@@ -21,14 +21,11 @@ import {
 } from '@/data/retreats'
 
 export const metadata: Metadata = {
-  title: 'Retreats — Curated Getaways | LYNC',
+  title: 'Retreats',
   description:
     'Curated group travel experiences designed to deepen friendships and explore stunning destinations across Spain and beyond.',
   openGraph: {
-    title: 'Retreats — Curated Getaways | LYNC',
-    description:
-      'Curated group travel experiences designed to deepen friendships and explore stunning destinations.',
-    type: 'website',
+    images: [{ url: '/brand/COMMUNITY/run-club-viewpoint-arms-raised.webp', width: 1200, height: 630, alt: 'LYNC Retreats' }],
   },
 }
 

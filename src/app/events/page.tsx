@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: 'Upcoming Events',
   description:
     'Browse and book upcoming LYNC events in Madrid — from yoga sessions to rooftop cocktails.',
+  openGraph: {
+    images: [{ url: '/brand/COMMUNITY/social-bar-chic-wide-shot.webp', width: 1200, height: 630, alt: 'LYNC community event in Madrid' }],
+  },
 }
 
 export default function EventsPage() {

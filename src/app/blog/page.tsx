@@ -3,14 +3,11 @@ import { BlogList } from '@/components/blog/blog-list'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Blog | LYNC Madrid',
+  title: 'Blog',
   description:
     'Tips, stories, and guides for making real friends in Madrid. From girls\u2019 nights to yoga meetups, discover how to build your social circle abroad.',
   openGraph: {
-    title: 'Blog | LYNC Madrid',
-    description:
-      'Tips, stories, and guides for making real friends in Madrid.',
-    type: 'website',
+    images: [{ url: '/brand/BLOG/social-circle.jpg', width: 1200, height: 630, alt: 'LYNC Blog' }],
   },
 }
 

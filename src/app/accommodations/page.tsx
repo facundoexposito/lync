@@ -14,15 +14,17 @@ import {
 import { CopyPromoCode } from './copy-promo-code'
 
 export const metadata: Metadata = {
-  title: 'Collegiate Madrid — Premium Student Living | LYNC',
+  title: { absolute: 'Collegiate Madrid — Premium Student Living | LYNC' },
   description:
     'Exclusive student accommodation in the heart of Madrid. Private studios, rooftop terrace, gym, cinema room, and an exclusive €200 LYNC discount.',
   openGraph: {
+    images: [{ url: '/brand/COLLEGIATE/hero.avif', width: 1920, height: 800, alt: 'Collegiate Madrid' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'Collegiate Madrid — Premium Student Living | LYNC',
-    description:
-      'Exclusive student accommodation in the heart of Madrid. Private studios, world-class amenities, and an exclusive LYNC discount.',
-    images: [{ url: '/brand/COLLEGIATE/hero.avif', width: 1920, height: 800 }],
-    type: 'website',
+    description: 'Exclusive student accommodation in the heart of Madrid. Private studios, world-class amenities, and an exclusive LYNC discount.',
+    images: [{ url: '/brand/COLLEGIATE/hero.avif', alt: 'Collegiate Madrid' }],
   },
 }
 

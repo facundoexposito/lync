@@ -3,14 +3,11 @@ import { HighlightStroke } from '@/components/ui/highlight-stroke'
 import { StudyAbroadTabs, RotatingEmoji } from '@/components/study-abroad/study-abroad-tabs'
 
 export const metadata: Metadata = {
-  title: 'Study Abroad in Madrid | LYNC',
+  title: 'Study Abroad in Madrid',
   description:
     'Expert guidance for studying abroad in Madrid. University selection, visa support, on-ground integration, and free resources for international students.',
   openGraph: {
-    title: 'Study Abroad in Madrid | LYNC',
-    description:
-      'Expert guidance for studying abroad in Madrid. University selection, visa support, and community integration.',
-    type: 'website',
+    images: [{ url: '/brand/RESOURCES/how-to-study-abroad-in-madrid.jpg', width: 1200, height: 630, alt: 'Study Abroad in Madrid with LYNC' }],
   },
 }
 

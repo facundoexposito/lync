@@ -7,14 +7,11 @@ import { HighlightStroke } from '@/components/ui/highlight-stroke'
 import { guides } from '@/data/guides'
 
 export const metadata: Metadata = {
-  title: 'Guides — Insider Madrid Ebooks | LYNC',
+  title: 'Guides',
   description:
     'Practical, community-curated ebooks to help you move to, live in, and thrive in Madrid. From relocation checklists to restaurant guides.',
   openGraph: {
-    title: 'Guides — Insider Madrid Ebooks | LYNC',
-    description:
-      'Practical, community-curated ebooks to help you move to, live in, and thrive in Madrid.',
-    type: 'website',
+    images: [{ url: '/brand/GUIDES/madrid-guide.png', width: 1200, height: 630, alt: 'LYNC Madrid Guides' }],
   },
 }
 
