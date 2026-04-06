@@ -8,8 +8,6 @@ import { studentServices, schoolServices, resources } from '@/data/study-abroad'
 import type { ServiceItem, ResourceItem } from '@/data/study-abroad'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import SpotlightCard from '@/components/ui/spotlight-card'
-import { CtaMotionLink, CtaMotionA } from '@/components/ui/cta-hover'
-
 /* ── Tab config ───────────────────────────────────── */
 
 const tabs = [
@@ -18,9 +16,6 @@ const tabs = [
   { id: 'Consultation' as const, emoji: '💬' },
 ]
 type Tab = (typeof tabs)[number]['id']
-
-const WHATSAPP_LINK =
-  'https://wa.me/34612345678?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20free%20study%20abroad%20consultation.'
 
 /* ── Rotating emoji (exported for page hero) ──────── */
 
@@ -315,47 +310,20 @@ function ResourceCard({ item }: { item: ResourceItem }) {
 
 /* ── Consultation panel ───────────────────────────── */
 
+const CALENDLY_URL = 'https://calendly.com/theintellete/study-in-europe-planning-call'
+
 function ConsultationPanel() {
   return (
-    <div>
-      <ScrollReveal>
-        <div className="mx-auto max-w-3xl">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-lync to-lync-dark p-8 text-center text-white md:p-14">
-            {/* Decorative circles */}
-            <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/10" />
-            <div className="absolute -bottom-8 -left-8 h-28 w-28 rounded-full bg-white/10" />
-
-            <div className="relative">
-              <span className="mb-5 inline-block text-5xl">💬</span>
-              <h2 className="mb-3 font-display text-3xl font-semibold uppercase tracking-normal sm:text-4xl">
-                Book a Free Consultation
-              </h2>
-              <p className="mx-auto mb-8 max-w-lg text-base text-white/80 md:text-lg">
-                Not sure where to start? Chat with our team to get personalized
-                advice on universities, visas, and life in Madrid — completely
-                free, no strings attached.
-              </p>
-              <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                <CtaMotionA
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-7 py-3 text-sm font-semibold text-white shadow-md"
-                >
-                  💬 Chat on WhatsApp
-                </CtaMotionA>
-                <CtaMotionLink
-                  href="/study-abroad"
-                  className="inline-flex items-center gap-2 rounded-full bg-white/20 px-7 py-3 text-sm font-semibold text-white backdrop-blur-sm"
-                >
-                  Learn More
-                  <ArrowRight size={16} />
-                </CtaMotionLink>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ScrollReveal>
+    <div className="mx-auto max-w-4xl">
+      <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/[0.04]">
+        <iframe
+          src={CALENDLY_URL}
+          title="Book a Study Abroad Consultation"
+          width="100%"
+          height="700"
+          frameBorder="0"
+        />
+      </div>
     </div>
   )
 }
