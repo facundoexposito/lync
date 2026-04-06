@@ -66,8 +66,8 @@ export function Footer() {
                 <ul className="space-y-2">
                   {[
                     { href: '/quiz', label: 'Take the Quiz' },
-                    { href: 'https://instagram.com', label: 'Instagram', external: true },
-                    { href: 'https://tiktok.com', label: 'TikTok', external: true },
+                    { href: 'https://www.instagram.com/lyncevents/', label: 'Instagram', external: true },
+                    { href: 'https://www.tiktok.com/@lyncevents', label: 'TikTok', external: true },
                   ].map((link) => (
                     <li key={link.label}>
                       {'external' in link ? (
@@ -88,9 +88,18 @@ export function Footer() {
 
           <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/15 pt-6 text-xs text-white/35 md:flex-row">
             <p>&copy; 2026 LYNC Events. All rights reserved.</p>
-            <div className="flex gap-5">
+            <div className="flex items-center gap-5">
               <a href="#" className="transition-colors hover:text-white/55">Privacy</a>
               <a href="#" className="transition-colors hover:text-white/55">Cookies</a>
+              <span className="mx-1 hidden h-3 w-px bg-white/15 md:block" />
+              <div className="flex items-center gap-3">
+                <a href="https://www.instagram.com/lyncevents/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white/55" aria-label="Instagram">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                </a>
+                <a href="https://www.tiktok.com/@lyncevents" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white/55" aria-label="TikTok">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>

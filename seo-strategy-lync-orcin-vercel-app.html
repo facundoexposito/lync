@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Strategy Report — lync-orcin.vercel.app</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface-2: #1a1a25;
+  --surface-3: #22222f;
+  --border: #2a2a3a;
+  --border-light: #3a3a4a;
+  --text: #e8e8f0;
+  --text-secondary: #9898a8;
+  --text-muted: #6a6a7a;
+  --green: #34d399;
+  --green-bg: rgba(52, 211, 153, 0.1);
+  --green-border: rgba(52, 211, 153, 0.2);
+  --yellow: #fbbf24;
+  --yellow-bg: rgba(251, 191, 36, 0.1);
+  --yellow-border: rgba(251, 191, 36, 0.2);
+  --red: #f87171;
+  --red-bg: rgba(248, 113, 113, 0.1);
+  --red-border: rgba(248, 113, 113, 0.2);
+  --blue: #60a5fa;
+  --blue-bg: rgba(96, 165, 250, 0.1);
+  --blue-border: rgba(96, 165, 250, 0.2);
+  --purple: #a78bfa;
+  --purple-bg: rgba(167, 139, 250, 0.1);
+  --purple-border: rgba(167, 139, 250, 0.2);
+  --accent: #818cf8;
+  --accent-bg: rgba(129, 140, 248, 0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.4);
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.header {
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(129,140,248,0.2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-family: var(--font-mono);
+}
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.header-subtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+.header-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.header-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Score Section */
+.score-section {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  padding: 32px 0;
+  margin-bottom: 32px;
+  align-items: center;
+}
+.score-ring-container { position: relative; width: 180px; height: 180px; }
+.score-ring { transform: rotate(-90deg); }
+.score-ring-bg { fill: none; stroke: var(--surface-3); stroke-width: 8; }
+.score-ring-fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+.score-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.score-number {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+.score-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.score-grade {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--radius-xs);
+  margin-top: 4px;
+}
+.score-details h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.score-details p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.sub-scores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.sub-score {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sub-score-name {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.sub-score-value {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  text-align: center;
+}
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--font-body);
+}
+.tab:hover { color: var(--text-secondary); }
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.badge-pass {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green-border);
+}
+.badge-fail {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid var(--red-border);
+}
+.badge-warning {
+  background: var(--yellow-bg);
+  color: var(--yellow);
+  border: 1px solid var(--yellow-border);
+}
+.badge-info {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid var(--blue-border);
+}
+
+/* Findings */
+.finding {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+.finding-status { padding-top: 2px; }
+.finding-content h4 {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.finding-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.finding-rec {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+/* Collapsible */
+.collapsible { margin-bottom: 12px; }
+.collapsible-header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+  user-select: none;
+}
+.collapsible-header:hover { border-color: var(--border-light); }
+.collapsible-header h3 {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.collapsible-header .arrow {
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  font-size: 12px;
+}
+.collapsible.open .collapsible-header { border-radius: var(--radius) var(--radius) 0 0; }
+.collapsible.open .arrow { transform: rotate(180deg); }
+.collapsible-body {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 20px;
+}
+.collapsible.open .collapsible-body { display: block; }
+
+/* Page Meta Grid */
+.page-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.page-meta-item {
+  background: var(--surface-2);
+  border-radius: var(--radius-xs);
+  padding: 10px 14px;
+}
+.page-meta-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.page-meta-value {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+/* Section Headers */
+.section-header {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.data-table th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--surface); }
+.data-table code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--surface-3);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Action Items */
+.action-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+.action-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.action-number.critical { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+.action-number.high { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+.action-number.medium { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+.action-number.low { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+.action-content {}
+.action-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.action-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.action-impact {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  padding-top: 4px;
+}
+.action-impact.critical { color: var(--red); }
+.action-impact.high { color: var(--yellow); }
+.action-impact.medium { color: var(--blue); }
+.action-impact.low { color: var(--purple); }
+
+/* Content Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.card h4 {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+.card ul li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.card ul li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Cluster */
+.cluster {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.cluster-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.cluster-pillar {
+  font-size: 12px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  margin-bottom: 10px;
+}
+.cluster-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cluster-page {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  background: var(--surface-3);
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+/* Dividers */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .score-section { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .sub-scores { grid-template-columns: 1fr 1fr; }
+  .header h1 { font-size: 24px; }
+  .finding { grid-template-columns: 1fr; }
+  .finding-rec { white-space: normal; }
+  .action-item { grid-template-columns: 1fr; }
+  .action-impact { white-space: normal; }
+  .tabs { gap: 2px; }
+  .tab { padding: 8px 12px; font-size: 12px; }
+  .data-table { font-size: 12px; }
+  .data-table th, .data-table td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">&#9670; SEO AUDIT REPORT</div>
+  <h1>SEO Strategy Report — lync-orcin.vercel.app</h1>
+  <p class="header-subtitle">Full technical and content SEO analysis for LYNC, the Madrid-based international women's community platform.</p>
+  <div class="header-meta">
+    <span class="header-meta-item">&#128197; April 6, 2026</span>
+    <span class="header-meta-item">&#127760; lync-orcin.vercel.app</span>
+    <span class="header-meta-item">&#128196; 11 pages analyzed</span>
+    <span class="header-meta-item">&#9888; 10 issues found</span>
+  </div>
+</div>
+
+<!-- SCORE SECTION -->
+<div class="score-section">
+  <div class="score-ring-container">
+    <svg class="score-ring" width="180" height="180" viewBox="0 0 180 180">
+      <circle class="score-ring-bg" cx="90" cy="90" r="80"/>
+      <circle class="score-ring-fill" cx="90" cy="90" r="80" stroke="var(--yellow)" stroke-dasharray="502" stroke-dashoffset="105"/>
+    </svg>
+    <div class="score-value">
+      <div class="score-number" style="color: var(--yellow);">79</div>
+      <div class="score-label">Overall</div>
+      <span class="score-grade" style="background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border);">B</span>
+    </div>
+  </div>
+  <div class="score-details">
+    <h3>Strong foundation with a few technical gaps to close</h3>
+    <p>LYNC has solid on-page SEO fundamentals: every page has unique titles using a consistent template pattern, meta descriptions, proper Open Graph images, and Organization JSON-LD. The sitemap and robots.txt are well-configured. The main gaps are missing canonical tags across all pages, 4 absent security headers, and a lack of page-specific structured data on most pages.</p>
+    <div class="sub-scores">
+      <div class="sub-score">
+        <span class="sub-score-name">Technical</span>
+        <span class="sub-score-value" style="color: var(--yellow);">68</span>
+      </div>
+      <div class="sub-score">
+        <span class="sub-score-name">Content</span>
+        <span class="sub-score-value" style="color: var(--green);">82</span>
+      </div>
+      <div class="sub-score">
+        <span class="sub-score-name">Architecture</span>
+        <span class="sub-score-value" style="color: var(--yellow);">78</span>
+      </div>
+      <div class="sub-score">
+        <span class="sub-score-name">Cross-Page</span>
+        <span class="sub-score-value" style="color: var(--green);">90</span>
+      </div>
+      <div class="sub-score">
+        <span class="sub-score-name">Social &amp; Schema</span>
+        <span class="sub-score-value" style="color: var(--green);">82</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<div class="quick-stats">
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--red);">1</div>
+    <div class="stat-label">Critical</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--yellow);">3</div>
+    <div class="stat-label">High</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--blue);">6</div>
+    <div class="stat-label">Warnings</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--text);">~3,850</div>
+    <div class="stat-label">Total Words</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--green);">100%</div>
+    <div class="stat-label">Schema Coverage</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--green);">0</div>
+    <div class="stat-label">Orphan Pages</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--text);">~175</div>
+    <div class="stat-label">Internal Links</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color: var(--green);">0</div>
+    <div class="stat-label">Missing Meta</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('executive')">Executive Summary</button>
+  <button class="tab" onclick="switchTab('pages')">Page Breakdown</button>
+  <button class="tab" onclick="switchTab('sitewide')">Site-Wide Issues</button>
+  <button class="tab" onclick="switchTab('technical')">Technical</button>
+  <button class="tab" onclick="switchTab('content')">Content Strategy</button>
+  <button class="tab" onclick="switchTab('linking')">Internal Linking</button>
+  <button class="tab" onclick="switchTab('actions')">Action Plan</button>
+</div>
+
+<!-- ===== TAB: EXECUTIVE SUMMARY ===== -->
+<div id="tab-executive" class="tab-content active">
+  <h2 class="section-header">Executive Summary</h2>
+  <p class="section-desc">A high-level overview of the SEO health of lync-orcin.vercel.app, covering 11 pages across technical, content, and structural dimensions.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4 style="color: var(--green);">What's Working Well</h4>
+      <ul>
+        <li>All 11 pages have unique titles, meta descriptions, and H1 tags</li>
+        <li>Organization JSON-LD schema on every page (100% coverage)</li>
+        <li>Valid robots.txt and sitemap.xml with 18 URLs</li>
+        <li>Open Graph images configured on all pages</li>
+        <li>HSTS with preload and HTTP-to-HTTPS redirect</li>
+        <li>Brotli compression enabled</li>
+        <li>No orphan or dead-end pages</li>
+        <li>No keyword cannibalization detected</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color: var(--red);">Critical Issues</h4>
+      <ul>
+        <li>No canonical tags on any page (affects duplicate content signals)</li>
+        <li>4 security headers missing: CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy</li>
+        <li>Only 3 of 11 pages have explicit Twitter card metadata</li>
+        <li>No page-specific structured data beyond Organization on 8 of 11 pages</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color: var(--yellow);">Opportunities</h4>
+      <ul>
+        <li>Add canonical tags to all pages via root layout metadata</li>
+        <li>Add Event, CollectionPage, LocalBusiness schemas for rich snippets</li>
+        <li>Lengthen 4 short meta descriptions (under 120 characters)</li>
+        <li>Add preconnect for Google Fonts</li>
+        <li>Build out blog content (3 posts is thin; target 10-15)</li>
+        <li>Add breadcrumb structured data site-wide</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color: var(--blue);">Key Metrics</h4>
+      <ul>
+        <li>11 pages analyzed, ~3,850 total words</li>
+        <li>Average ~350 words per page, ~16 internal links per page</li>
+        <li>4 strong pages (500+ words), 2 thin pages (&lt;150 words)</li>
+        <li>Sitemap covers 18 URLs with proper priority hierarchy</li>
+        <li>Blog has 3 articles published (2 resource articles separate)</li>
+        <li>3 distinct content clusters identified</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 class="section-header">Issue Severity Breakdown</h2>
+  <p class="section-desc">Distribution of 10 issues found across severity levels.</p>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">CRITICAL</span></div>
+    <div class="finding-content">
+      <h4>No canonical tags on any page</h4>
+      <p>All 11 pages are missing <code>&lt;link rel="canonical"&gt;</code> tags. This can cause search engines to index duplicate versions of pages (e.g., with query parameters or trailing slashes), diluting page authority.</p>
+    </div>
+    <div class="finding-rec">FIX ASAP</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">HIGH</span></div>
+    <div class="finding-content">
+      <h4>Missing 4 security headers</h4>
+      <p>Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, and Referrer-Policy are all absent. While not direct ranking factors, Google considers security signals and these protect against XSS and clickjacking.</p>
+    </div>
+    <div class="finding-rec">1-2 HOURS</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">HIGH</span></div>
+    <div class="finding-content">
+      <h4>No preconnect for Google Fonts</h4>
+      <p>Google Fonts are loaded via CSS @import, which delays font loading. Adding <code>&lt;link rel="preconnect"&gt;</code> hints can improve LCP and CLS metrics.</p>
+    </div>
+    <div class="finding-rec">15 MIN</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">HIGH</span></div>
+    <div class="finding-content">
+      <h4>Limited page-specific structured data</h4>
+      <p>Only 3 of 11 pages have schema beyond Organization. The /events, /retreats, /accommodations, /guides, and homepage would benefit from Event, TouristTrip, LocalBusiness, CollectionPage, and WebSite schemas respectively.</p>
+    </div>
+    <div class="finding-rec">2-4 HOURS</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>4 pages have short meta descriptions</h4>
+      <p>/events (89 chars), /quiz (91 chars), /resources/tie-card-guide (85 chars), and one blog post (108 chars) have meta descriptions below the recommended 120-160 character range.</p>
+    </div>
+    <div class="finding-rec">30 MIN</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>2 thin content pages</h4>
+      <p>/quiz (~100 words) and /events (~200 words) have relatively thin text content. While /quiz is interactive, additional descriptive text would help search engines understand the page purpose.</p>
+    </div>
+    <div class="finding-rec">1-2 HOURS</div>
+  </div>
+</div>
+
+<!-- ===== TAB: PAGE BREAKDOWN ===== -->
+<div id="tab-pages" class="tab-content">
+  <h2 class="section-header">Page-by-Page Breakdown</h2>
+  <p class="section-desc">Detailed SEO analysis of each page. Click any page to expand its full report.</p>
+
+  <!-- Page 1: Homepage -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/</code> &mdash; Homepage <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">LYNC | Make Friends in Madrid (31 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Join hundreds of international women building meaningful friendships in Madrid through curated events and community. (121 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1 (in hero component)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~600</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Images</div>
+          <div class="page-meta-value">~15</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H2 Count</div>
+          <div class="page-meta-value">~8</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph</h4>
+          <p>og:title, og:description, og:image (/brand/COMMUNITY/social-bar-chic-wide-shot.webp), og:type=website, og:site_name=LYNC, og:locale=en_US all present.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Twitter Card</h4>
+          <p>card=summary_large_image inherited from OG tags.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Schema Markup</h4>
+          <p>Organization JSON-LD present. No page-specific schema (recommend adding WebSite + SearchAction).</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>No <code>&lt;link rel="canonical"&gt;</code> tag found. Search engines may index duplicate URLs with query params or trailing slashes.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2: /about -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/about</code> &mdash; About Us <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">About Us | LYNC (15 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Meet the founders of LYNC and learn about our mission to help international women build meaningful friendships in Madrid. (119 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1</div>
+          <div class="page-meta-value">Hey! We're Rebecca and Cordelia</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~250</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Images</div>
+          <div class="page-meta-value">5 (2 content + 3 layout)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/about-founders.webp (1200x630)</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph &amp; Twitter</h4>
+          <p>Full OG tags present with correctly-sized image. Twitter card inherited from OG.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Schema</h4>
+          <p>Organization JSON-LD present. No additional schema needed for an about page.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 3: /events -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/events</code> &mdash; Upcoming Events <span class="badge badge-warning">2 Issues</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Upcoming Events | LYNC (22 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Browse and book upcoming LYNC events in Madrid — from yoga sessions to rooftop cocktails. (89 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1</div>
+          <div class="page-meta-value">Upcoming Events</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~200</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">External Links</div>
+          <div class="page-meta-value">Acuity booking URL</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/COMMUNITY/social-bar-chic-wide-shot.webp</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>Short Meta Description (89 chars)</h4>
+          <p>The meta description is below the recommended 120-160 character range. Expand to include more detail about event types and community benefits.</p>
+        </div>
+        <div class="finding-rec">LENGTHEN</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph &amp; Schema</h4>
+          <p>OG tags properly configured. Organization JSON-LD present. Consider adding Event schema if events are dynamically listed.</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 4: /blog -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/blog</code> &mdash; Blog Listing <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Blog | LYNC (11 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Tips, stories, and guides for making real friends in Madrid. From girls' nights to yoga meetups, discover how to build your social circle abroad. (143 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~200 (listing page)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/BLOG/social-circle.jpg</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization only</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Meta Description</h4>
+          <p>Well-crafted description at 143 characters, within the optimal range.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-info">INFO</span></div>
+        <div class="finding-content">
+          <h4>Schema Recommendation</h4>
+          <p>Consider adding CollectionPage schema to help search engines understand this is a blog index page.</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 5: /blog/the-fun-and-easy-way -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/blog/the-fun-and-easy-way-to-expand-your-social-circle</code> <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">The Fun and Easy Way to Expand Your Social Circle | LYNC (55 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Nothing beats a good girls' night out. Here's how to show up with confidence and leave with real connections. (108 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~600</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Type</div>
+          <div class="page-meta-value">article (publishedTime: 2025-03-25)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization + Article</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph &amp; Twitter</h4>
+          <p>Full OG article tags with publishedTime. Explicit Twitter card metadata (card, title, desc, image, image:alt).</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Schema Markup</h4>
+          <p>Organization + Article schema present. This is the most complete schema implementation in the site.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>Meta Description Slightly Short (108 chars)</h4>
+          <p>Just below the 120-char threshold. Consider expanding to give Google more snippet text to work with.</p>
+        </div>
+        <div class="finding-rec">LENGTHEN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 6: /quiz -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/quiz</code> &mdash; Find Your Experience <span class="badge badge-warning">2 Issues</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Find Your Experience | LYNC (27 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Take our quick quiz to get matched with events and experiences that fit your vibe in Madrid. (91 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~100 (interactive quiz, thin)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/COMMUNITY/pilates-group-laughing.webp</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization only</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>Short Meta Description (91 chars)</h4>
+          <p>Below the recommended 120-char minimum. Expand to describe quiz format and what users will discover.</p>
+        </div>
+        <div class="finding-rec">LENGTHEN</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>Thin Content (~100 words)</h4>
+          <p>Interactive quiz pages are inherently thin in indexable text. Consider adding an intro paragraph or FAQ section below the quiz to give search engines more to work with.</p>
+        </div>
+        <div class="finding-rec">ADD CONTENT</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 7: /study-abroad -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/study-abroad</code> &mdash; Study Abroad in Madrid <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Study Abroad in Madrid | LYNC (30 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Expert guidance for studying abroad in Madrid. University selection, visa support, on-ground integration, and free resources for international students. (153 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1</div>
+          <div class="page-meta-value">Study Abroad</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~350</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/RESOURCES/how-to-study-abroad-in-madrid.jpg</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization only</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Meta Description</h4>
+          <p>153 characters — well within the optimal range. Includes target keywords and value proposition.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph</h4>
+          <p>Full OG tags configured with relevant image.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-info">INFO</span></div>
+        <div class="finding-content">
+          <h4>Schema Recommendation</h4>
+          <p>Consider adding EducationalOrganization or Service schema to appear in study abroad related rich results.</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 8: /resources/tie-card-guide -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/resources/tie-card-guide</code> &mdash; TIE Card Guide <span class="badge badge-warning">2 Issues</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">TIE Card Guide | LYNC (21 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Step-by-step guide to applying for your Tarjeta de Identidad de Extranjero in Madrid. (85 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~550</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Type</div>
+          <div class="page-meta-value">article (publishedTime: 2025-04-08)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization + Article</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>Short Meta Description (85 chars)</h4>
+          <p>Well below the 120-char recommended minimum. Add detail about what the guide covers: documents needed, appointment booking, timeline, and costs.</p>
+        </div>
+        <div class="finding-rec">LENGTHEN</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Schema</h4>
+          <p>Organization + Article schema present with publishedTime. Explicit Twitter card tags. Well-structured page.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 9: /retreats -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/retreats</code> &mdash; Retreats <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Retreats | LYNC (15 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Curated group travel experiences designed to deepen friendships and explore stunning destinations across Spain and beyond. (119 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~450</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/COMMUNITY/run-club-viewpoint-arms-raised.webp</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization only</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Open Graph</h4>
+          <p>Full OG tags configured. Twitter card inherited from OG.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-info">INFO</span></div>
+        <div class="finding-content">
+          <h4>Schema Recommendation</h4>
+          <p>Add TouristTrip or Product schema to describe retreat offerings with pricing, dates, and destinations for potential rich results.</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 10: /guides -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/guides</code> &mdash; Guides <span class="badge badge-warning">1 Issue</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Guides | LYNC (14 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Practical, community-curated ebooks to help you move to, live in, and thrive in Madrid. From relocation checklists to restaurant guides. (136 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~300</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/GUIDES/madrid-guide.png</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Schema</div>
+          <div class="page-meta-value">Organization only</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Meta Description</h4>
+          <p>136 characters, within optimal range. Good keyword coverage.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-info">INFO</span></div>
+        <div class="finding-content">
+          <h4>Schema Recommendation</h4>
+          <p>Add CollectionPage schema to identify this as a curated collection of guide products.</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 11: /accommodations -->
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <h3><code>/accommodations</code> &mdash; Collegiate Madrid <span class="badge badge-warning">2 Issues</span></h3>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="page-meta">
+        <div class="page-meta-item">
+          <div class="page-meta-label">Title</div>
+          <div class="page-meta-value">Collegiate Madrid — Premium Student Living | LYNC (50 chars) — absolute title</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Meta Description</div>
+          <div class="page-meta-value">Exclusive student accommodation in the heart of Madrid. Private studios, rooftop terrace, gym, cinema room, and an exclusive €200 LYNC discount. (145 chars)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">H1 Count</div>
+          <div class="page-meta-value">1</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Word Count</div>
+          <div class="page-meta-value">~600</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">Images</div>
+          <div class="page-meta-value">~15 (hero, icons, rooms, amenities, lifestyle)</div>
+        </div>
+        <div class="page-meta-item">
+          <div class="page-meta-label">OG Image</div>
+          <div class="page-meta-value">/brand/COLLEGIATE/hero.avif (1920x800)</div>
+        </div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+        <div class="finding-content">
+          <h4>OG Image Format &amp; Dimensions</h4>
+          <p>Using .avif format at 1920x800 pixels. AVIF is not universally supported by social platform crawlers (Facebook, LinkedIn). The dimensions are non-standard (should be 1200x630). Convert to .jpg or .webp and resize.</p>
+        </div>
+        <div class="finding-rec">CONVERT IMAGE</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+        <div class="finding-content">
+          <h4>Twitter Card</h4>
+          <p>Explicit twitter:card, twitter:title, twitter:description, twitter:image tags present.</p>
+        </div>
+        <div class="finding-rec"></div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+        <div class="finding-content">
+          <h4>Canonical Tag</h4>
+          <p>Missing canonical tag.</p>
+        </div>
+        <div class="finding-rec">FIX</div>
+      </div>
+      <div class="finding">
+        <div class="finding-status"><span class="badge badge-info">INFO</span></div>
+        <div class="finding-content">
+          <h4>Schema Recommendation</h4>
+          <p>Add LocalBusiness or Product schema for Collegiate Madrid to enable rich result features (ratings, pricing, location).</p>
+        </div>
+        <div class="finding-rec">ADD SCHEMA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB: SITE-WIDE ISSUES ===== -->
+<div id="tab-sitewide" class="tab-content">
+  <h2 class="section-header">Site-Wide Issues</h2>
+  <p class="section-desc">10 issues that affect the entire site, spanning duplicate content, consistency, robots/sitemap, and security headers.</p>
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Duplicate Content &amp; Cannibalization</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Unique Title Tags</h4>
+      <p>All 11 pages have unique title tags. No duplication detected.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Unique Meta Descriptions</h4>
+      <p>All 11 pages have unique meta descriptions. No duplication detected.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Unique H1 Tags</h4>
+      <p>All 11 pages have unique H1 headings. No duplication detected.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>No Keyword Cannibalization</h4>
+      <p>Each page targets a distinct topic with no overlap. No cannibalization risk identified.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>Shared OG Fallback Image</h4>
+      <p>/events and the homepage share the same OG image (/brand/COMMUNITY/social-bar-chic-wide-shot.webp). When both are shared on social media, they appear identical. Consider using a unique image for the events page.</p>
+    </div>
+    <div class="finding-rec">UNIQUE IMAGE</div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Consistency Issues</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>Title Format Inconsistency</h4>
+      <p>10 pages use the "%s | LYNC" template pattern, but /accommodations uses an absolute title ("Collegiate Madrid — Premium Student Living | LYNC"). This is likely intentional for a partner page but worth noting for consistency.</p>
+    </div>
+    <div class="finding-rec">INTENTIONAL</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>Inconsistent Twitter Card Metadata</h4>
+      <p>Only 3 of 11 pages have explicit twitter:title, twitter:description, and twitter:image tags. The other 8 inherit from Open Graph, which works but explicit tags are more reliable across platforms.</p>
+    </div>
+    <div class="finding-rec">ADD EXPLICIT</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>Missing og:url on All Pages</h4>
+      <p>No page explicitly sets og:url. Next.js may not auto-generate this property. Without it, social platforms may use the request URL (which could include tracking params) as the canonical URL for shares.</p>
+    </div>
+    <div class="finding-rec">ADD OG:URL</div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Robots &amp; Sitemap</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>robots.txt</h4>
+      <p>Valid robots.txt, allows all crawlers, references sitemap.xml.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>sitemap.xml</h4>
+      <p>Contains all 18 URLs with lastmod, changefreq, and priority attributes. Well-structured.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Sitemap Priority Hierarchy</h4>
+      <p>Logical priority hierarchy: 1.0 for homepage, descending to 0.6 for individual posts. Correctly signals page importance to crawlers.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Security Headers</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>HSTS with Preload</h4>
+      <p>Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>HTTP to HTTPS Redirect</h4>
+      <p>308 Permanent Redirect from HTTP to HTTPS. Correct status code for permanent redirect.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Brotli Compression</h4>
+      <p>Content-Encoding: br enabled for all text-based responses.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>Missing Content-Security-Policy</h4>
+      <p>No CSP header found. Add a Content-Security-Policy header to prevent XSS attacks and unauthorized resource loading.</p>
+    </div>
+    <div class="finding-rec">ADD HEADER</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>Missing X-Content-Type-Options</h4>
+      <p>Should be set to "nosniff" to prevent MIME type sniffing attacks.</p>
+    </div>
+    <div class="finding-rec">ADD HEADER</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>Missing X-Frame-Options</h4>
+      <p>Should be set to "DENY" or "SAMEORIGIN" to prevent clickjacking attacks.</p>
+    </div>
+    <div class="finding-rec">ADD HEADER</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>Missing Referrer-Policy</h4>
+      <p>Should be set to "strict-origin-when-cross-origin" to control referrer information leakage.</p>
+    </div>
+    <div class="finding-rec">ADD HEADER</div>
+  </div>
+</div>
+
+<!-- ===== TAB: TECHNICAL ===== -->
+<div id="tab-technical" class="tab-content">
+  <h2 class="section-header">Technical SEO Checklist</h2>
+  <p class="section-desc">15-point technical SEO audit covering HTTPS, compression, structured data, and crawlability.</p>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>1. HTTPS Enabled</h4>
+      <p>308 Permanent Redirect from HTTP to HTTPS. All pages served over HTTPS.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>2. HSTS with Preload</h4>
+      <p>Strict-Transport-Security header with max-age=63072000, includeSubDomains, and preload directives.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>3. Viewport Meta Tag</h4>
+      <p>Present on all pages: <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>4. HTML lang Attribute</h4>
+      <p><code>&lt;html lang="en"&gt;</code> set on all pages.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>5. robots.txt</h4>
+      <p>Valid and permissive. References sitemap.xml. Allows all crawlers.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>6. sitemap.xml</h4>
+      <p>Contains 18 URLs with lastmod, changefreq, and priority. Properly formatted and referenced from robots.txt.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>7. Brotli Compression</h4>
+      <p>Content-Encoding: br enabled on all text-based responses for optimal transfer sizes.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>8. Next.js Image Optimization</h4>
+      <p>Automatic WebP/AVIF conversion via Next.js Image component. Responsive srcset generation.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>9. Organization JSON-LD</h4>
+      <p>Present on every page (100% coverage). Consistent schema across the site.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>10. Favicon &amp; Apple Touch Icon</h4>
+      <p>Both configured correctly in the root layout.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>11. Canonical Tags</h4>
+      <p>No <code>&lt;link rel="canonical"&gt;</code> found on any of the 11 pages. This is the single most impactful issue to fix — add via root layout metadata export with <code>alternates: { canonical: ... }</code>.</p>
+    </div>
+    <div class="finding-rec">CRITICAL FIX</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>12. No Preconnect for Google Fonts</h4>
+      <p>Fonts are loaded via CSS @import which is render-blocking. Add <code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</code> and <code>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</code> in the root layout head.</p>
+    </div>
+    <div class="finding-rec">QUICK FIX</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-fail">FAIL</span></div>
+    <div class="finding-content">
+      <h4>13. Missing Security Headers</h4>
+      <p>Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, and Referrer-Policy are all absent. Add them in <code>next.config.js</code> via the <code>headers()</code> configuration.</p>
+    </div>
+    <div class="finding-rec">ADD IN CONFIG</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>14. No Breadcrumb Structured Data</h4>
+      <p>BreadcrumbList schema is not present on any page. Adding it would improve how pages appear in search results with breadcrumb trails.</p>
+    </div>
+    <div class="finding-rec">ADD SCHEMA</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-warning">WARNING</span></div>
+    <div class="finding-content">
+      <h4>15. No hreflang Tags</h4>
+      <p>No hreflang tags present. Currently acceptable as the site is English-only. If targeting Spanish-speaking audiences in the future, add hreflang annotations.</p>
+    </div>
+    <div class="finding-rec">MONITOR</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 class="section-header">Schema Strategy</h2>
+  <p class="section-desc">Current schema coverage and recommended additions for rich result eligibility.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th>Current Schema</th>
+        <th>Recommended Addition</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/</code></td>
+        <td>Organization</td>
+        <td>WebSite + SearchAction</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/about</code></td>
+        <td>Organization</td>
+        <td>(sufficient)</td>
+        <td><span class="badge badge-pass">OK</span></td>
+      </tr>
+      <tr>
+        <td><code>/events</code></td>
+        <td>Organization</td>
+        <td>Event (if events listed)</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/blog</code></td>
+        <td>Organization</td>
+        <td>CollectionPage</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/blog/[slug]</code></td>
+        <td>Organization + Article</td>
+        <td>(complete)</td>
+        <td><span class="badge badge-pass">OK</span></td>
+      </tr>
+      <tr>
+        <td><code>/quiz</code></td>
+        <td>Organization</td>
+        <td>(sufficient - interactive)</td>
+        <td><span class="badge badge-pass">OK</span></td>
+      </tr>
+      <tr>
+        <td><code>/study-abroad</code></td>
+        <td>Organization</td>
+        <td>EducationalOrganization or Service</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/resources/[slug]</code></td>
+        <td>Organization + Article</td>
+        <td>(complete)</td>
+        <td><span class="badge badge-pass">OK</span></td>
+      </tr>
+      <tr>
+        <td><code>/retreats</code></td>
+        <td>Organization</td>
+        <td>Product or TouristTrip</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/guides</code></td>
+        <td>Organization</td>
+        <td>CollectionPage</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+      <tr>
+        <td><code>/accommodations</code></td>
+        <td>Organization</td>
+        <td>LocalBusiness or Product</td>
+        <td><span class="badge badge-info">ADD</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== TAB: CONTENT STRATEGY ===== -->
+<div id="tab-content" class="tab-content">
+  <h2 class="section-header">Content Strategy</h2>
+  <p class="section-desc">Content depth analysis, keyword mapping, content clusters, and gap recommendations.</p>
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Content Depth Overview</h3>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4 style="color: var(--green);">Strong Pages (500+ words)</h4>
+      <ul>
+        <li><code>/</code> — ~600 words (homepage)</li>
+        <li><code>/blog/the-fun-and-easy-way...</code> — ~600 words</li>
+        <li><code>/resources/tie-card-guide</code> — ~550 words</li>
+        <li><code>/accommodations</code> — ~600 words</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color: var(--yellow);">Thin Pages (&lt;200 words)</h4>
+      <ul>
+        <li><code>/quiz</code> — ~100 words (interactive, acceptable)</li>
+        <li><code>/events</code> — ~200 words (dynamic listing)</li>
+      </ul>
+      <p style="margin-top: 8px;">Consider adding descriptive intro text or FAQ sections to boost indexable content.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Keyword Map</h3>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Page</th>
+        <th>Target Keyword</th>
+        <th>In Title</th>
+        <th>In H1</th>
+        <th>In First 100w</th>
+        <th>Cannibalization</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/</code></td>
+        <td>make friends madrid</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/about</code></td>
+        <td>LYNC founders</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/events</code></td>
+        <td>LYNC events madrid</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/blog</code></td>
+        <td>LYNC blog madrid</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/blog/[slug]</code></td>
+        <td>social circle expand</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/quiz</code></td>
+        <td>find experience quiz</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/study-abroad</code></td>
+        <td>study abroad madrid</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/resources/[slug]</code></td>
+        <td>TIE card guide madrid</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/retreats</code></td>
+        <td>LYNC retreats</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/guides</code></td>
+        <td>madrid guides ebooks</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td><code>/accommodations</code></td>
+        <td>collegiate madrid student</td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td><span class="badge badge-pass">YES</span></td>
+        <td>None</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Content Clusters</h3>
+
+  <div class="cluster">
+    <div class="cluster-title">Community &amp; Social</div>
+    <div class="cluster-pillar">Pillar: / (Homepage)</div>
+    <div class="cluster-pages">
+      <span class="cluster-page">/about</span>
+      <span class="cluster-page">/events</span>
+      <span class="cluster-page">/quiz</span>
+      <span class="cluster-page">/retreats</span>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title">Study Abroad</div>
+    <div class="cluster-pillar">Pillar: /study-abroad</div>
+    <div class="cluster-pages">
+      <span class="cluster-page">/resources/tie-card-guide</span>
+      <span class="cluster-page">/resources/* (6 total)</span>
+      <span class="cluster-page">/accommodations</span>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title">Content &amp; Guides</div>
+    <div class="cluster-pillar">Pillar: /blog</div>
+    <div class="cluster-pages">
+      <span class="cluster-page">/blog/* (3 posts)</span>
+      <span class="cluster-page">/guides</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Content Gap Recommendations</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">GAP</span></div>
+    <div class="finding-content">
+      <h4>No Contact Us or FAQ Standalone Page</h4>
+      <p>FAQ content exists as an embedded section on the homepage, but a dedicated FAQ page would capture long-tail "how to..." search queries and provide a better user experience.</p>
+    </div>
+    <div class="finding-rec">CREATE PAGE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">GAP</span></div>
+    <div class="finding-content">
+      <h4>No Individual Event Detail Pages</h4>
+      <p>Events link directly to external Acuity booking. Individual event pages would capture event-specific search traffic and improve internal linking.</p>
+    </div>
+    <div class="finding-rec">CONSIDER</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">GAP</span></div>
+    <div class="finding-content">
+      <h4>No Free Neighborhood/Location Guides</h4>
+      <p>Neighborhood guides beyond the paid ebooks would capture location-specific long-tail queries (e.g., "best neighborhoods in Madrid for expats").</p>
+    </div>
+    <div class="finding-rec">CREATE CONTENT</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">GAP</span></div>
+    <div class="finding-content">
+      <h4>No Testimonials/Reviews Page</h4>
+      <p>A dedicated testimonials page would build E-E-A-T (Experience, Expertise, Authority, Trust) signals and could generate Review schema rich results.</p>
+    </div>
+    <div class="finding-rec">CREATE PAGE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">GAP</span></div>
+    <div class="finding-content">
+      <h4>"Madrid Living" Content Hub</h4>
+      <p>Consider creating a content hub aggregating blog posts, resources, and guides under a "Madrid Living" umbrella to capture long-tail search queries about expat life in Madrid.</p>
+    </div>
+    <div class="finding-rec">STRATEGIC</div>
+  </div>
+</div>
+
+<!-- ===== TAB: INTERNAL LINKING ===== -->
+<div id="tab-linking" class="tab-content">
+  <h2 class="section-header">Internal Linking Analysis</h2>
+  <p class="section-desc">Link equity distribution, orphan page detection, and cross-linking recommendations.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>Link Infrastructure</h4>
+      <ul>
+        <li>Every page: 8 navbar + 6 footer = 14 base links</li>
+        <li>Average links per page: ~16</li>
+        <li>Total internal links: ~175</li>
+        <li>Orphan pages: 0</li>
+        <li>Dead-end pages: 0</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Contextual Links</h4>
+      <ul>
+        <li>Blog listing links to individual posts</li>
+        <li>Study-abroad links to resource articles</li>
+        <li>Multiple pages CTA to /quiz</li>
+        <li>Homepage blog section links to posts</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>No Orphan Pages</h4>
+      <p>All 11 pages are reachable from the global navigation. No pages are isolated from the link graph.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>No Dead-End Pages</h4>
+      <p>All pages have navigation and footer links, ensuring users always have a path forward.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-pass">PASS</span></div>
+    <div class="finding-content">
+      <h4>Link Equity Distribution</h4>
+      <p>Well-distributed due to consistent global nav. Homepage receives the most equity as expected.</p>
+    </div>
+    <div class="finding-rec"></div>
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--text-secondary);">Suggested Internal Links</h3>
+
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">ADD</span></div>
+    <div class="finding-content">
+      <h4>Blog posts → /quiz</h4>
+      <p>Blog posts should include a CTA linking to the quiz. Currently the quiz is only linked from the footer on blog pages. An in-content "Find Your Experience" CTA would drive conversions and pass link equity.</p>
+    </div>
+    <div class="finding-rec">HIGH VALUE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">ADD</span></div>
+    <div class="finding-content">
+      <h4>/about → /events and /retreats</h4>
+      <p>The about page has no contextual links to events or retreats. Adding "See our upcoming events" and "Join a retreat" links would improve discoverability and user flow.</p>
+    </div>
+    <div class="finding-rec">MEDIUM VALUE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">ADD</span></div>
+    <div class="finding-content">
+      <h4>/retreats → /accommodations</h4>
+      <p>These are complementary content pages. Cross-linking retreats with accommodation options creates a natural user journey for trip planning.</p>
+    </div>
+    <div class="finding-rec">MEDIUM VALUE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">ADD</span></div>
+    <div class="finding-content">
+      <h4>/guides → /study-abroad</h4>
+      <p>The guides page offers Madrid relocation content that complements the study abroad page. Cross-linking reinforces the "Study Abroad" content cluster.</p>
+    </div>
+    <div class="finding-rec">MEDIUM VALUE</div>
+  </div>
+  <div class="finding">
+    <div class="finding-status"><span class="badge badge-info">ADD</span></div>
+    <div class="finding-content">
+      <h4>Homepage blog section → /blog listing</h4>
+      <p>The homepage features blog posts but may not link to the main /blog listing page. Adding a "View all posts" link improves the content cluster structure.</p>
+    </div>
+    <div class="finding-rec">LOW VALUE</div>
+  </div>
+</div>
+
+<!-- ===== TAB: ACTION PLAN ===== -->
+<div id="tab-actions" class="tab-content">
+  <h2 class="section-header">Action Plan</h2>
+  <p class="section-desc">Prioritized fixes and improvements organized by effort level. Start with quick wins for immediate impact.</p>
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--green);">Quick Wins (&lt; 1 hour each)</h3>
+
+  <div class="action-item">
+    <div class="action-number critical">1</div>
+    <div class="action-content">
+      <div class="action-title">Add canonical tags to all pages via root layout metadata</div>
+      <div class="action-desc">Use Next.js metadata export with <code>alternates: { canonical: 'https://lync-orcin.vercel.app/...' }</code> in each page's metadata. This is the single highest-impact fix — prevents duplicate content indexing and consolidates page authority.</div>
+    </div>
+    <div class="action-impact critical">HIGH IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number high">2</div>
+    <div class="action-content">
+      <div class="action-title">Add preconnect hints for Google Fonts</div>
+      <div class="action-desc">Add <code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</code> and <code>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</code> to the root layout. Reduces font loading latency and improves LCP.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number high">3</div>
+    <div class="action-content">
+      <div class="action-title">Add security headers in next.config.js</div>
+      <div class="action-desc">Add Content-Security-Policy, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, and Referrer-Policy: strict-origin-when-cross-origin via the <code>headers()</code> function in next.config.js. Improves security posture and trust signals.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number high">4</div>
+    <div class="action-content">
+      <div class="action-title">Lengthen short meta descriptions</div>
+      <div class="action-desc">Expand meta descriptions for /events (89 chars), /quiz (91 chars), /resources/tie-card-guide (85 chars), and blog post (108 chars) to 120-160 characters. More descriptive snippets improve CTR in search results.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number medium">5</div>
+    <div class="action-content">
+      <div class="action-title">Change /accommodations OG image from .avif to .jpg/.webp</div>
+      <div class="action-desc">Convert the hero.avif OG image to .jpg or .webp format and resize to 1200x630 pixels. AVIF is not universally supported by social platform crawlers (Facebook, LinkedIn, WhatsApp).</div>
+    </div>
+    <div class="action-impact low">LOW IMPACT</div>
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--yellow);">High Impact (1-4 hours each)</h3>
+
+  <div class="action-item">
+    <div class="action-number high">6</div>
+    <div class="action-content">
+      <div class="action-title">Add page-specific JSON-LD structured data</div>
+      <div class="action-desc">Add Event schema to /events, TouristTrip to /retreats, LocalBusiness or Product to /accommodations, and CollectionPage to /guides and /blog. These enable rich snippets in search results (event dates, pricing, ratings) which significantly boost CTR.</div>
+    </div>
+    <div class="action-impact critical">HIGH IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number medium">7</div>
+    <div class="action-content">
+      <div class="action-title">Add WebSite schema with SearchAction to homepage</div>
+      <div class="action-desc">Enables sitelinks search box in Google results. Add WebSite schema with a SearchAction pointing to a search URL pattern.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number medium">8</div>
+    <div class="action-content">
+      <div class="action-title">Add BreadcrumbList structured data</div>
+      <div class="action-desc">Add breadcrumb schema to all pages. This displays breadcrumb trails in search results, improving click-through rate and helping users understand page hierarchy.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number medium">9</div>
+    <div class="action-content">
+      <div class="action-title">Add explicit og:url to all pages</div>
+      <div class="action-desc">Set og:url in each page's metadata to the canonical URL. Without it, social platforms may use the request URL (including tracking parameters) as the canonical URL for shares.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <hr class="divider">
+
+  <h3 style="font-family: var(--font-heading); font-size: 16px; margin-bottom: 16px; color: var(--blue);">Strategic Initiatives (Ongoing)</h3>
+
+  <div class="action-item">
+    <div class="action-number low">10</div>
+    <div class="action-content">
+      <div class="action-title">Build out blog content (target 10-15 posts)</div>
+      <div class="action-desc">3 blog posts is very thin for establishing topical authority. Target 10-15 posts covering Madrid social life, expat tips, event recaps, and friendship-building advice. Each post should be 800-1500 words with internal links to relevant pages.</div>
+    </div>
+    <div class="action-impact critical">HIGH IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number low">11</div>
+    <div class="action-content">
+      <div class="action-title">Create dedicated FAQ page</div>
+      <div class="action-desc">Extract the homepage FAQ section into a standalone /faq page with FAQPage schema. This captures long-tail "how to..." queries and enables FAQ rich results in Google.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number low">12</div>
+    <div class="action-content">
+      <div class="action-title">Add more resource articles (target 12+)</div>
+      <div class="action-desc">6 resource articles is a good start. Expand to 12+ covering topics like NIE applications, healthcare enrollment, bank account setup, phone plans, and neighborhood guides. Each establishes LYNC as the authority for Madrid relocation.</div>
+    </div>
+    <div class="action-impact medium">MEDIUM IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number low">13</div>
+    <div class="action-content">
+      <div class="action-title">Consider hreflang for Spanish audience</div>
+      <div class="action-desc">If LYNC plans to target Spanish-speaking users, add hreflang annotations and consider creating Spanish-language content. Not urgent while the site is English-only.</div>
+    </div>
+    <div class="action-impact low">LOW IMPACT</div>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number low">14</div>
+    <div class="action-content">
+      <div class="action-title">Monitor Core Web Vitals via Google Search Console</div>
+      <div class="action-desc">After launch, monitor LCP, FID/INP, and CLS metrics through GSC. Address any regressions promptly. Current Next.js image optimization is a strong foundation.</div>
+    </div>
+    <div class="action-impact medium">ONGOING</div>
+  </div>
+</div>
+
+</div><!-- end .container -->
+
+<div style="text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); border-top: 1px solid var(--border); margin-top: 48px;">
+  SEO Strategy Report generated April 6, 2026 &mdash; lync-orcin.vercel.app &mdash; 11 pages analyzed
+</div>
+
+<script>
+function switchTab(tabId) {
+  // Remove active class from all tabs and content
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+  // Add active class to clicked tab and corresponding content
+  document.getElementById('tab-' + tabId).classList.add('active');
+
+  // Find the tab button that matches
+  document.querySelectorAll('.tab').forEach(t => {
+    if (
+      (tabId === 'executive' && t.textContent === 'Executive Summary') ||
+      (tabId === 'pages' && t.textContent === 'Page Breakdown') ||
+      (tabId === 'sitewide' && t.textContent === 'Site-Wide Issues') ||
+      (tabId === 'technical' && t.textContent === 'Technical') ||
+      (tabId === 'content' && t.textContent === 'Content Strategy') ||
+      (tabId === 'linking' && t.textContent === 'Internal Linking') ||
+      (tabId === 'actions' && t.textContent === 'Action Plan')
+    ) {
+      t.classList.add('active');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
