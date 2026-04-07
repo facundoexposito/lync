@@ -25,8 +25,9 @@
 |------|--------------|-------|
 | Home | ✅ v3 polished | Full-bleed hero, TrustBento (auto-cycling on mobile), ThisMonth (infinite swipe carousel on mobile / scroll-fan on desktop), WhyLync, Testimonials (mobile carousel), CTA (responsive aspect ratios) |
 | Quiz | ✅ v2 done | Full-width progress bar, card answers, auto-advance, lead form |
-| Events | ✅ done | Acuity scheduler embed (live events), sticky sidebar, hero + CTA |
-| Retreats | ✅ done | Placeholder cards (no real retreats on Acuity yet), sticky sidebar |
+| Events | ✅ done | Live Acuity events via API, category filters, mobile responsive |
+| Retreats listing | ✅ done | Extended horizontal cards (hero image + content), mobile optimized |
+| Retreats detail | ✅ done | Full content page: hero, intro, bento grid, daily schedule (emoji+time strip), 7-day programme (3-col grid with emoji+bullet highlights), founder story, inclusions, pricing, sticky CTA bar, bottom CTA |
 | About | ✅ done | Founders photo + story, responsive grid |
 | Accommodations | ✅ done | Hero, features grid, room types, communal spaces, lifestyle banner |
 | Study Abroad | ✅ done | Tabs (Services/Resources/Consultation), fan cards on desktop |
@@ -39,6 +40,11 @@
 - `shiny-text.tsx` — text shimmer sweep animation
 - `faq.tsx` — plus/minus accordion
 - `acuity-embed.tsx` — Acuity Scheduling iframe + auto-resize script
+
+## Retreat Components (src/components/retreats/)
+- `retreat-card.tsx` — standard card (used on listing grids)
+- `retreat-card-extended.tsx` — horizontal card (55/45 image/content, reversed prop)
+- `sticky-cta-bar.tsx` — fixed bottom bar with Book Now + Brochure, scroll-aware visibility, coordinates with WhatsApp FAB via `data-sticky-cta` attribute on `<html>`
 
 ## Content Sources
 - Current site audit: `Projects/LYNC/site-audit/` (7 page screenshots)

@@ -35,7 +35,8 @@ export function Navbar() {
     pathname === '/' ||
     pathname === '/accommodations' ||
     pathname === '/events' ||
-    pathname === '/retreats'
+    pathname === '/retreats' ||
+    pathname.startsWith('/retreats/')
   /** Use dark (black text, blue logo) on inner pages or when scrolled */
   const dark = scrolled || !isHeroNav
   /** Show white container only after scrolling — all pages start transparent */

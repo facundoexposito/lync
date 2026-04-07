@@ -26,6 +26,7 @@ export type Event = {
   price: string
   description: string
   highlights?: string[]
+  schedulingUrl?: string
 }
 
 export type Testimonial = {

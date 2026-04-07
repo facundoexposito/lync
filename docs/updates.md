@@ -1,5 +1,51 @@
 # LYNC — Updates
 
+## April 8, 2026
+
+### Session — Retreat page enhancements + mobile polish
+
+**Retreat detail page (`/retreats/[slug]`):**
+- Added sticky CTA bar (`src/components/retreats/sticky-cta-bar.tsx`) — frosted-glass bottom bar with "Brochure" + "Book Now" buttons + price hint. Shows after scrolling past hero, hides when pricing or bottom CTA section is in viewport. iPhone safe area padding included.
+- Added `id="pricing"` and `id="bottom-cta"` section IDs for sticky bar visibility tracking
+- Booking URL updated to full Acuity appointment path (`/schedule/.../appointment/.../calendar/...`)
+- WhatsApp floating button now shifts up when sticky CTA bar is visible (MutationObserver on `data-sticky-cta` attribute)
+- Navbar now shows white logo/links on retreat detail pages (added `/retreats/*` to `isHeroNav`)
+
+**"A Day at Solstice" timeline redesign:**
+- Replaced broken vertical timeline (times overlapping line) with horizontal card layout — tinted time strip on left with emoji + time, content on right
+- Added emojis to each `ScheduleEntry` in data
+
+**"Seven Days of Becoming" programme redesign:**
+- Changed from paragraph descriptions to bullet-point highlights per day
+- Added emojis to each `ItineraryDay` in data (new `emoji` + `highlights` fields, replaced `description`)
+- Layout: 3-column grid — row 1 (days 1-3), row 2 (days 4-6), row 3 (day 7 left-aligned)
+
+**"What's Included / Not Included":**
+- Not Included items: stacked vertically on mobile, dot-separated inline on `sm+`
+
+**Retreats listing page (`/retreats`):**
+- Created extended retreat card (`src/components/retreats/retreat-card-extended.tsx`) — horizontal layout (55% image / 45% content on desktop), stacked on mobile. Location + price badges, dates, title, subtitle, description, stat row (duration, group size, venue), gradient CTA button. `reversed` prop for alternating layout.
+- Replaced 3-column grid with single-column extended cards
+
+**Events page (`/events`):**
+- Reverted to `getUpcomingEvents()` only — retreats removed from events page
+- Cleaned up `events-grid.tsx` back to events-only (removed `GridItem` union, `Retreat` imports, "Retreats" filter)
+- Removed `getEventsWithRetreats()` from `acuity.ts`
+
+**Mobile optimization (both pages):**
+- Detail hero: reduced min-height (360px mobile), smaller title (text-5xl), tighter spacing
+- Intro image: landscape aspect (4/3) on mobile, portrait (3/4) on sm+
+- Bento grid: clean 2x2 on mobile (no row-span/col-span), bento layout only at md+
+- Daily schedule: narrower time strip (w-20) on mobile with smaller text
+- Pricing cards: reduced padding on mobile (p-5 vs p-8)
+- Extended card: tighter padding, smaller text sizes, min-height on desktop image
+- Listing hero: smaller title/subtitle on mobile
+
+**Other:**
+- Removed WhatsApp pre-filled message text (clean link)
+
+---
+
 ## April 1, 2026
 
 ### Session — Acuity embed + mobile responsive polish

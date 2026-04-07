@@ -1,22 +1,43 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CtaMotionA } from '@/components/ui/cta-hover'
 import { MessageCircle } from 'lucide-react'
 
+function WhatsAppFab() {
+  const [lifted, setLifted] = useState(false)
+
+  useEffect(() => {
+    const el = document.documentElement
+    const observer = new MutationObserver(() => {
+      setLifted(el.getAttribute('data-sticky-cta') === '1')
+    })
+    observer.observe(el, { attributes: true, attributeFilter: ['data-sticky-cta'] })
+    // check initial state
+    setLifted(el.getAttribute('data-sticky-cta') === '1')
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <CtaMotionA
+      href="https://wa.me/13107411846"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed right-6 z-40 rounded-full bg-[#25D366] p-3.5 text-white shadow-lg transition-all duration-300 hover:shadow-xl"
+      style={{ bottom: lifted ? 76 : 24 }}
+      aria-label="WhatsApp"
+    >
+      <MessageCircle size={22} />
+    </CtaMotionA>
+  )
+}
+
 export function Footer() {
   return (
     <>
-      <CtaMotionA
-        href="https://wa.me/13107411846?text=Hi!%20I%E2%80%99m%20interested%20in%20joining%20a%20Lync%20event%20%F0%9F%98%8A"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-40 rounded-full bg-[#25D366] p-3.5 text-white shadow-lg transition-shadow duration-200 hover:shadow-xl"
-        aria-label="WhatsApp"
-      >
-        <MessageCircle size={22} />
-      </CtaMotionA>
+      <WhatsAppFab />
 
       <footer className="bg-lync text-white">
         <div className="mx-auto max-w-6xl px-5 py-10 md:py-12">

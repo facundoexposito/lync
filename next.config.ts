@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
         // no `search` → optional ?v= cache-bust on any brand asset
       },
     ],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn-s.acuityscheduling.com' },
+    ],
   },
   headers: async () => [
     {

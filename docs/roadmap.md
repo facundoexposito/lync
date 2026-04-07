@@ -14,9 +14,15 @@
 - [x] Events page: Acuity scheduler embed (replaces hardcoded cards)
 - [x] Mobile polish pass (first round — TrustBento, ThisMonth carousel, testimonials, CTA)
 - [x] Deploy to Vercel
+- [x] Retreat detail page (`/retreats/[slug]`) — full content: hero, intro, bento grid, daily schedule, 7-day programme, founder story, inclusions, pricing, bottom CTA
+- [x] Retreat listing page (`/retreats`) — extended horizontal cards
+- [x] Sticky CTA bar on retreat detail (Book Now + Brochure, scroll-aware show/hide)
+- [x] WhatsApp FAB shifts up when sticky CTA bar is visible
+- [x] Navbar white logo on retreat detail pages
+- [x] Mobile polish pass (retreat pages — hero, bento grid, schedule, pricing, extended card)
 - [ ] Swap placeholder fonts for Mogena + Avenir (Boss task)
 - [ ] SEO metadata for all pages
-- [ ] Mobile polish pass (remaining pages — accommodations hero, retreats sidebar order)
+- [ ] Mobile polish pass (remaining pages — accommodations hero)
 - [ ] Accessibility audit (touch targets, focus states, reduced motion)
 
 ## Phase 2: Supabase + Data

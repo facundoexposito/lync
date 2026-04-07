@@ -29,3 +29,15 @@
 - **Decision:** Use Mona Sans (`font-nav`, Google Fonts) for navigation, all marketing section titles, and default semantic headings (`h1–h6` base styles in `globals.css`). Reserve Playfair Display (`font-display`) for the **homepage hero `<h1>` only**. Non-hero titles use **uppercase**, **`font-semibold`**, and **`tracking-normal`** (wider tracking was tried with `tracking-wide` and reverted).
 - **Rationale:** Keeps nav and titles in one sans voice; a single serif hero line preserves editorial emphasis without mixing display fonts across the page. Tighter letter-spacing reads better for long uppercase lines.
 - **Consequences:** Inner pages and section headers render in Mona Sans. Hero remains visually distinct. Quiz question copy stays sentence case (semibold only, no forced uppercase).
+
+## ADR-006: Static retreat data over Acuity for curated retreats
+- **Date:** April 8, 2026
+- **Decision:** Curated retreats (like Solstice) are defined as static data in `src/data/retreats.ts` with their own detail pages (`/retreats/[slug]`), rather than relying solely on Acuity API events. Booking URLs point directly to the specific Acuity appointment.
+- **Rationale:** Retreats need rich content (itinerary, founder story, inclusions, bento photo grid) that Acuity's API can't provide. Static data allows full creative control over the detail page while still linking to Acuity for booking.
+- **Consequences:** New retreats require adding data to `retreats.ts`. The events page (`/events`) shows only Acuity events — retreats live exclusively on `/retreats`.
+
+## ADR-007: Sticky CTA bar with scroll-aware visibility
+- **Date:** April 8, 2026
+- **Decision:** Retreat detail pages have a fixed bottom CTA bar that shows after scrolling past the hero and hides when the in-page pricing section or bottom CTA is in viewport. Uses `data-sticky-cta` attribute on `<html>` to coordinate with the WhatsApp FAB.
+- **Rationale:** Keeps booking action always accessible during long-scroll content, but avoids visual duplication when the user reaches the actual pricing/CTA sections.
+- **Consequences:** WhatsApp FAB uses a MutationObserver to shift up when the sticky bar is visible. Any future fixed bottom elements need to account for this z-index stacking.

@@ -4,7 +4,8 @@ import { ArrowRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { HighlightStroke } from '@/components/ui/highlight-stroke'
 import { CtaMotionA } from '@/components/ui/cta-hover'
-import { AcuityEmbed } from '@/components/ui/acuity-embed'
+import { EventsGrid } from '@/components/events/events-grid'
+import { getUpcomingEvents } from '@/lib/acuity'
 
 export const metadata: Metadata = {
   title: 'Upcoming Events',
@@ -15,7 +16,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const events = await getUpcomingEvents()
+
   return (
     <>
       {/* ── Hero ──────────────────────────────────────── */}
@@ -52,21 +55,10 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* ── Booking section ─────────────────────────────── */}
-      <section className="bg-cream py-10 md:py-14">
+      {/* ── Events Grid ─────────────────────────────────── */}
+      <section className="bg-cream pt-6 pb-10 md:pt-8 md:pb-14">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <ScrollReveal>
-            <div className="mb-8 text-center">
-              <h2 className="mb-3 font-display text-3xl font-semibold uppercase tracking-normal md:text-4xl">
-                Choose Your Event
-              </h2>
-              <p className="mx-auto max-w-xl text-base text-muted md:text-lg">
-                Pick a date, grab your spot, and come ready to connect.
-                Spaces are limited so don&apos;t wait too long.
-              </p>
-            </div>
-          </ScrollReveal>
-          <AcuityEmbed className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/[0.04]" />
+          <EventsGrid events={events} />
         </div>
       </section>
 
