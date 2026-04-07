@@ -48,6 +48,7 @@ export interface Retreat {
     intro: string
     card: string
     bento: string[]
+    slideshow: { src: string; alt: string }[]
   }
   founderStory: string
   founderAttribution: string
@@ -310,6 +311,19 @@ export const solstice: Retreat = {
       '/brand/RETREATS/solstice-surfing.webp',
       '/brand/RETREATS/solstice-beach-reading.webp',
       '/brand/RETREATS/solstice-night-group.webp',
+    ],
+    slideshow: [
+      { src: '/brand/RETREATS/slideshow/sunset-beach.webp', alt: 'Golden sunset on the Costa Rican beach' },
+      { src: '/brand/RETREATS/slideshow/group-dining.webp', alt: 'Communal dinner with friends' },
+      { src: '/brand/RETREATS/slideshow/waterfall-hike.webp', alt: 'Montezuma waterfall hike' },
+      { src: '/brand/RETREATS/slideshow/surfing-ocean.webp', alt: 'Surfing in the Pacific Ocean' },
+      { src: '/brand/RETREATS/slideshow/group-beach-night.webp', alt: 'Evening on the beach with the group' },
+      { src: '/brand/RETREATS/slideshow/reading-beach.webp', alt: 'Reading on the beach at golden hour' },
+      { src: '/brand/RETREATS/slideshow/villa-view.webp', alt: 'House of Shakti with ocean view' },
+      { src: '/brand/RETREATS/slideshow/waves-fun.webp', alt: 'Playing in the waves' },
+      { src: '/brand/RETREATS/slideshow/sunset-landscape.webp', alt: 'Pacific sunset from Santa Teresa' },
+      { src: '/brand/RETREATS/slideshow/group-sunset.webp', alt: 'Group watching the sunset together' },
+      { src: '/brand/RETREATS/slideshow/beach-dusk.webp', alt: 'Beach at dusk in Costa Rica' },
     ],
   },
 
