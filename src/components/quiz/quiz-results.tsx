@@ -1,21 +1,37 @@
 import { CtaMotionLink, CtaMotionA } from '@/components/ui/cta-hover'
 import { EventCard } from '@/components/events/event-card'
-import { events } from '@/data/events'
-import { QuizAnswer } from '@/lib/types'
+import { QuizAnswer, Event } from '@/lib/types'
 import { ArrowRight, MessageCircle, Check } from 'lucide-react'
+
+const IDEAL_NIGHT_TO_CATEGORY: Record<string, Event['category']> = {
+  'dinner-wine': 'Social',
+  dancing: 'Nightlife',
+  creative: 'Creative',
+  wellness: 'Wellness',
+  exploring: 'Adventure',
+}
 
 interface Props {
   answers: QuizAnswer[]
   leadInfo: { name: string; email: string; phone?: string; nationality: string } | null
+  events?: Event[]
   /** Homepage inline layout: no full-viewport shell, tighter stack */
   embedded?: boolean
 }
 
-export function QuizResults({ answers, leadInfo, embedded = false }: Props) {
-  const interests = answers.find(a => a.questionId === 'interests')
-  const interestList = Array.isArray(interests?.answer) ? interests.answer : []
-  const matched = events.filter(e => interestList.some(i => e.category.toLowerCase() === i)).slice(0, 3)
-  const display = matched.length > 0 ? matched : events.slice(0, 3)
+export function QuizResults({ answers, leadInfo, events = [], embedded = false }: Props) {
+  const idealNight = answers.find(a => a.questionId === 'ideal-night')
+  const answer = typeof idealNight?.answer === 'string' ? idealNight.answer : ''
+  const targetCategory = IDEAL_NIGHT_TO_CATEGORY[answer]
+
+  let display: Event[]
+  if (answer === 'spontaneous' || !targetCategory) {
+    // Show first 3 events for "spontaneous" or unknown answers
+    display = events.slice(0, 3)
+  } else {
+    const matched = events.filter(e => e.category === targetCategory).slice(0, 3)
+    display = matched.length > 0 ? matched : events.slice(0, 3)
+  }
 
   return (
     <div
@@ -51,15 +67,17 @@ export function QuizResults({ answers, leadInfo, embedded = false }: Props) {
         </div>
 
         {/* Events */}
-        <div
-          className={`grid grid-cols-1 gap-5 ${embedded ? 'mb-8 sm:grid-cols-2' : 'mb-16 md:grid-cols-3'}`}
-        >
-          {display.map((event, i) => (
-            <div key={event.id} className="animate-fade-up" style={{ animationDelay: `${(i + 1) * 100}ms` }}>
-              <EventCard event={event} />
-            </div>
-          ))}
-        </div>
+        {display.length > 0 && (
+          <div
+            className={`grid grid-cols-1 gap-5 ${embedded ? 'mb-8 sm:grid-cols-2' : 'mb-16 md:grid-cols-3'}`}
+          >
+            {display.map((event, i) => (
+              <div key={event.id} className="animate-fade-up" style={{ animationDelay: `${(i + 1) * 100}ms` }}>
+                <EventCard event={event} />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Next steps */}
         <div
@@ -77,7 +95,6 @@ export function QuizResults({ answers, leadInfo, embedded = false }: Props) {
           <div className={`space-y-5 ${embedded ? 'mb-6' : 'mb-10'}`}
           >
             {[
-              { text: `Recommendations sent to ${leadInfo?.email}` },
               { text: 'Join the WhatsApp community to meet girls before events' },
               { text: 'RSVP to your first event and show up. We handle the rest' },
             ].map((s, i) => (

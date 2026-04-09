@@ -8,15 +8,19 @@ import { QuizStep } from '@/components/quiz/quiz-step'
 import { QuizResults } from '@/components/quiz/quiz-results'
 import { quizQuestions } from '@/data/quiz-questions'
 import { PAGE_SHELL } from '@/lib/page-shell'
-import type { QuizAnswer } from '@/lib/types'
+import type { QuizAnswer, Event } from '@/lib/types'
 
-export function QuizSection() {
+interface QuizSectionProps {
+  events?: Event[]
+}
+
+export function QuizSection({ events = [] }: QuizSectionProps) {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
   const [leadInfo, setLeadInfo] = useState<{
     name: string
     email: string
-    phone?: string
+    phone: string
     nationality: string
   } | null>(null)
   const [done, setDone] = useState(false)
@@ -46,7 +50,7 @@ export function QuizSection() {
       <section className="bg-cream pb-14 pt-10 md:pb-20 md:pt-16">
         <div className={PAGE_SHELL}>
           <div className="mx-auto w-full max-w-3xl rounded-[2rem] border border-border bg-white p-6 shadow-lg sm:rounded-[2.5rem] md:p-10 lg:p-12">
-            <QuizResults answers={quizAnswers} leadInfo={leadInfo} embedded />
+            <QuizResults answers={quizAnswers} leadInfo={leadInfo} events={events} embedded />
           </div>
         </div>
       </section>
@@ -76,7 +80,7 @@ export function QuizSection() {
 
         <header className="mb-6 text-center">
           <h2 className="font-display text-xl font-semibold uppercase tracking-normal text-dark sm:text-2xl md:text-[1.65rem]">
-            Find your <span className="text-lync">experience</span>
+            Find your <span className="text-lync">community</span>
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted">
             <span className="block">

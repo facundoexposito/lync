@@ -19,7 +19,7 @@ interface Props {
   answers: Record<string, string | string[]>
   onAnswer: (id: string, answer: string | string[]) => void
   onNext: () => void
-  onLeadSubmit: (info: { name: string; email: string; phone?: string; nationality: string }) => void
+  onLeadSubmit: (info: { name: string; email: string; phone: string; nationality: string }) => void
   /** Homepage blue oval: white pills, light question copy */
   variant?: 'default' | 'oval'
 }
@@ -36,13 +36,20 @@ export function QuizStep({
   const [form, setForm] = useState({ name: '', email: '', phone: '', nationality: '' })
   const isOval = variant === 'oval'
 
+  const nationalities = [
+    'American', 'Argentinian', 'Australian', 'Austrian', 'Belgian', 'Brazilian',
+    'British', 'Canadian', 'Chilean', 'Chinese', 'Colombian', 'Czech', 'Danish',
+    'Dutch', 'Ecuadorian', 'Finnish', 'French', 'German', 'Greek', 'Hungarian',
+    'Indian', 'Irish', 'Israeli', 'Italian', 'Japanese', 'Korean', 'Mexican',
+    'Norwegian', 'Peruvian', 'Polish', 'Portuguese', 'Romanian', 'Russian',
+    'South African', 'Spanish', 'Swedish', 'Swiss', 'Turkish', 'Ukrainian',
+    'Venezuelan',
+  ]
+
   if (isLeadStep) {
-    const fields = [
-      { key: 'name', label: 'First Name', type: 'text', placeholder: 'Rebecca', required: true },
-      { key: 'email', label: 'Email', type: 'email', placeholder: 'you@example.com', required: true },
-      { key: 'phone', label: 'Phone (optional)', type: 'tel', placeholder: '+34 612 345 678', required: false },
-      { key: 'nationality', label: 'Nationality', type: 'text', placeholder: 'American, British...', required: true },
-    ] as const
+    const inputClass = `w-full rounded-xl border border-border bg-white px-3 py-2.5 text-dark shadow-sm outline-none transition-all placeholder:text-muted/60 focus:border-lync focus:ring-2 focus:ring-lync/10 sm:py-3 ${
+      isOval ? '' : 'px-4 py-3.5'
+    }`
 
     return (
       <div className={isOval ? 'text-center' : undefined}>
@@ -77,23 +84,70 @@ export function QuizStep({
               : 'space-y-3 rounded-2xl border border-border bg-white p-4 shadow-md sm:p-5 md:space-y-4'
           }`}
         >
-          {fields.map((f) => (
-            <div key={f.key} className={isOval ? 'space-y-1.5' : ''}>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-normal text-muted">
-                {f.label} {f.required && <span className="text-lync">*</span>}
-              </label>
-              <input
-                type={f.type}
-                required={f.required}
-                value={form[f.key as keyof typeof form]}
-                onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-                className={`w-full rounded-xl border border-border bg-white px-3 py-2.5 text-dark shadow-sm outline-none transition-all placeholder:text-muted/60 focus:border-lync focus:ring-2 focus:ring-lync/10 sm:py-3 ${
-                  isOval ? '' : 'px-4 py-3.5'
-                }`}
-                placeholder={f.placeholder}
-              />
-            </div>
-          ))}
+          {/* Name */}
+          <div className={isOval ? 'space-y-1.5' : ''}>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-normal text-muted">
+              First Name <span className="text-lync">*</span>
+            </label>
+            <input
+              type="text"
+              required
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className={inputClass}
+              placeholder="Rebecca"
+            />
+          </div>
+
+          {/* Email */}
+          <div className={isOval ? 'space-y-1.5' : ''}>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-normal text-muted">
+              Email <span className="text-lync">*</span>
+            </label>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className={inputClass}
+              placeholder="you@example.com"
+            />
+          </div>
+
+          {/* Nationality (dropdown) */}
+          <div className={isOval ? 'space-y-1.5' : ''}>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-normal text-muted">
+              Nationality <span className="text-lync">*</span>
+            </label>
+            <select
+              required
+              value={form.nationality}
+              onChange={(e) => setForm({ ...form, nationality: e.target.value })}
+              className={`${inputClass} appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M2%204l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px] bg-[right_12px_center] bg-no-repeat pr-8`}
+            >
+              <option value="" disabled>Select nationality</option>
+              {nationalities.map((n) => (
+                <option key={n} value={n}>{n}</option>
+              ))}
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          {/* Phone */}
+          <div className={isOval ? 'space-y-1.5' : ''}>
+            <label className="mb-1 block text-xs font-semibold uppercase tracking-normal text-muted">
+              Phone <span className="text-lync">*</span>
+            </label>
+            <input
+              type="tel"
+              required
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              className={inputClass}
+              placeholder="+34 612 345 678"
+            />
+          </div>
+
           <CtaMotionButton
             type="submit"
             className={`flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark text-sm font-semibold text-white shadow-sm transition-shadow hover:shadow-md ${
@@ -161,7 +215,7 @@ export function QuizStep({
                     : 'border-border bg-cream/40 text-dark hover:border-lync/35 hover:bg-lync-light/50'
                 }`}
               >
-                <span className="flex-shrink-0 text-lg leading-none sm:text-xl">{opt.icon}</span>
+                {opt.icon && <span className="flex-shrink-0 text-lg leading-none sm:text-xl">{opt.icon}</span>}
                 <div className="min-w-0 flex-1">
                   <span>{opt.label}</span>
                   {opt.subtitle && (
@@ -224,7 +278,7 @@ export function QuizStep({
                     : 'border-border bg-surface/80 hover:border-lync/35 hover:bg-lync-light/40'
                 }`}
               >
-                <span className="flex-shrink-0 text-xl sm:text-2xl">{opt.icon}</span>
+                {opt.icon && <span className="flex-shrink-0 text-xl sm:text-2xl">{opt.icon}</span>}
                 <div className="min-w-0 flex-1">
                   <span className="text-sm font-semibold text-dark">{opt.label}</span>
                   {opt.subtitle && (

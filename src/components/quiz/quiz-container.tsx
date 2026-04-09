@@ -5,13 +5,17 @@ import { motion } from 'motion/react'
 import { QuizStep } from './quiz-step'
 import { QuizResults } from './quiz-results'
 import { quizQuestions } from '@/data/quiz-questions'
-import { QuizAnswer } from '@/lib/types'
+import { QuizAnswer, Event } from '@/lib/types'
 import { ArrowLeft } from 'lucide-react'
 
-export function QuizContainer() {
+interface QuizContainerProps {
+  events?: Event[]
+}
+
+export function QuizContainer({ events = [] }: QuizContainerProps) {
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
-  const [leadInfo, setLeadInfo] = useState<{ name: string; email: string; phone?: string; nationality: string } | null>(null)
+  const [leadInfo, setLeadInfo] = useState<{ name: string; email: string; phone: string; nationality: string } | null>(null)
   const [done, setDone] = useState(false)
 
   const total = quizQuestions.length + 1
@@ -27,7 +31,7 @@ export function QuizContainer() {
     step: i + 1, questionId, answer,
   }))
 
-  if (done) return <QuizResults answers={quizAnswers} leadInfo={leadInfo} />
+  if (done) return <QuizResults answers={quizAnswers} leadInfo={leadInfo} events={events} />
 
   return (
     <div className="flex min-h-screen flex-col bg-cream pt-20">
@@ -44,7 +48,7 @@ export function QuizContainer() {
             {step === 0 && (
               <div className="mb-6 text-center sm:mb-7">
                 <h1 className="font-display text-2xl font-semibold uppercase tracking-normal text-dark sm:text-3xl md:text-4xl">
-                  Find your <span className="text-lync">experience</span>
+                  Find your <span className="text-lync">community</span>
                 </h1>
                 <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted sm:text-base">
                   A few quick questions, then we&apos;ll match you with events you&apos;ll actually want to go to.

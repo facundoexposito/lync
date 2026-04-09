@@ -9,8 +9,11 @@ import { FaqSection } from '@/components/home/faq-section'
 import { BrandStripMarquee } from '@/components/home/brand-strip-marquee'
 import { BlogSection } from '@/components/home/blog-section'
 import { CtaSection } from '@/components/home/cta-section'
+import { getUpcomingEvents } from '@/lib/acuity'
 
-export default function Home() {
+export default async function Home() {
+  const events = await getUpcomingEvents()
+
   return (
     <>
       <HeroSection />
@@ -18,7 +21,7 @@ export default function Home() {
       <TrustBento />
       <ThisMonth />
       <WhyLync />
-      <QuizSection />
+      <QuizSection events={events} />
       <EventsShowcase />
       <Testimonials />
       <FaqSection />

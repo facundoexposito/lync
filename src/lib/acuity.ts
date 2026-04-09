@@ -91,7 +91,7 @@ async function fetchClasses(): Promise<AcuityClass[]> {
 async function fetchAppointmentTypes(): Promise<AcuityAppointmentType[]> {
   const res = await fetch(`${ACUITY_BASE}/appointment-types`, {
     headers: authHeaders(),
-    next: { revalidate: 3600 }, // 1 hour
+    next: { revalidate: 300 }, // 5 minutes — match classes cache so new types appear together
   })
 
   if (!res.ok) throw new Error(`Acuity appointment-types API ${res.status}`)
