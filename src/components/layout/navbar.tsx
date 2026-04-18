@@ -32,7 +32,6 @@ export function Navbar() {
 
   /** Full-bleed hero behind nav — white logo/links until scroll */
   const isHeroNav =
-    pathname === '/' ||
     pathname === '/accommodations' ||
     pathname === '/events' ||
     pathname === '/retreats' ||
