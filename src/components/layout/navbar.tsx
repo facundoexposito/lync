@@ -38,8 +38,8 @@ export function Navbar() {
     pathname.startsWith('/retreats/')
   /** Use dark (black text, blue logo) on inner pages or when scrolled */
   const dark = scrolled || !isHeroNav
-  /** Show white container only after scrolling — all pages start transparent */
-  const showContainer = scrolled
+  /** Show white container on homepage always, other pages after scrolling */
+  const showContainer = scrolled || pathname === '/'
 
   const links = [
     { href: '/about', label: 'About' },
