@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
 import { PAGE_SHELL } from '@/lib/page-shell'
@@ -23,7 +23,10 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
-  useEffect(() => {
+  /* Check scroll position before paint to avoid hero flash */
+  const useBrowserLayoutEffect =
+    typeof window !== 'undefined' ? useLayoutEffect : useEffect
+  useBrowserLayoutEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -32,14 +35,15 @@ export function Navbar() {
 
   /** Full-bleed hero behind nav — white logo/links until scroll */
   const isHeroNav =
+    pathname === '/' ||
     pathname === '/accommodations' ||
     pathname === '/events' ||
     pathname === '/retreats' ||
     pathname.startsWith('/retreats/')
   /** Use dark (black text, blue logo) on inner pages or when scrolled */
   const dark = scrolled || !isHeroNav
-  /** Show white container on homepage always, other pages after scrolling */
-  const showContainer = scrolled || pathname === '/'
+  /** Show white container only after scrolling — all pages start transparent */
+  const showContainer = scrolled
 
   const links = [
     { href: '/about', label: 'About' },
