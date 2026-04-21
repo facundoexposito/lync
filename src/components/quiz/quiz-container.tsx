@@ -6,6 +6,7 @@ import { QuizStep } from './quiz-step'
 import { QuizResults } from './quiz-results'
 import { quizQuestions } from '@/data/quiz-questions'
 import { QuizAnswer, Event } from '@/lib/types'
+import { submitQuizLead } from '@/lib/submit-quiz-lead'
 import { ArrowLeft } from 'lucide-react'
 
 interface QuizContainerProps {
@@ -92,7 +93,11 @@ export function QuizContainer({ events = [] }: QuizContainerProps) {
                 answers={answers}
                 onAnswer={handleAnswer}
                 onNext={() => setStep(s => s + 1)}
-                onLeadSubmit={(info) => { setLeadInfo(info); setDone(true) }}
+                onLeadSubmit={(info) => {
+                  setLeadInfo(info)
+                  setDone(true)
+                  submitQuizLead({ lead: info, answers, source: 'quiz-page' })
+                }}
               />
             </div>
           </div>

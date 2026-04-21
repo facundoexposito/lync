@@ -36,20 +36,8 @@ export const quizQuestions = [
     type: 'single',
   },
   {
-    id: 'duration',
-    step: 4,
-    question: 'How long have you been here?',
-    options: [
-      { value: 'just-arrived', label: 'Just arrived', icon: '🆕' },
-      { value: '1-6-months', label: '1–6 months', icon: '🌱' },
-      { value: '6-12-months', label: '6–12 months', icon: '🌿' },
-      { value: '1-plus-years', label: '1+ years', icon: '🌳' },
-    ],
-    type: 'single',
-  },
-  {
     id: 'ideal-night',
-    step: 5,
+    step: 4,
     question: 'What does your ideal night out look like?',
     options: [
       { value: 'dinner-wine', label: 'Dinner or wine with good conversation', icon: '🍷' },
@@ -63,7 +51,7 @@ export const quizQuestions = [
   },
   {
     id: 'availability',
-    step: 6,
+    step: 5,
     question: 'When are you usually free?',
     options: [
       { value: 'weekday-mornings', label: 'Weekday mornings', icon: '🌅' },
@@ -75,7 +63,7 @@ export const quizQuestions = [
   },
   {
     id: 'group-size',
-    step: 7,
+    step: 6,
     question: "What's your ideal group size?",
     options: [
       { value: 'small', label: 'Small & intimate', subtitle: '4–6 people', icon: '👯' },

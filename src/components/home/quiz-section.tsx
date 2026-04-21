@@ -9,6 +9,7 @@ import { QuizResults } from '@/components/quiz/quiz-results'
 import { quizQuestions } from '@/data/quiz-questions'
 import { PAGE_SHELL } from '@/lib/page-shell'
 import type { QuizAnswer, Event } from '@/lib/types'
+import { submitQuizLead } from '@/lib/submit-quiz-lead'
 
 interface QuizSectionProps {
   events?: Event[]
@@ -138,6 +139,7 @@ export function QuizSection({ events = [] }: QuizSectionProps) {
             onLeadSubmit={(info) => {
               setLeadInfo(info)
               setDone(true)
+              submitQuizLead({ lead: info, answers, source: 'homepage' })
             }}
             variant="oval"
           />

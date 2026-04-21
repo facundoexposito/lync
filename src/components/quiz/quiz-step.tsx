@@ -158,6 +158,14 @@ export function QuizStep({
           >
             See My Results <ArrowRight size={18} />
           </CtaMotionButton>
+
+          <p
+            className={`text-center text-xs text-muted ${
+              isOval ? 'col-span-full mt-2' : 'mt-3'
+            }`}
+          >
+            We will be in contact soon with your events!
+          </p>
         </form>
       </div>
     )
