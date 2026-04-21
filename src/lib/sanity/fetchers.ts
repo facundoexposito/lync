@@ -1,5 +1,5 @@
 import type { Retreat } from '@/data/retreats'
-import { client, isSanityConfigured } from './client'
+import { client } from './client'
 import { urlFor } from './image'
 import {
   ALL_RETREATS_QUERY,
@@ -80,19 +80,16 @@ function mapSanityRetreat(doc: any): Retreat {
 }
 
 export async function getAllRetreats(): Promise<Retreat[]> {
-  if (!isSanityConfigured) return []
   const docs = await client.fetch(ALL_RETREATS_QUERY, {}, { next: { tags: ['retreat'] } })
   return docs.map(mapSanityRetreat)
 }
 
 export async function getRetreatBySlug(slug: string): Promise<Retreat | null> {
-  if (!isSanityConfigured) return null
   const doc = await client.fetch(RETREAT_BY_SLUG_QUERY, { slug }, { next: { tags: ['retreat'] } })
   if (!doc) return null
   return mapSanityRetreat(doc)
 }
 
 export async function getRetreatSlugs(): Promise<{ slug: string }[]> {
-  if (!isSanityConfigured) return []
   return client.fetch(RETREAT_SLUGS_QUERY, {}, { next: { tags: ['retreat'] } })
 }
