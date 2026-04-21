@@ -100,7 +100,7 @@ async function fetchAppointmentTypes(): Promise<AcuityAppointmentType[]> {
 
 // ── Retreat keywords ────────────────────────────────────────
 
-const RETREAT_KEYWORDS = ['retreat', 'getaway', 'solstice']
+const RETREAT_KEYWORDS = ['retreat', 'getaway']
 
 // ── Main exports ────────────────────────────────────────────
 

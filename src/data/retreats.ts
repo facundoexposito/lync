@@ -55,6 +55,12 @@ export interface Retreat {
   bookingUrl: string
   brochurePath: string
   contactEmail: string
+  // CMS-editable per-retreat copy
+  introText?: string
+  programmeTitle?: string
+  programmeSubtitle?: string
+  founderStoryTitle?: string
+  dailyScheduleSubtitle?: string
 }
 
 // ── Solstice retreat data ───────────────────────────────────

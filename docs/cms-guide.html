@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lync Events — CMS Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1a1a2e;
+      background: #fafafa;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 100%);
+      color: white;
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      opacity: 0.85;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    nav.toc {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+
+    nav.toc h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    nav.toc ol {
+      padding-left: 20px;
+    }
+
+    nav.toc li {
+      margin-bottom: 6px;
+    }
+
+    nav.toc a {
+      color: #4a5cdb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav.toc a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #eee;
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: #2d2d5e;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #333;
+    }
+
+    ol, ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: #4a5cdb;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    .callout {
+      background: #f0f4ff;
+      border-left: 4px solid #4a5cdb;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+
+    .callout.warning {
+      background: #fff8f0;
+      border-left-color: #e67e22;
+    }
+
+    .callout.success {
+      background: #f0faf4;
+      border-left-color: #27ae60;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 0.92rem;
+    }
+
+    thead {
+      background: #f5f5f5;
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      border-bottom: 2px solid #ddd;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.required {
+      background: #fee;
+      color: #c0392b;
+    }
+
+    .badge.optional {
+      background: #eef6ee;
+      color: #27ae60;
+    }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-box {
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 14px 22px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .flow-box.active {
+      border-color: #4a5cdb;
+      background: #f0f4ff;
+      color: #4a5cdb;
+    }
+
+    .flow-box.done {
+      border-color: #27ae60;
+      background: #f0faf4;
+      color: #27ae60;
+    }
+
+    .flow-arrow {
+      font-size: 1.4rem;
+      color: #aaa;
+    }
+
+    .screenshot-placeholder {
+      background: #f5f5f5;
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      color: #999;
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+
+    kbd {
+      background: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.85em;
+      font-family: inherit;
+      box-shadow: 0 1px 0 #bbb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #999;
+      font-size: 0.85rem;
+      border-top: 1px solid #eee;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 40px 20px 32px; }
+      header h1 { font-size: 1.5rem; }
+      .container { padding: 24px 16px 60px; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.82rem; }
+      th, td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Lync Events — CMS Guide</h1>
+  <p>Everything you need to manage retreats through the Sanity Studio</p>
+</header>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#access">How to Access the Studio</a></li>
+      <li><a href="#editing">Editing an Existing Retreat</a></li>
+      <li><a href="#creating">Creating a New Retreat</a></li>
+      <li><a href="#fields">Field-by-Field Guide</a></li>
+      <li><a href="#images">Uploading Images</a></li>
+      <li><a href="#brochure">Uploading a Brochure PDF</a></li>
+      <li><a href="#publishing">Publishing Flow</a></li>
+      <li><a href="#visibility">Section Visibility Rules</a></li>
+      <li><a href="#tips">Tips &amp; Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. ACCESS -->
+  <section id="access">
+    <h2>1. How to Access the Studio</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        Go to <strong><code>lyncevents.com/studio</code></strong> in your browser.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        Click <strong>"Sign in with Google"</strong> and use the Google account that was invited to the project.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        You'll land on the Studio dashboard. On the left sidebar you'll see <strong>"Retreat"</strong> — this is where all retreat content lives.
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Bookmark it!</strong>
+      Save <code>lyncevents.com/studio</code> as a bookmark for quick access. You can use the Studio from any device with a browser.
+    </div>
+  </section>
+
+  <!-- 2. EDITING -->
+  <section id="editing">
+    <h2>2. Editing an Existing Retreat</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        Click <strong>"Retreat"</strong> in the left sidebar to see all retreats.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        Click the retreat you want to edit. The editing panel opens on the right.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        Make your changes — edit text, swap images, update pricing, etc.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        Click the blue <strong>"Publish"</strong> button in the bottom-right corner. Changes go live on the website within seconds.
+      </div>
+    </div>
+
+    <div class="callout success">
+      <strong>Auto-save drafts</strong>
+      Every change is automatically saved as a draft. You won't lose work if you close your browser — just come back and hit Publish when ready.
+    </div>
+  </section>
+
+  <!-- 3. CREATING -->
+  <section id="creating">
+    <h2>3. Creating a New Retreat</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        Click the <strong>pencil icon</strong> (compose button) at the top of the document list, or click the <strong>"+"</strong> next to the Retreat type in the sidebar.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        Fill in the three <strong>required fields</strong>:
+        <ul style="margin-top: 8px;">
+          <li><strong>Title</strong> — the retreat name (e.g., "Solstice")</li>
+          <li><strong>Slug</strong> — click "Generate" to auto-create from the title</li>
+          <li><strong>Hero Image</strong> — upload or select the main banner image</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        Add any optional sections you'd like — pricing, itinerary, daily schedule, inclusions, images, etc. Sections left empty simply won't appear on the website.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        Click <strong>"Publish"</strong> when you're happy. The new retreat page goes live immediately.
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Start minimal, add later</strong>
+      You only need a title, slug, and hero image to publish. You can always come back to fill in pricing, itinerary, and other sections later.
+    </div>
+  </section>
+
+  <!-- 4. FIELD-BY-FIELD GUIDE -->
+  <section id="fields">
+    <h2>4. Field-by-Field Guide</h2>
+
+    <h3>Core Info</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Title</strong></td>
+          <td><span class="badge required">Required</span></td>
+          <td>The retreat name displayed everywhere — page title, cards, navigation. Example: "Solstice"</td>
+        </tr>
+        <tr>
+          <td><strong>Slug</strong></td>
+          <td><span class="badge required">Required</span></td>
+          <td>The URL path for the retreat. Click "Generate" to create it from the title. Creates URLs like <code>lyncevents.com/retreats/solstice</code></td>
+        </tr>
+        <tr>
+          <td><strong>Subtitle</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>A secondary tagline. Example: "A Journey Back to Your Heart"</td>
+        </tr>
+        <tr>
+          <td><strong>Short Description</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Brief description used in the intro section if no custom Intro Text is set</td>
+        </tr>
+        <tr>
+          <td><strong>Location</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Where the retreat takes place. Example: "Santa Teresa, Costa Rica"</td>
+        </tr>
+        <tr>
+          <td><strong>Venue</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Specific venue name. Example: "House of Shakti"</td>
+        </tr>
+        <tr>
+          <td><strong>Dates</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Display dates as you want visitors to see them. Example: "March 22–29, 2026"</td>
+        </tr>
+        <tr>
+          <td><strong>Duration</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Length of the retreat. Example: "7 nights"</td>
+        </tr>
+        <tr>
+          <td><strong>Group Size</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Expected group size. Example: "10 women"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Customizable Copy</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Intro Text</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Custom intro paragraphs for the retreat. Separate paragraphs with a blank line. If empty, the Short Description is used instead.</td>
+        </tr>
+        <tr>
+          <td><strong>Programme Title</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Heading for the programme/itinerary section. If empty, defaults to "[Duration] of Becoming"</td>
+        </tr>
+        <tr>
+          <td><strong>Programme Subtitle</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Description text under the programme heading</td>
+        </tr>
+        <tr>
+          <td><strong>Founder Story Title</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Heading for the founder story section. If empty, defaults to "The Story Behind [Title]"</td>
+        </tr>
+        <tr>
+          <td><strong>Daily Schedule Subtitle</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Subtitle for the daily schedule section. If empty, defaults to "Every day is designed to be yours."</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Pricing</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pricing</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Add one or more room tiers. Each tier has a <strong>Type</strong> (e.g., "Shared Room"), a <strong>Price</strong> (e.g., "$2,250"), and a list of <strong>Perks</strong>. The layout adapts automatically — 1 tier centers, 2-3 tiers show as columns.</td>
+        </tr>
+        <tr>
+          <td><strong>Deposit Note</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Text shown below pricing tiers. Example: "50% deposit to reserve · Monthly payments available"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Itinerary</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Itinerary</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Day-by-day programme. Each entry has a <strong>Day</strong> number, an <strong>Emoji</strong>, a <strong>Title</strong> (e.g., "Arrival & Opening Circle"), and a list of <strong>Highlights</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Daily Schedule</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Daily Schedule</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>A typical day's timetable. Each entry has a <strong>Time</strong>, a <strong>Title</strong>, a <strong>Description</strong>, and an <strong>Emoji</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>What's Included</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Inclusions</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Things included in the retreat price. Each entry has an <strong>Emoji</strong>, <strong>Title</strong>, and <strong>Description</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Not Included</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Simple list of what's not included (e.g., "Flights", "Travel insurance"). Shown as a comma-separated list below inclusions.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Founder Story</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Founder Story</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>A personal narrative about the retreat's origin. Plain text — separate paragraphs with blank lines.</td>
+        </tr>
+        <tr>
+          <td><strong>Founder Attribution</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Attribution shown below the story. Example: "Rebecca, Founder of Lync Events Madrid"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Images</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hero Image</strong></td>
+          <td><span class="badge required">Required</span></td>
+          <td>The large banner image at the top of the retreat page. Also used for social media previews.</td>
+        </tr>
+        <tr>
+          <td><strong>Intro Image</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Shown alongside the intro text. Displayed in portrait orientation on desktop.</td>
+        </tr>
+        <tr>
+          <td><strong>Card Image</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Used on retreat listing cards. If empty, the hero image is used instead.</td>
+        </tr>
+        <tr>
+          <td><strong>Bento Images</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Photo grid. The layout adapts automatically: 1 image = full width, 2 = two columns, 3 = asymmetric grid, 4+ = full bento grid.</td>
+        </tr>
+        <tr>
+          <td><strong>Slideshow Images</strong> (array)</td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Auto-rotating image carousel. Each image has an <strong>alt text</strong> field — describe the image for accessibility.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Links &amp; Contact</h3>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Status</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Booking URL</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Link to the booking system. When set, a "Book Now" button appears in the pricing section and in a sticky bar at the bottom of the page.</td>
+        </tr>
+        <tr>
+          <td><strong>Brochure</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>PDF file upload. When set, a "Download Brochure" button appears in the pricing section.</td>
+        </tr>
+        <tr>
+          <td><strong>Contact Email</strong></td>
+          <td><span class="badge optional">Optional</span></td>
+          <td>Email address shown in the pricing section as "Questions? Reach us at [email]".</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 5. IMAGES -->
+  <section id="images">
+    <h2>5. Uploading Images</h2>
+
+    <h3>How to Upload</h3>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        Click any image field — you'll see an upload area.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Drag &amp; drop</strong> an image file onto the area, or <strong>click "Upload"</strong> to browse your files.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        Once uploaded, click the image to open the <strong>editing view</strong> where you can set a hotspot.
+      </div>
+    </div>
+
+    <h3>Hotspot Cropping</h3>
+    <p>
+      After uploading, you can set a <strong>hotspot</strong> — a focal point that tells the website which part of the image to keep visible when it's cropped for different screen sizes. Drag the circle to the most important part of the image (usually a face or the center of the scene).
+    </p>
+
+    <div class="callout">
+      <strong>Why set a hotspot?</strong>
+      Images display at different aspect ratios on different parts of the site (widescreen for the hero, portrait for bento grids, etc.). The hotspot ensures the important part of your image is always visible, no matter how it's cropped.
+    </div>
+
+    <h3>Recommended Image Sizes</h3>
+    <table>
+      <thead>
+        <tr><th>Image</th><th>Recommended Size</th><th>Aspect Ratio</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hero</td>
+          <td>2400 &times; 1350px or larger</td>
+          <td>Wide landscape (16:9)</td>
+        </tr>
+        <tr>
+          <td>Intro</td>
+          <td>1200 &times; 1600px</td>
+          <td>Portrait (3:4)</td>
+        </tr>
+        <tr>
+          <td>Card</td>
+          <td>1200 &times; 900px</td>
+          <td>Landscape (4:3)</td>
+        </tr>
+        <tr>
+          <td>Bento</td>
+          <td>1200 &times; 900px or larger</td>
+          <td>Mix of portrait &amp; landscape</td>
+        </tr>
+        <tr>
+          <td>Slideshow</td>
+          <td>2400 &times; 1200px</td>
+          <td>Wide landscape (2:1)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Image format tip</strong>
+      JPG works best for photos. Keep file sizes under 5MB for fast loading — Sanity automatically optimises images for the web, but starting with a reasonable size helps.
+    </div>
+  </section>
+
+  <!-- 6. BROCHURE -->
+  <section id="brochure">
+    <h2>6. Uploading a Brochure PDF</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        Scroll to the <strong>Brochure</strong> field in the retreat editor.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Drag &amp; drop</strong> a PDF file onto the upload area, or <strong>click "Upload"</strong> to browse your files. Only <code>.pdf</code> files are accepted.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        Once uploaded, a <strong>"Download Brochure"</strong> button will automatically appear on the retreat page (in the pricing section).
+      </div>
+    </div>
+
+    <p>To replace a brochure, click the existing file and select "Clear field", then upload the new PDF.</p>
+  </section>
+
+  <!-- 7. PUBLISHING -->
+  <section id="publishing">
+    <h2>7. Publishing Flow</h2>
+
+    <div class="flow-diagram">
+      <div class="flow-box">Edit content</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box active">Saved as Draft</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box done">Click Publish</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box done">Live on site</div>
+    </div>
+
+    <h3>How It Works</h3>
+    <ul>
+      <li>Every edit you make is <strong>automatically saved as a draft</strong>. Nothing goes live until you publish.</li>
+      <li>The <strong>"Publish"</strong> button (blue, bottom-right corner) pushes your changes to the live website.</li>
+      <li>Changes typically appear on the site <strong>within a few seconds</strong> of publishing.</li>
+      <li>You can make multiple edits over time and publish them all at once.</li>
+    </ul>
+
+    <h3>Unpublishing</h3>
+    <p>
+      To take a retreat page offline, click the <strong>arrow next to Publish</strong> to reveal the dropdown menu, then select <strong>"Unpublish"</strong>. The page will no longer be accessible on the website.
+    </p>
+
+    <div class="callout warning">
+      <strong>Draft vs Published</strong>
+      If you see a yellow "Edited" badge next to a retreat, it means you have unpublished changes. Click "Publish" to push them live, or continue editing.
+    </div>
+  </section>
+
+  <!-- 8. VISIBILITY -->
+  <section id="visibility">
+    <h2>8. Section Visibility Rules</h2>
+
+    <p>
+      The retreat page is built to be flexible. Sections <strong>automatically show or hide</strong> based on whether you've filled in the content. If a section is empty, it simply doesn't appear on the page — no blank spaces, no broken layouts.
+    </p>
+
+    <table>
+      <thead>
+        <tr><th>Section</th><th>Shows When...</th><th>If Empty...</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Intro Image</strong></td>
+          <td>Intro Image is uploaded</td>
+          <td>Intro text spans full width</td>
+        </tr>
+        <tr>
+          <td><strong>Photo Bento Grid</strong></td>
+          <td>1+ Bento Images added</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Image Slideshow</strong></td>
+          <td>1+ Slideshow Images added</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Daily Schedule</strong></td>
+          <td>1+ schedule entries added</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Programme / Itinerary</strong></td>
+          <td>1+ itinerary days added</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Founder Story</strong></td>
+          <td>Founder Story text filled in</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>What's Included</strong></td>
+          <td>1+ inclusions added</td>
+          <td>Section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Not Included</strong></td>
+          <td>1+ items added (within Inclusions)</td>
+          <td>Subsection hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Pricing &amp; CTA</strong></td>
+          <td>1+ pricing tiers added</td>
+          <td>Entire pricing section hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Book Now button</strong></td>
+          <td>Booking URL is set</td>
+          <td>Button hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Download Brochure button</strong></td>
+          <td>Brochure PDF is uploaded</td>
+          <td>Button hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Contact Email</strong></td>
+          <td>Contact Email is filled in</td>
+          <td>Line hidden</td>
+        </tr>
+        <tr>
+          <td><strong>Sticky Bottom Bar</strong></td>
+          <td>Booking URL is set &amp; user scrolls past hero</td>
+          <td>Bar hidden</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout success">
+      <strong>The golden rule</strong>
+      Fill in what you have, leave empty what you don't. The page always looks clean.
+    </div>
+  </section>
+
+  <!-- 9. TIPS -->
+  <section id="tips">
+    <h2>9. Tips &amp; Troubleshooting</h2>
+
+    <h3>Paragraph Breaks</h3>
+    <p>
+      For text fields like <strong>Intro Text</strong> and <strong>Founder Story</strong>, separate paragraphs with a <strong>blank line</strong> (press <kbd>Enter</kbd> twice). Single line breaks are treated as one continuous paragraph.
+    </p>
+
+    <h3>Slugs</h3>
+    <p>
+      Always use the <strong>"Generate"</strong> button to create slugs from the title. If you need a custom URL, you can edit the slug manually — just use lowercase letters and hyphens only (e.g., <code>spring-equinox-2027</code>).
+    </p>
+
+    <div class="callout warning">
+      <strong>Don't change slugs after publishing</strong>
+      Changing a retreat's slug changes its URL. If anyone has bookmarked or shared the old URL, it will stop working. Only change slugs before the first publish if possible.
+    </div>
+
+    <h3>Changes Not Showing?</h3>
+    <ul>
+      <li>Make sure you clicked <strong>"Publish"</strong> — drafts don't appear on the site.</li>
+      <li>Try a <strong>hard refresh</strong> in your browser: <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Mac) or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Windows).</li>
+      <li>If changes still aren't showing after a minute, reach out to your developer.</li>
+    </ul>
+
+    <h3>Replacing Images</h3>
+    <p>
+      Click on the existing image, then click <strong>"Clear field"</strong> to remove it. Then upload the new image. Remember to set the hotspot on the new image.
+    </p>
+
+    <h3>Pricing Perks</h3>
+    <p>
+      To add perks to a pricing tier, click into the tier and use the <strong>"Add item"</strong> button under Perks. Each perk is a single line of text (e.g., "Daily yoga sessions", "All meals included").
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  Lync Events CMS Guide &middot; Last updated April 2026
+</footer>
+
+</body>
+</html>

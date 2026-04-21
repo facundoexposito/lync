@@ -7,33 +7,45 @@ import { CtaMotionLink } from '@/components/ui/cta-hover'
 import { EventCard } from '@/components/events/event-card'
 import { RetreatCardExtended } from '@/components/retreats/retreat-card-extended'
 import { getUpcomingRetreats } from '@/lib/acuity'
-import { retreats } from '@/data/retreats'
+import { getAllRetreats } from '@/lib/sanity/fetchers'
 
-export const metadata: Metadata = {
-  title: 'Retreats',
-  description:
-    'Transformative women\'s retreats by LYNC — from Costa Rica to beyond. Small groups, deep connection, and experiences you\'ll carry home forever.',
-  openGraph: {
-    images: [
-      {
-        url: '/brand/RETREATS/solstice-sunset-group.webp',
-        width: 1200,
-        height: 630,
-        alt: 'LYNC Retreats',
-      },
-    ],
-  },
+const FALLBACK_HERO = '/brand/RETREATS/solstice-sunset-group.webp'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const retreats = await getAllRetreats()
+  const heroImage = retreats[0]?.images.hero || FALLBACK_HERO
+
+  return {
+    title: 'Retreats',
+    description:
+      'Transformative women\'s retreats by LYNC — from Costa Rica to beyond. Small groups, deep connection, and experiences you\'ll carry home forever.',
+    openGraph: {
+      images: [
+        {
+          url: heroImage,
+          width: 1200,
+          height: 630,
+          alt: 'LYNC Retreats',
+        },
+      ],
+    },
+  }
 }
 
 export default async function RetreatsPage() {
-  const retreatEvents = await getUpcomingRetreats()
+  const [retreats, retreatEvents] = await Promise.all([
+    getAllRetreats(),
+    getUpcomingRetreats(),
+  ])
+
+  const heroImage = retreats[0]?.images.hero || FALLBACK_HERO
 
   return (
     <>
       {/* ── Hero ──────────────────────────────────────── */}
       <section className="relative flex h-[45vh] min-h-[300px] items-end sm:min-h-[340px]">
         <Image
-          src="/brand/RETREATS/solstice-sunset-group.webp"
+          src={heroImage}
           alt="LYNC retreat group at sunset"
           fill
           priority

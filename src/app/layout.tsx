@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Navbar } from '@/components/layout/navbar'
-import { Footer } from '@/components/layout/footer'
 import { SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -26,19 +24,6 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'LYNC',
-  url: SITE_URL,
-  logo: `${SITE_URL}/brand/ICON_BLUE.png`,
-  description: 'A community for international women building meaningful friendships in Madrid through curated events, retreats, and resources.',
-  foundingLocation: {
-    '@type': 'Place',
-    name: 'Madrid, Spain',
-  },
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,15 +35,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
