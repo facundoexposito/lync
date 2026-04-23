@@ -7,18 +7,18 @@ import {
   RETREAT_SLUGS_QUERY,
 } from './queries'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 function imageToUrl(img: any): string {
   if (!img?.asset) return ''
   return urlFor(img).url()
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 function fileToUrl(file: any): string {
   return file?.asset?.url ?? ''
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 function mapSanityRetreat(doc: any): Retreat {
   return {
     id: doc._id,
