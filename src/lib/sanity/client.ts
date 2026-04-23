@@ -10,3 +10,12 @@ export const client = createClient({
   apiVersion,
   useCdn: process.env.NODE_ENV === 'production',
 })
+
+/** Authenticated client for server-side mutations (publish, migrate, etc.) */
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+})

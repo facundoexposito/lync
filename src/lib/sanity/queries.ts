@@ -79,3 +79,35 @@ export const RETREAT_BY_SLUG_QUERY = groq`
 export const RETREAT_SLUGS_QUERY = groq`
   *[_type == "retreat"] { "slug": slug.current }
 `
+
+// ── Blog posts ─────────────────────────────────────────
+
+export const ALL_BLOGS_QUERY = groq`
+  *[_type == "blogPost"] | order(date desc) {
+    _id,
+    title,
+    slug,
+    date,
+    category,
+    excerpt,
+    image,
+    content[] { heading, body }
+  }
+`
+
+export const BLOG_BY_SLUG_QUERY = groq`
+  *[_type == "blogPost" && slug.current == $slug][0] {
+    _id,
+    title,
+    slug,
+    date,
+    category,
+    excerpt,
+    image,
+    content[] { heading, body }
+  }
+`
+
+export const BLOG_SLUGS_QUERY = groq`
+  *[_type == "blogPost"] { "slug": slug.current }
+`

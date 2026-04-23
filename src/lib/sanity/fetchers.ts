@@ -1,10 +1,14 @@
 import type { Retreat } from '@/data/retreats'
+import type { BlogPost } from '@/data/blog-posts'
 import { client } from './client'
 import { urlFor } from './image'
 import {
   ALL_RETREATS_QUERY,
   RETREAT_BY_SLUG_QUERY,
   RETREAT_SLUGS_QUERY,
+  ALL_BLOGS_QUERY,
+  BLOG_BY_SLUG_QUERY,
+  BLOG_SLUGS_QUERY,
 } from './queries'
 
  
@@ -92,4 +96,36 @@ export async function getRetreatBySlug(slug: string): Promise<Retreat | null> {
 
 export async function getRetreatSlugs(): Promise<{ slug: string }[]> {
   return client.fetch(RETREAT_SLUGS_QUERY, {}, { next: { tags: ['retreat'] } })
+}
+
+// ── Blog posts ─────────────────────────────────────────
+
+function mapSanityBlog(doc: any): BlogPost {
+  return {
+    slug: doc.slug?.current ?? '',
+    title: doc.title ?? '',
+    date: doc.date ?? '',
+    category: doc.category ?? '',
+    excerpt: doc.excerpt ?? '',
+    image: doc.image?.asset ? imageToUrl(doc.image) : '',
+    content: (doc.content ?? []).map((s: { heading?: string; body?: string[] }) => ({
+      heading: s.heading,
+      body: s.body ?? [],
+    })),
+  }
+}
+
+export async function getAllBlogs(): Promise<BlogPost[]> {
+  const docs = await client.fetch(ALL_BLOGS_QUERY, {}, { next: { tags: ['blog'] } })
+  return docs.map(mapSanityBlog)
+}
+
+export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+  const doc = await client.fetch(BLOG_BY_SLUG_QUERY, { slug }, { next: { tags: ['blog'] } })
+  if (!doc) return null
+  return mapSanityBlog(doc)
+}
+
+export async function getBlogSlugs(): Promise<{ slug: string }[]> {
+  return client.fetch(BLOG_SLUGS_QUERY, {}, { next: { tags: ['blog'] } })
 }

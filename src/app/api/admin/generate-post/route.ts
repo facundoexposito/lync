@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
-import { blogPosts } from '@/data/blog-posts'
+import { getAllBlogs } from '@/lib/sanity/fetchers'
 import { isAdminRequest } from '@/lib/admin-auth'
 import type { BlogBrief, BlogCategory, GeneratedPost } from '@/lib/admin-types'
 
@@ -34,7 +34,8 @@ Structure of every LYNC post:
 - End with a soft CTA-style closing paragraph that nudges to LYNC events/community without feeling salesy.
 - Length: ~400-550 words total.`
 
-function buildUserPrompt(brief: BlogBrief): string {
+async function buildUserPrompt(brief: BlogBrief): Promise<string> {
+  const blogPosts = await getAllBlogs()
   const examples = blogPosts
     .slice(0, 3)
     .map((p, i) =>
@@ -145,7 +146,7 @@ export async function POST(req: Request) {
       max_tokens: 2000,
       temperature: 0.7,
       system: LYNC_CONTEXT,
-      messages: [{ role: 'user', content: buildUserPrompt(brief) }],
+      messages: [{ role: 'user', content: await buildUserPrompt(brief) }],
     })
     const block = resp.content.find((b) => b.type === 'text')
     if (!block || block.type !== 'text') {

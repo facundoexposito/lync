@@ -8,9 +8,9 @@ import { ArrowRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
 import { HighlightStroke } from '@/components/ui/highlight-stroke'
 import { PAGE_SHELL } from '@/lib/page-shell'
-import { blogPosts } from '@/data/blog-posts'
+import type { BlogPost } from '@/data/blog-posts'
 
-export function BlogSection() {
+export function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
     <section className="bg-white py-16 md:py-28">
       <div className={PAGE_SHELL}>
@@ -35,7 +35,7 @@ export function BlogSection() {
 
       {/* Card grid */}
       <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {blogPosts.map((post, i) => (
+        {posts.map((post, i) => (
           <ScrollReveal key={post.slug} delay={i * 0.08}>
             <Link
               href={`/blog/${post.slug}`}

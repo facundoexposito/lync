@@ -10,9 +10,10 @@ import { BrandStripMarquee } from '@/components/home/brand-strip-marquee'
 import { BlogSection } from '@/components/home/blog-section'
 import { CtaSection } from '@/components/home/cta-section'
 import { getUpcomingEvents } from '@/lib/acuity'
+import { getAllBlogs } from '@/lib/sanity/fetchers'
 
 export default async function Home() {
-  const events = await getUpcomingEvents()
+  const [events, blogPosts] = await Promise.all([getUpcomingEvents(), getAllBlogs()])
 
   return (
     <>
@@ -26,7 +27,7 @@ export default async function Home() {
       <Testimonials />
       <FaqSection />
       <BrandStripMarquee />
-      <BlogSection />
+      <BlogSection posts={blogPosts} />
       <CtaSection />
     </>
   )

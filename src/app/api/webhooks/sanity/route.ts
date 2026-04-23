@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
   }
 
   revalidateTag('retreat', 'max')
+  revalidateTag('blog', 'max')
 
   return NextResponse.json({ revalidated: true, now: Date.now() })
 }

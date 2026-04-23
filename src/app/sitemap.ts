@@ -1,8 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/constants'
-import { blogPosts } from '@/data/blog-posts'
 import { resources } from '@/data/study-abroad'
-import { getRetreatSlugs } from '@/lib/sanity/fetchers'
+import { getRetreatSlugs, getAllBlogs } from '@/lib/sanity/fetchers'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
@@ -17,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/accommodations`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
   ]
 
+  const blogPosts = await getAllBlogs()
   const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),

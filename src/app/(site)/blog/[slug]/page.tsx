@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { blogPosts, getBlogPost } from '@/data/blog-posts'
+import { getBlogBySlug, getBlogSlugs, getAllBlogs } from '@/lib/sanity/fetchers'
 import { BlogArticle } from '@/components/blog/blog-article'
 import { SITE_URL } from '@/lib/constants'
 import type { Metadata } from 'next'
@@ -9,12 +9,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }))
+  return getBlogSlugs()
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = getBlogPost(slug)
+  const post = await getBlogBySlug(slug)
   if (!post) return { title: 'Post Not Found' }
 
   return {
@@ -38,17 +38,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = getBlogPost(slug)
+  const post = await getBlogBySlug(slug)
   if (!post) notFound()
 
-  const otherPosts = blogPosts.filter((p) => p.slug !== slug)
+  const allPosts = await getAllBlogs()
+  const otherPosts = allPosts.filter((p) => p.slug !== slug)
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: `${SITE_URL}${post.image}`,
+    image: post.image,
     datePublished: post.date,
     author: {
       '@type': 'Organization',
