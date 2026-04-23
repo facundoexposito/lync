@@ -190,7 +190,7 @@ export function PostPreview({
           disabled={publishing || !image}
           className="flex-[2] rounded-full bg-gradient-to-b from-[#5a96f5] to-lync-dark py-3.5 text-sm font-semibold text-white shadow-sm transition-shadow hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60 md:text-base"
         >
-          {publishing ? 'Publishing to GitHub…' : 'Publish post'}
+          {publishing ? 'Publishing to Studio…' : 'Publish post'}
         </button>
       </div>
     </section>
