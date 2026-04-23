@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { isAdminRequest } from '@/lib/admin-auth'
 import type { BlogCategory, PublishRequest } from '@/lib/admin-types'
 import { writeClient } from '@/lib/sanity/client'
@@ -82,6 +83,9 @@ export async function POST(req: Request) {
         body: s.body.map((p) => p.trim()).filter(Boolean),
       })),
     })
+
+    // 3) Bust Next.js cache so the new post appears immediately
+    revalidateTag('blog', 'max')
 
     const liveUrl = `https://lyncevents.com/blog/${slug}`
 
