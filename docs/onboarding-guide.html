@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYNC — Platform Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --lync: #3679F1;
+      --lync-dark: #2B60C4;
+      --lync-light: #E8F2FF;
+      --cream: #F3EFE7;
+      --dark: #0a0a0a;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --surface: #fafafa;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.7;
+      color: var(--dark);
+      background: var(--cream);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--lync-dark) 0%, var(--lync) 100%);
+      color: white;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    header img.logo {
+      height: 36px;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    header h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.85;
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    nav.toc {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    nav.toc h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--dark);
+    }
+
+    nav.toc ol {
+      padding-left: 20px;
+    }
+
+    nav.toc li {
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+
+    nav.toc a {
+      color: var(--lync);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav.toc a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      color: var(--dark);
+      letter-spacing: -0.3px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 22px 0 10px;
+      color: var(--dark);
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #444;
+    }
+
+    ol, ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      background: var(--lync);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    .callout {
+      background: var(--lync-light);
+      border-left: 4px solid var(--lync);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+    }
+
+    .callout.warning {
+      background: #FFF8F0;
+      border-left-color: #E67E22;
+    }
+
+    .callout.success {
+      background: #F0FAF4;
+      border-left-color: #27AE60;
+    }
+
+    .callout.danger {
+      background: #FFF0F0;
+      border-left-color: #E74C3C;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+
+    code {
+      background: #F0F0F0;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 0.88em;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: var(--surface);
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.required {
+      background: #FEE;
+      color: #C0392B;
+    }
+
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-box {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 20px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .flow-box small {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .flow-box.active {
+      border-color: var(--lync);
+      background: var(--lync-light);
+      color: var(--lync);
+    }
+
+    .flow-box.done {
+      border-color: #27AE60;
+      background: #F0FAF4;
+      color: #27AE60;
+    }
+
+    .flow-arrow {
+      font-size: 1.3rem;
+      color: #ccc;
+    }
+
+    kbd {
+      background: #EEE;
+      border: 1px solid #CCC;
+      border-radius: 5px;
+      padding: 2px 6px;
+      font-size: 0.85em;
+      font-family: inherit;
+      box-shadow: 0 1px 0 #BBB;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .section-label.hosting { background: var(--lync); }
+    .section-label.cms { background: #E67E22; }
+    .section-label.admin { background: #8E44AD; }
+    .section-label.quiz { background: #27AE60; }
+    .section-label.events { background: #E74C3C; }
+    .section-label.pages { background: var(--dark); }
+    .section-label.env { background: #16A085; }
+    .section-label.help { background: #F39C12; }
+
+    a {
+      color: var(--lync);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer img {
+      height: 22px;
+      margin-bottom: 8px;
+      opacity: 0.4;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 40px 20px 32px; }
+      header h1 { font-size: 1.4rem; }
+      .container { padding: 24px 16px 60px; }
+      h2 { font-size: 1.2rem; }
+      table { font-size: 0.82rem; }
+      th, td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img class="logo" src="../public/brand/LOGO_WHITETEXT_NOBG.png" alt="LYNC" onerror="this.style.display='none'">
+  <h1>Platform Guide</h1>
+  <p>Everything you need to manage your website, content, events, and leads</p>
+</header>
+
+<div class="container">
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview">Platform Overview</a></li>
+      <li><a href="#hosting">Hosting &amp; Deployment (Vercel)</a></li>
+      <li><a href="#sanity">Content Management (Sanity CMS)</a></li>
+      <li><a href="#retreats">Managing Retreats</a></li>
+      <li><a href="#blog-admin">Blog &amp; Admin Panel (AI-Powered)</a></li>
+      <li><a href="#blog-studio">Blog via Sanity Studio</a></li>
+      <li><a href="#events">Events (Acuity Scheduling)</a></li>
+      <li><a href="#quiz">Quiz &amp; Lead Capture (Airtable)</a></li>
+      <li><a href="#pages">Site Pages &amp; Structure</a></li>
+      <li><a href="#env">Environment Variables</a></li>
+      <li><a href="#troubleshooting">Troubleshooting</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. OVERVIEW -->
+  <section id="overview">
+    <h2>1. Platform Overview</h2>
+
+    <p>Your website is built with <strong>Next.js</strong> and runs on <strong>Vercel</strong>. Content is managed through <strong>Sanity CMS</strong> (blog posts and retreats), events come from <strong>Acuity Scheduling</strong>, and quiz leads are saved to <strong>Airtable</strong>. Blog posts can also be generated with AI using the <strong>Admin Panel</strong>.</p>
+
+    <h3>Quick Links</h3>
+    <table>
+      <tbody>
+        <tr><td><strong>Live website</strong></td><td><a href="https://lyncevents.com">lyncevents.com</a></td></tr>
+        <tr><td><strong>Sanity Studio</strong></td><td><a href="https://lyncevents.com/studio">lyncevents.com/studio</a></td></tr>
+        <tr><td><strong>Admin Panel</strong></td><td><a href="https://lyncevents.com/admin">lyncevents.com/admin</a></td></tr>
+        <tr><td><strong>Vercel Dashboard</strong></td><td><a href="https://vercel.com">vercel.com</a> (lynccommunity account)</td></tr>
+        <tr><td><strong>Acuity Scheduling</strong></td><td><a href="https://acuityscheduling.com">acuityscheduling.com</a></td></tr>
+        <tr><td><strong>Airtable (Leads)</strong></td><td><a href="https://airtable.com">airtable.com</a></td></tr>
+      </tbody>
+    </table>
+
+    <h3>How Everything Connects</h3>
+    <div class="flow-diagram">
+      <div class="flow-box">Acuity<small>Events</small></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box active">lyncevents.com<small>Vercel</small></div>
+      <div class="flow-arrow">&larr;</div>
+      <div class="flow-box">Sanity<small>Blog + Retreats</small></div>
+    </div>
+    <div class="flow-diagram">
+      <div class="flow-box">Quiz</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box done">Airtable<small>Leads</small></div>
+    </div>
+  </section>
+
+  <!-- 2. HOSTING -->
+  <section id="hosting">
+    <span class="section-label hosting">Hosting</span>
+    <h2>2. Hosting &amp; Deployment (Vercel)</h2>
+
+    <p>The website is hosted on <strong>Vercel</strong> under the <strong>lynccommunity</strong> account. It auto-deploys every time code is pushed to the <code>main</code> branch on GitHub.</p>
+
+    <h3>How Deployments Work</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">Code is pushed to <code>main</code> branch on GitHub</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">Vercel automatically detects the push and starts building</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">Build takes ~2-3 minutes. Once done, the new version is live.</div>
+    </div>
+
+    <div class="callout success">
+      <strong>No manual deploys needed for content</strong>
+      Blog posts and retreats managed through Sanity update the live site instantly &mdash; no code deploy required.
+    </div>
+
+    <h3>Vercel Project Details</h3>
+    <table>
+      <tbody>
+        <tr><td><strong>Account</strong></td><td>lynccommunity</td></tr>
+        <tr><td><strong>Project name</strong></td><td>lync</td></tr>
+        <tr><td><strong>Framework</strong></td><td>Next.js 16</td></tr>
+        <tr><td><strong>GitHub repo</strong></td><td>facundoexposito/lync (main branch)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 3. SANITY CMS -->
+  <section id="sanity">
+    <span class="section-label cms">CMS</span>
+    <h2>3. Content Management (Sanity CMS)</h2>
+
+    <p>Sanity is your content management system. It handles <strong>blog posts</strong> and <strong>retreats</strong>. You access it through the Studio, which is built right into your website.</p>
+
+    <h3>Accessing the Studio</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">Go to <strong><code>lyncevents.com/studio</code></strong> in your browser</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">Sign in with the Google account that was invited to the project</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">You'll see two content types in the sidebar: <strong>Retreat</strong> and <strong>Blog Post</strong></div>
+    </div>
+
+    <div class="callout">
+      <strong>Bookmark it!</strong>
+      Save <code>lyncevents.com/studio</code> for quick access. Works on any device with a browser.
+    </div>
+
+    <h3>Content Types</h3>
+    <table>
+      <thead><tr><th>Type</th><th>What It Manages</th><th>URL Pattern</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Retreat</strong></td><td>Retreat pages with pricing, itinerary, images, schedule</td><td><code>/retreats/[name]</code></td></tr>
+        <tr><td><strong>Blog Post</strong></td><td>Blog articles with sections, images, categories</td><td><code>/blog/[title]</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Publishing Flow</h3>
+    <div class="flow-diagram">
+      <div class="flow-box">Edit content</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box active">Saved as Draft</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box done">Click Publish</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-box done">Live on site</div>
+    </div>
+    <ul>
+      <li>Every edit is <strong>auto-saved as a draft</strong>. Nothing goes live until you publish.</li>
+      <li>Click the blue <strong>"Publish"</strong> button (bottom-right) to push changes live.</li>
+      <li>Changes appear on the website <strong>within seconds</strong>.</li>
+      <li>No code deploy required &mdash; cache invalidation happens automatically.</li>
+    </ul>
+
+    <div class="callout warning">
+      <strong>Draft vs Published</strong>
+      If you see a yellow "Edited" badge next to content, it means you have unpublished changes. Click "Publish" to push them live.
+    </div>
+  </section>
+
+  <!-- 4. RETREATS -->
+  <section id="retreats">
+    <span class="section-label cms">CMS</span>
+    <h2>4. Managing Retreats</h2>
+
+    <h3>Creating a New Retreat</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">In the Studio, click <strong>"Retreat"</strong> in the sidebar, then the <strong>+</strong> button</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        Fill in the three <strong>required fields</strong>:
+        <ul style="margin-top: 8px;">
+          <li><strong>Title</strong> &mdash; the retreat name (e.g., "Solstice")</li>
+          <li><strong>Slug</strong> &mdash; click "Generate" to create from the title</li>
+          <li><strong>Hero Image</strong> &mdash; upload the main banner image</li>
+        </ul>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">Add optional sections: pricing, itinerary, daily schedule, inclusions, images, founder story, etc.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">Click <strong>"Publish"</strong> &mdash; the retreat page goes live immediately</div>
+    </div>
+
+    <div class="callout success">
+      <strong>Start minimal, add later</strong>
+      You only need a title, slug, and hero image to publish. Fill in pricing, itinerary, and other sections whenever you're ready.
+    </div>
+
+    <h3>Retreat Fields</h3>
+    <table>
+      <thead><tr><th>Field</th><th>Status</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Title</strong></td><td><span class="badge required">Required</span></td><td>Name shown everywhere (cards, page title, navigation)</td></tr>
+        <tr><td><strong>Slug</strong></td><td><span class="badge required">Required</span></td><td>URL path &mdash; click "Generate" to create from title</td></tr>
+        <tr><td><strong>Hero Image</strong></td><td><span class="badge required">Required</span></td><td>Large banner at top. Also used for social media previews.</td></tr>
+        <tr><td><strong>Subtitle</strong></td><td>Optional</td><td>Secondary tagline (e.g., "A Journey Back to Your Heart")</td></tr>
+        <tr><td><strong>Location / Venue / Dates</strong></td><td>Optional</td><td>Where and when the retreat takes place</td></tr>
+        <tr><td><strong>Duration / Group Size</strong></td><td>Optional</td><td>E.g., "7 nights" / "10 women"</td></tr>
+        <tr><td><strong>Pricing</strong></td><td>Optional</td><td>Room tiers with price and perks</td></tr>
+        <tr><td><strong>Itinerary</strong></td><td>Optional</td><td>Day-by-day programme (day, emoji, title, highlights)</td></tr>
+        <tr><td><strong>Daily Schedule</strong></td><td>Optional</td><td>Typical day timetable (time, title, description)</td></tr>
+        <tr><td><strong>Inclusions</strong></td><td>Optional</td><td>What's included + what's not</td></tr>
+        <tr><td><strong>Bento / Slideshow Images</strong></td><td>Optional</td><td>Photo grid and auto-rotating carousel</td></tr>
+        <tr><td><strong>Founder Story</strong></td><td>Optional</td><td>Personal narrative about the retreat's origin</td></tr>
+        <tr><td><strong>Booking URL</strong></td><td>Optional</td><td>When set, "Book Now" button + sticky bar appear</td></tr>
+        <tr><td><strong>Brochure PDF</strong></td><td>Optional</td><td>"Download Brochure" button appears when uploaded</td></tr>
+        <tr><td><strong>Contact Email</strong></td><td>Optional</td><td>"Questions? Reach us at..." line in pricing</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Section Visibility</h3>
+    <p>Sections <strong>automatically show or hide</strong> based on whether you've filled in the content. Empty sections don't appear &mdash; no blank spaces, no broken layouts.</p>
+
+    <div class="callout success">
+      <strong>The golden rule</strong>
+      Fill in what you have, leave empty what you don't. The page always looks clean.
+    </div>
+  </section>
+
+  <!-- 5. BLOG & ADMIN PANEL -->
+  <section id="blog-admin">
+    <span class="section-label admin">Admin</span>
+    <h2>5. Blog &amp; Admin Panel (AI-Powered)</h2>
+
+    <p>The admin panel at <strong><code>lyncevents.com/admin</code></strong> lets you generate blog posts using AI. You provide a brief, Claude AI writes the post matching your brand voice, and you publish it directly to Sanity.</p>
+
+    <h3>Accessing the Admin Panel</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">Go to <strong><code>lyncevents.com/admin</code></strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">Enter the admin password</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">Click <strong>"New blog post"</strong> to start</div>
+    </div>
+
+    <h3>Creating a Blog Post</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Fill in the brief:</strong>
+        <ul style="margin-top: 8px;">
+          <li><strong>Working title</strong> &mdash; rough title idea (AI will polish it)</li>
+          <li><strong>Category</strong> &mdash; Nightlife, Meetups, or Wellness</li>
+          <li><strong>Note from the founder</strong> &mdash; your angle, key message, what you want to say</li>
+          <li><strong>Key questions/topics</strong> (optional) &mdash; these become section headings</li>
+          <li><strong>Cover image</strong> &mdash; upload a photo (jpg, png, or webp)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">Click <strong>"Generate draft"</strong> &mdash; AI writes the full post in ~10 seconds, matching your brand voice.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content"><strong>Review the preview.</strong> You can edit the title, excerpt, and all section text before publishing.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">Click <strong>"Publish post"</strong> &mdash; the image uploads to Sanity, the blog document is created, and the post goes live within seconds.</div>
+    </div>
+
+    <h3>Blog Post Structure</h3>
+    <p>Every AI-generated post follows this structure:</p>
+    <ul>
+      <li><strong>3-5 sections</strong> total, ~400-550 words</li>
+      <li>First section: no heading (intro), 2 short paragraphs</li>
+      <li>Other sections: evocative heading + 1-2 paragraphs</li>
+      <li>Ends with a soft nudge to LYNC events</li>
+      <li>No bullet lists, no emoji in body, no fake quotes</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Brand voice</strong>
+      Warm, confident, honest. Like a slightly older friend giving advice over coffee. Madrid-specific details welcome. Never corporate, never hype-y.
+    </div>
+
+    <h3>Blog Categories</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Card Color</th><th>Example Topics</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Nightlife</strong></td><td style="color:#E74C3C">Rose / pink</td><td>Girls' nights, rooftop dinners, cocktail events</td></tr>
+        <tr><td><strong>Meetups</strong></td><td style="color:#E67E22">Amber / warm</td><td>Coffee meetups, brunch, social gatherings</td></tr>
+        <tr><td><strong>Wellness</strong></td><td style="color:#27AE60">Emerald / green</td><td>Yoga, meditation, wellness workshops</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. BLOG VIA STUDIO -->
+  <section id="blog-studio">
+    <span class="section-label cms">CMS</span>
+    <h2>6. Blog via Sanity Studio</h2>
+
+    <p>You can also create or edit blog posts directly in the Sanity Studio. This is useful for editing posts after they've been published, or creating posts without the AI flow.</p>
+
+    <h3>Blog Post Fields</h3>
+    <table>
+      <thead><tr><th>Field</th><th>Status</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Title</strong></td><td><span class="badge required">Required</span></td><td>Post title on cards and article page</td></tr>
+        <tr><td><strong>Slug</strong></td><td><span class="badge required">Required</span></td><td>URL path &mdash; click "Generate" from title</td></tr>
+        <tr><td><strong>Date</strong></td><td><span class="badge required">Required</span></td><td>Publication date shown on the article</td></tr>
+        <tr><td><strong>Category</strong></td><td><span class="badge required">Required</span></td><td>Nightlife, Meetups, or Wellness</td></tr>
+        <tr><td><strong>Excerpt</strong></td><td><span class="badge required">Required</span></td><td>Short summary for cards and SEO (~180 chars)</td></tr>
+        <tr><td><strong>Cover Image</strong></td><td><span class="badge required">Required</span></td><td>Main image. Set a hotspot for responsive cropping.</td></tr>
+        <tr><td><strong>Content Sections</strong></td><td><span class="badge required">Required</span></td><td>Sections with optional heading + paragraphs</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <strong>Don't change slugs after publishing</strong>
+      Changing a slug changes the URL. Old bookmarks and shared links will stop working.
+    </div>
+
+    <p>Posts created via the Admin Panel appear in the Studio as regular Blog Post documents. You can edit any field and re-publish &mdash; changes go live within seconds.</p>
+  </section>
+
+  <!-- 7. EVENTS -->
+  <section id="events">
+    <span class="section-label events">Events</span>
+    <h2>7. Events (Acuity Scheduling)</h2>
+
+    <p>Events on the website are pulled <strong>automatically</strong> from your Acuity Scheduling account. Just create events in Acuity and they appear on the site.</p>
+
+    <h3>How It Works</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">You create events/classes in <strong>Acuity Scheduling</strong> as usual</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">The website fetches upcoming events every <strong>5 minutes</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">Events are <strong>auto-categorized</strong> based on keywords in their title or description</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">Visitors can filter by category and click to <strong>book directly</strong> through Acuity</div>
+    </div>
+
+    <h3>Auto-Categorization</h3>
+    <table>
+      <thead><tr><th>Category</th><th>Keywords Detected</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wellness</strong></td><td>yoga, pilates, meditation, breathwork, sound bath, spa, stretch, mindful</td></tr>
+        <tr><td><strong>Adventure</strong></td><td>run, hike, climb, outdoor, kayak, surf, bike, walk, tour, explore</td></tr>
+        <tr><td><strong>Creative</strong></td><td>craft, paint, art, pottery, workshop, cook, bake, flower, vision board</td></tr>
+        <tr><td><strong>Nightlife</strong></td><td>club, party, rooftop, cocktail, bar crawl, night out, DJ</td></tr>
+        <tr><td><strong>Social</strong></td><td>brunch, dinner, lunch, coffee, picnic, game night, meetup</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Tip</strong>
+      Include descriptive keywords in your Acuity event titles for correct categorization. E.g., "Sunset Yoga in Retiro" will be tagged as Wellness. If no keyword matches, the event defaults to "Social".
+    </div>
+
+    <p>If an event doesn't have a photo in Acuity, the website uses a <strong>category-specific fallback image</strong> from your brand photos.</p>
+  </section>
+
+  <!-- 8. QUIZ & AIRTABLE -->
+  <section id="quiz">
+    <span class="section-label quiz">Leads</span>
+    <h2>8. Quiz &amp; Lead Capture (Airtable)</h2>
+
+    <p>The quiz at <strong><code>lyncevents.com/quiz</code></strong> collects lead information and saves it to your <strong>Airtable</strong> base. There's also a quiz preview embedded on the homepage.</p>
+
+    <h3>Quiz Flow (7 Steps)</h3>
+    <table>
+      <thead><tr><th>Step</th><th>Question</th><th>Options</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>What brings you to Madrid?</td><td>Studying, Working, Traveling, Living here</td></tr>
+        <tr><td>2</td><td>Social life right now?</td><td>Starting from zero, Building, Solid but want more, Thriving</td></tr>
+        <tr><td>3</td><td>Age bracket</td><td>18-22, 23-27, 28-32, 33+</td></tr>
+        <tr><td>4</td><td>Ideal night out?</td><td>Dinner &amp; wine, Dancing, Creative, Wellness, Exploring, Spontaneous</td></tr>
+        <tr><td>5</td><td>When are you usually free?</td><td>Weekday mornings, Evenings, Weekends, Flexible</td></tr>
+        <tr><td>6</td><td>Preferred group size?</td><td>Small (4-6), Medium (8-12), Large (15+), No preference</td></tr>
+        <tr><td>7</td><td>Contact info</td><td>Name, email, phone (optional), nationality</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What Happens After the Quiz</h3>
+    <ol>
+      <li>The user sees <strong>personalized event recommendations</strong> based on their answers</li>
+      <li>Lead data is saved to your <strong>Airtable "Leads" table</strong></li>
+      <li>User is offered links to <strong>browse all events</strong> and <strong>join the WhatsApp community</strong></li>
+    </ol>
+
+    <h3>Airtable Fields</h3>
+    <table>
+      <thead><tr><th>Field</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>name</strong></td><td>Full name</td></tr>
+        <tr><td><strong>email</strong></td><td>Email address</td></tr>
+        <tr><td><strong>phone</strong></td><td>Phone number (optional)</td></tr>
+        <tr><td><strong>nationality</strong></td><td>Nationality from dropdown</td></tr>
+        <tr><td><strong>purpose</strong></td><td>What brings them to Madrid</td></tr>
+        <tr><td><strong>availability</strong></td><td>When they're free</td></tr>
+        <tr><td><strong>groupSize</strong></td><td>Preferred group size</td></tr>
+        <tr><td><strong>source</strong></td><td>"homepage" or "quiz-page"</td></tr>
+        <tr><td><strong>status</strong></td><td>Default: "New"</td></tr>
+        <tr><td><strong>quizAnswersJSON</strong></td><td>Full JSON of all quiz answers</td></tr>
+        <tr><td><strong>submittedAt</strong></td><td>Timestamp</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout success">
+      <strong>Non-blocking</strong>
+      Quiz submissions are fire-and-forget. If Airtable is unavailable, the user still sees their results. Nothing breaks.
+    </div>
+  </section>
+
+  <!-- 9. PAGES -->
+  <section id="pages">
+    <span class="section-label pages">Site</span>
+    <h2>9. Site Pages &amp; Structure</h2>
+
+    <table>
+      <thead><tr><th>Page</th><th>URL</th><th>Content Source</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Homepage</strong></td><td><code>/</code></td><td>Static + Acuity events + Sanity blogs</td></tr>
+        <tr><td><strong>Events</strong></td><td><code>/events</code></td><td>Live from Acuity (5-min refresh)</td></tr>
+        <tr><td><strong>Quiz</strong></td><td><code>/quiz</code></td><td>Static questions + Acuity for results</td></tr>
+        <tr><td><strong>Blog Listing</strong></td><td><code>/blog</code></td><td>Sanity CMS</td></tr>
+        <tr><td><strong>Blog Article</strong></td><td><code>/blog/[slug]</code></td><td>Sanity CMS</td></tr>
+        <tr><td><strong>Retreats Listing</strong></td><td><code>/retreats</code></td><td>Sanity CMS + Acuity</td></tr>
+        <tr><td><strong>Retreat Detail</strong></td><td><code>/retreats/[slug]</code></td><td>Sanity CMS</td></tr>
+        <tr><td><strong>About</strong></td><td><code>/about</code></td><td>Static (founders story)</td></tr>
+        <tr><td><strong>Study Abroad</strong></td><td><code>/study-abroad</code></td><td>Static (tabbed content)</td></tr>
+        <tr><td><strong>Accommodations</strong></td><td><code>/accommodations</code></td><td>Static (Collegiate partnership)</td></tr>
+        <tr><td><strong>Guides</strong></td><td><code>/guides</code></td><td>Static (city guides)</td></tr>
+        <tr><td><strong>Admin</strong></td><td><code>/admin</code></td><td>Password-protected</td></tr>
+        <tr><td><strong>Sanity Studio</strong></td><td><code>/studio</code></td><td>Google auth</td></tr>
+      </tbody>
+    </table>
+
+    <h3>SEO</h3>
+    <ul>
+      <li><strong>Sitemap</strong> auto-generated at <code>/sitemap.xml</code></li>
+      <li><strong>robots.txt</strong> at <code>/robots.txt</code></li>
+      <li><strong>OpenGraph &amp; Twitter cards</strong> set on every page</li>
+      <li><strong>JSON-LD schema</strong> for search engines (Organization, Article)</li>
+    </ul>
+  </section>
+
+  <!-- 10. ENV VARS -->
+  <section id="env">
+    <span class="section-label env">Config</span>
+    <h2>10. Environment Variables</h2>
+
+    <p>These must be set in the Vercel dashboard under <strong>Settings &rarr; Environment Variables</strong>. They connect the website to your external services.</p>
+
+    <h3>Acuity Scheduling</h3>
+    <table>
+      <thead><tr><th>Variable</th><th>Where to Find</th></tr></thead>
+      <tbody>
+        <tr><td><code>ACUITY_USER_ID</code></td><td>Acuity &rarr; Integrations &rarr; API Credentials</td></tr>
+        <tr><td><code>ACUITY_API_KEY</code></td><td>Acuity &rarr; Integrations &rarr; API Credentials</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Sanity CMS</h3>
+    <table>
+      <thead><tr><th>Variable</th><th>Value / Where to Find</th></tr></thead>
+      <tbody>
+        <tr><td><code>NEXT_PUBLIC_SANITY_PROJECT_ID</code></td><td><code>kxf081e5</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_SANITY_DATASET</code></td><td><code>production</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_SANITY_API_VERSION</code></td><td><code>2026-04-20</code></td></tr>
+        <tr><td><code>SANITY_API_TOKEN</code></td><td>Sanity &rarr; Manage &rarr; API &rarr; Tokens (Editor role)</td></tr>
+        <tr><td><code>SANITY_REVALIDATION_SECRET</code></td><td>Any random string (secures the webhook)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Airtable (Quiz Leads)</h3>
+    <table>
+      <thead><tr><th>Variable</th><th>Where to Find</th></tr></thead>
+      <tbody>
+        <tr><td><code>AIRTABLE_PAT</code></td><td>Airtable &rarr; Account &rarr; Developer Hub &rarr; Personal Access Tokens</td></tr>
+        <tr><td><code>AIRTABLE_BASE_ID</code></td><td>Airtable base URL: the <code>appXXXXXX</code> part</td></tr>
+        <tr><td><code>AIRTABLE_TABLE_NAME</code></td><td>Default: <code>Leads</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Admin Panel &amp; Blog AI</h3>
+    <table>
+      <thead><tr><th>Variable</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td><code>ADMIN_PASSWORD</code></td><td>Password for <code>/admin</code>. Set to anything secure.</td></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Claude API key for blog generation. From <a href="https://console.anthropic.com">console.anthropic.com</a></td></tr>
+        <tr><td><code>ANTHROPIC_MODEL</code></td><td>Optional. Defaults to <code>claude-sonnet-4-5</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout danger">
+      <strong>Keep these secret</strong>
+      Never share these values publicly. Only store them in Vercel environment variables or <code>.env.local</code> (which is git-ignored).
+    </div>
+  </section>
+
+  <!-- 11. TROUBLESHOOTING -->
+  <section id="troubleshooting">
+    <span class="section-label help">Help</span>
+    <h2>11. Troubleshooting</h2>
+
+    <h3>Blog post not appearing after publishing</h3>
+    <ul>
+      <li>Make sure you clicked <strong>"Publish"</strong> in the Studio or Admin Panel.</li>
+      <li>Hard refresh: <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> (Mac) or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> (Windows)</li>
+      <li>If still not showing after a minute, the Sanity webhook may need checking. The webhook URL should be: <code>lyncevents.com/api/webhooks/sanity?secret=YOUR_SECRET</code></li>
+    </ul>
+
+    <h3>Events not showing on the website</h3>
+    <ul>
+      <li>Events refresh every 5 minutes. Wait a moment if you just created one in Acuity.</li>
+      <li>Make sure the event is <strong>published with upcoming dates</strong> in Acuity.</li>
+      <li>Verify <code>ACUITY_USER_ID</code> and <code>ACUITY_API_KEY</code> are set in Vercel.</li>
+    </ul>
+
+    <h3>Quiz submissions not in Airtable</h3>
+    <ul>
+      <li>Check <code>AIRTABLE_PAT</code> and <code>AIRTABLE_BASE_ID</code> in Vercel.</li>
+      <li>Make sure the table name matches <code>AIRTABLE_TABLE_NAME</code> (default: "Leads").</li>
+    </ul>
+
+    <h3>Admin panel login fails</h3>
+    <ul>
+      <li><code>ADMIN_PASSWORD</code> must be set in Vercel and match exactly (case-sensitive).</li>
+    </ul>
+
+    <h3>AI blog generation fails</h3>
+    <ul>
+      <li>Check <code>ANTHROPIC_API_KEY</code> is set and valid at <a href="https://console.anthropic.com">console.anthropic.com</a>.</li>
+    </ul>
+
+    <h3>Replacing images in the Studio</h3>
+    <p>Click the existing image &rarr; <strong>"Clear field"</strong> &rarr; upload the new one. Set a hotspot (drag the circle to the important part of the image).</p>
+
+    <h3>Recommended Image Sizes</h3>
+    <table>
+      <thead><tr><th>Image</th><th>Recommended Size</th><th>Aspect Ratio</th></tr></thead>
+      <tbody>
+        <tr><td>Hero (retreat)</td><td>2400 &times; 1350px</td><td>16:9</td></tr>
+        <tr><td>Cover (blog)</td><td>2400 &times; 1200px</td><td>2:1</td></tr>
+        <tr><td>Card</td><td>1200 &times; 900px</td><td>4:3</td></tr>
+        <tr><td>Intro (retreat)</td><td>1200 &times; 1600px</td><td>3:4 portrait</td></tr>
+        <tr><td>Bento grid</td><td>1200 &times; 900px+</td><td>Mix</td></tr>
+      </tbody>
+    </table>
+    <p>JPG works best for photos. Keep files under 5MB &mdash; Sanity optimizes automatically.</p>
+  </section>
+
+</div>
+
+<footer>
+  <img src="../public/brand/ICON_BLUE.png" alt="LYNC" onerror="this.style.display='none'">
+  <br>
+  LYNC Events &mdash; Platform Guide &middot; April 2026
+</footer>
+
+</body>
+</html>
